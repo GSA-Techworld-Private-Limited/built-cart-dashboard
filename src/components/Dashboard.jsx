@@ -35,10 +35,7 @@ const Dashboard = () => {
               <UserDashboard />
             ) : activeTab === "orders" ? (
               activeSubTab === "order-details" ? (
-                <OrderDetails
-                  status="Pending"
-                  style="after:bg-[#FF3D00] text-[#FF3D00]"
-                />
+                <OrderDetails />
               ) : (
                 <Orders />
               )
