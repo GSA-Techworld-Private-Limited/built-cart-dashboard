@@ -19,12 +19,7 @@ export const fetchUserData = async (
         headers: options,
       }
     );
-    const orderDataList = await axios.get(
-      `${baseUrl}/superadmin/orders-list-dashboard/`,
-      {
-        headers: options,
-      }
-    );
+
     const categoryDataList = await axios.get(
       `${baseUrl}/superadmin/add-category-dashboard/`,
       {
@@ -32,9 +27,10 @@ export const fetchUserData = async (
       }
     );
     // console.log(categoryDataList.data.response);
+    fetchOrderData(setOrderData);
     fetchStatusData(setStatusData);
     setUserData(userDataList.data);
-    setOrderData(orderDataList.data.response);
+
     setCategoryData(categoryDataList.data.response);
   } catch (error) {
     console.error("Fetch user data error:", error);
@@ -44,7 +40,24 @@ export const fetchUserData = async (
     });
   }
 };
-
+export const fetchOrderData = async (setOrderData) => {
+  const accessToken = sessionStorage.getItem("accessToken");
+  try {
+    const orderDataList = await axios.get(
+      `${baseUrl}/superadmin/orders-list-dashboard/`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    setOrderData(orderDataList.data.response);
+  } catch (error) {
+    toast.error("Error fetching order data. Try again", {
+      className: "rounded-[10px]",
+    });
+  }
+};
 export const fetchStatusData = async (setStatusData, value) => {
   const accessToken = sessionStorage.getItem("accessToken");
   try {
@@ -199,5 +212,64 @@ export const addOffer = async (couponData) => {
       className: "rounded-[10px]",
     });
     console.log(error.request.response);
+  }
+};
+
+// export const showOrderDetails = async (
+//   id,
+//   setActiveSubTab,
+//   setUserOrderDetails
+// ) => {
+//   const accessToken = sessionStorage.getItem("accessToken");
+//   try {
+//     const response = await axios.get(
+//       `${baseUrl}superadmin/get-orders-dashboard/${id}`,
+//       {
+//         headers: {
+//           Authorization: `Bearer ${accessToken}`,
+//         },
+//       }
+//     );
+//     // setUserOrderDetails(response);
+//     console.log(response);
+//     console.log("success");
+//     // setActiveSubTab("order-details");
+//   } catch (error) {
+//     toast.error("Request Failed!! Try Again", {
+//       className: "rounded-[10px]",
+//     });
+//   }
+// };
+export const showOrderDetails = async (
+  id,
+  setActiveSubTab,
+  setUserOrderDetails
+) => {
+  const accessToken = sessionStorage.getItem("accessToken");
+  const options = {
+    Authorization: `Bearer ${accessToken}`,
+  };
+  try {
+    const res = await axios.get(
+      `${baseUrl}superadmin/get-orders-dashboard/${id}/`,
+      {
+        headers: options,
+      }
+    );
+    if (res.data.orders >= 0) {
+      toast.warning("No Order Placed Yet!!", {
+        className: "rounded-[10px]",
+      });
+    } else {
+      setUserOrderDetails(res.data);
+      setActiveSubTab("order-details");
+    }
+    console.log(res.data);
+  } catch (error) {
+    console.error("Fetch user data error:", error);
+    // Show error message
+    toast.error("Error fetching user data. Try again", {
+      className: "rounded-[10px]",
+    });
   }
 };

@@ -16,6 +16,7 @@ export const MyContextProvider = ({ children }) => {
   const [categoryData, setCategoryData] = useState(null);
   const [productDetailsData, setProductDetailsData] = useState(null);
   const [checkedItems, setCheckedItems] = useState({});
+  const [userOrderDetails, setUserOrderDetails] = useState();
   return (
     <MyContext.Provider
       value={{
@@ -45,6 +46,8 @@ export const MyContextProvider = ({ children }) => {
         setEditOverlay,
         selectExport,
         setSelectExport,
+        userOrderDetails,
+        setUserOrderDetails,
       }}
     >
       {children}

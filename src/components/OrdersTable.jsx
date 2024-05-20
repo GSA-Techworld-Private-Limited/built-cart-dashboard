@@ -5,6 +5,7 @@ import MyContext from "./context/MyContext";
 import { ordersTabledata } from "./common/Helper";
 import CheckBox from "./common/CheckBox";
 import { handleCheckBoxChange } from "./utils/handleCheckBox";
+import { showOrderDetails } from "./utils/auth";
 export const formatDateTime = (dateTimeString) => {
   const date = new Date(dateTimeString);
   return date.toLocaleDateString();
@@ -17,12 +18,9 @@ const OrdersTable = () => {
     checkedItems,
     setCheckedItems,
     categorySelect,
+    setUserOrderDetails,
   } = useContext(MyContext);
-  const showOrderDetails = (id) => {
-    setCategorySelect(id);
-    setActiveSubTab("order-details");
-    console.log(id);
-  };
+
   console.log(categorySelect);
   return (
     <>
@@ -81,10 +79,10 @@ const OrdersTable = () => {
                   <CheckBox
                     inputStyle="!border-[#686868]"
                     checkStyle="!border-[#686868] !bg-transparent"
-                    isChecked={checkedItems[val.id] || false}
+                    isChecked={checkedItems[val.order_id] || false}
                     handleCheckBox={() =>
                       handleCheckBoxChange(
-                        val.id,
+                        val.order_id,
                         setCheckedItems,
                         setCategorySelect
                       )
@@ -95,7 +93,13 @@ const OrdersTable = () => {
                   {formatDateTime(val.created_at)}
                 </p>
                 <p
-                  onClick={() => showOrderDetails(val.id)}
+                  onClick={() =>
+                    showOrderDetails(
+                      val.order_id,
+                      setActiveSubTab,
+                      setUserOrderDetails
+                    )
+                  }
                   className="font-medium underline cursor-pointer text-nowrap pl-6 w-[232px] text-2xl leading-5 text-dark"
                 >
                   {val.order_id}

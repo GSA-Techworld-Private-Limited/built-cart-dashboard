@@ -11,10 +11,33 @@ import { ChooseIcon } from "./common/Icons";
 import CommonBtn from "./common/CommonBtn";
 import OrdersTable from "./OrdersTable";
 import MyContext from "./context/MyContext";
+import { fetchOrderData } from "./utils/auth";
 const Orders = () => {
-  const { showExport, setShowExport, orderData, setSelectExport } =
-    useContext(MyContext);
+  const {
+    showExport,
+    setShowExport,
+    orderData,
+    setOrderData,
+    setSelectExport,
+  } = useContext(MyContext);
   const [accept, setAccept] = useState(false);
+  const handleChange = (event) => {
+    const term = event.target.value.toLowerCase();
+
+    const filteredData = orderData.filter((order) =>
+      order.orders.some((item) =>
+        Object.values(item).some(
+          (val) => typeof val === "string" && val.toLowerCase().includes(term)
+        )
+      )
+    );
+    console.log(filteredData);
+    if (filteredData.length === 0) {
+      fetchOrderData(setOrderData);
+    } else {
+      setOrderData(filteredData);
+    }
+  };
   return (
     <>
       <div className="w-full">
@@ -26,6 +49,7 @@ const Orders = () => {
             <div className="flex items-center gap-[10px] me-4 h-[54px] 2xl:max-h-[62px] border max-w-[380px] w-full border-black rounded-[10px] px-[13px]">
               <IoSearchSharp className="text-dark text-[28px]" />
               <input
+                onChange={handleChange}
                 type="text"
                 placeholder="Search Name, Location..."
                 className="text-2xl text-[#6E6E73] leading-5 w-full placeholder:text-[#6E6E73] font-medium outline-none border-0 bg-transparent py-4 2xl:py-5"

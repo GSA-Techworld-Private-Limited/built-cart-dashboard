@@ -3,14 +3,8 @@ import { IoArrowBack } from "react-icons/io5";
 import MyContext from "./context/MyContext";
 
 const OrderDetails = (props) => {
-  const { setActiveSubTab, orderData, categorySelect } = useContext(MyContext);
-  // const userOrderDetails = orderData.filter((obj) => obj.id === categorySelect);
-  const userOrderDetails = orderData.reduce((acc, item) => {
-    if (item.id === categorySelect) {
-      acc = item;
-    }
-    return acc;
-  }, null);
+  const { setActiveSubTab, userOrderDetails } = useContext(MyContext);
+
   console.log(userOrderDetails);
   return (
     <>
@@ -26,151 +20,111 @@ const OrderDetails = (props) => {
             </p>
           </div>
           <p
-            className={`text-2xl 2xl:text-3xxl font-semibold relative after:absolute after:w-[15px] after:h-[15px] after:top-1/2 after:-translate-y-1/2 after:rounded-full after:-left-[35px] ${props.style}`}
+            className={`${
+              userOrderDetails.orders[0].order_status === "pending"
+                ? "after:bg-[#FF3D00] text-[#FF3D00]"
+                : userOrderDetails.orders[0].order_status === "delivered"
+                ? "after:bg-[#0FB001] text-[#0FB001]"
+                : ""
+            } text-2xl 2xl:text-3xxl font-semibold relative after:absolute after:w-[15px] after:h-[15px] after:top-1/2 after:-translate-y-1/2 after:rounded-full after:-left-[35px] `}
           >
-            {props.status}
+            {userOrderDetails.orders[0].order_status}
           </p>
         </div>
         <div className="w-[95%] xl:w-[87%]">
           <div className="flex gap-6 justify-between">
             <div className="flex flex-col w-full max-w-[396px]">
-              <label
-                htmlFor="name"
-                className="text-2xl font-normal text-black mb-2"
-              >
+              <p className="text-2xl font-normal text-black mb-2">
                 Customer name
-              </label>
-              <input
-                id="name"
-                type="text"
-                className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
-              />
+              </p>
+              <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 rounded-[10px] bg-transparent outline-none">
+                {userOrderDetails.orders[0].order_address.full_name}
+              </p>
             </div>
             <div className="flex flex-col w-full max-w-[396px]">
-              <label
-                htmlFor="number"
-                className="text-2xl font-normal text-black mb-2"
-              >
+              <p className="text-2xl font-normal text-black mb-2">
                 Mobile Number
-              </label>
-              <input
-                id="number"
-                type="number"
-                className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
-              />
+              </p>
+              <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 rounded-[10px] bg-transparent outline-none">
+                {userOrderDetails.orders[0].order_address.mobile_number}
+              </p>
             </div>
             <div className="flex flex-col w-full max-w-[396px]">
-              <label
-                htmlFor="Location"
-                className="text-2xl font-normal text-black mb-2"
-              >
-                Location
-              </label>
-              <input
-                id="Location"
-                type="text"
-                className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
-              />
+              <p className="text-2xl font-normal text-black mb-2">Location</p>
+              <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 rounded-[10px] bg-transparent outline-none">
+                {userOrderDetails.orders[0].order_address.city}
+              </p>
             </div>
           </div>
           <div className="flex gap-6 justify-between mb-10 mt-7">
             <div className="flex flex-col w-full max-w-[396px]">
-              <label
-                htmlFor="Referral"
-                className="text-2xl font-normal text-black mb-2"
-              >
+              <p className="text-2xl font-normal text-black mb-2">
                 Referral ID
-              </label>
-              <input
-                id="Referral"
-                type="text"
-                className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
-              />
+              </p>
+              <input className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 rounded-[10px] bg-transparent outline-none" />
             </div>
             <div className="flex flex-col w-full max-w-[396px]">
-              <label
-                htmlFor="Payment"
-                className="text-2xl font-normal text-black mb-2"
-              >
+              <p className="text-2xl font-normal text-black mb-2">
                 Payment Mode
-              </label>
-              <input
-                id="Payment"
-                type="text"
-                className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
-              />
+              </p>
+              <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 rounded-[10px] bg-transparent outline-none">
+                {userOrderDetails.orders[0].mode_of_payment}
+              </p>
             </div>
             <div className="flex flex-col w-full max-w-[396px]">
-              <label
-                htmlFor="Address"
-                className="text-2xl font-normal text-black mb-2"
-              >
+              <p className="text-2xl font-normal text-black mb-2">
                 Delivery Address
-              </label>
+              </p>
 
-              <textarea
-                className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full rounded-[10px] bg-transparent outline-none"
-                name=""
-                id="Address"
-                rows="4"
-              ></textarea>
+              <div className="border py-[5px] 2xl:py-3 border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full rounded-[10px] bg-transparent outline-none">
+                {`House No.${userOrderDetails.orders[0].order_address.house_no}, ${userOrderDetails.orders[0].order_address.street}, ${userOrderDetails.orders[0].order_address.area}, ${userOrderDetails.orders[0].order_address.city}, ${userOrderDetails.orders[0].order_address.state}, ${userOrderDetails.orders[0].order_address.pincode}`}
+              </div>
             </div>
           </div>
           <p className="text-[26px] font-semibold text-black mb-5">Products</p>
-          <div className="flex gap-6 justify-between">
-            <div className="flex flex-col w-full max-w-[396px]">
-              <label
-                htmlFor="Product"
-                className="text-2xl font-normal text-black mb-2"
-              >
-                Product Name
-              </label>
-              <input
-                id="Product"
-                type="text"
-                className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
-              />
-            </div>
-            <div className="flex flex-col w-full max-w-[396px]">
-              <label
-                htmlFor="Quantity"
-                className="text-2xl font-normal text-black mb-2"
-              >
-                Quantity
-              </label>
-              <input
-                id="Quantity"
-                type="number"
-                className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
-              />
-            </div>
-            <div className="flex flex-col w-full max-w-[396px]">
-              <label
-                htmlFor="Price"
-                className="text-2xl font-normal text-black mb-2"
-              >
-                Price
-              </label>
-              <input
-                id="Price"
-                type="number"
-                className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
-              />
-            </div>
-          </div>
-          <div className="flex flex-col w-full mt-10 max-w-[396px]">
-            <label
-              htmlFor="Amount"
-              className="text-2xl font-normal text-black mb-2"
-            >
-              Total Amount
-            </label>
-            <input
-              id="Amount"
-              type="number"
-              className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
-            />
-          </div>
+          {userOrderDetails &&
+            userOrderDetails.orders.map((obj, i) => (
+              <div key={obj.id}>
+                <div className="flex gap-6 justify-between">
+                  <div className="flex flex-col w-full max-w-[396px]">
+                    <p className="text-2xl font-normal text-black mb-2">
+                      Product Name
+                    </p>
+                    <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 rounded-[10px] bg-transparent outline-none">
+                      {obj.product.name}
+                    </p>
+                  </div>
+                  <div className="flex flex-col w-full max-w-[396px]">
+                    <p className="text-2xl font-normal text-black mb-2">
+                      Quantity
+                    </p>
+                    <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 rounded-[10px] bg-transparent outline-none">
+                      {obj.product.total_quantity}
+                    </p>
+                  </div>
+                  <div className="flex flex-col w-full max-w-[396px]">
+                    <p className="text-2xl font-normal text-black mb-2">
+                      Price
+                    </p>
+                    <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 rounded-[10px] bg-transparent outline-none">
+                      {(
+                        obj.product.selling_price * obj.product.total_quantity
+                      ).toFixed(2)}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex flex-col w-full mt-10 max-w-[396px]">
+                  <p className="text-2xl font-normal text-black mb-2">
+                    Total Amount
+                  </p>
+                  <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 rounded-[10px] bg-transparent outline-none">
+                    {(
+                      obj.product.selling_price * obj.product.total_quantity
+                    ).toFixed(2)}
+                  </p>
+                </div>
+              </div>
+            ))}
         </div>
       </div>
     </>
