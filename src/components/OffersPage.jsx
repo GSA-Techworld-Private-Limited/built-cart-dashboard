@@ -1,17 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BsPatchCheckFill } from "react-icons/bs";
 import { CalendarTwoIcon, DownArrowIcon } from "./common/Icons";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { addOffer } from "./utils/auth";
 const OffersPage = () => {
   const [isSent, setIsSent] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("Choose Location");
+  const options = ["Bangalore", "New York"];
   const [couponData, setcouponData] = useState({
     coupon_code: "",
     order_value_amount: "",
@@ -22,14 +17,13 @@ const OffersPage = () => {
     account_created_to: "",
     number_of_referral_from: "",
     number_of_referral_to: "",
-    state_name: "California",
+    state_name: selectedOption,
     total_beneficiaries: "",
   });
-  const [selectedOption, setSelectedOption] = useState("Choose Location");
-  const options = ["Option 1", "Option 2", "Option 3"];
 
-  const toggleDropdown = () => {
+  const toggleDropdown = (e) => {
     setIsOpen(!isOpen);
+    console.log(e.value);
   };
 
   const handleOptionClick = (option) => {
@@ -44,11 +38,47 @@ const OffersPage = () => {
       setIsSent(false);
     }, 2000);
   };
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setcouponData({ ...couponData, [name]: value });
+  //   console.log(value);
+  // };
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setcouponData({ ...couponData, [name]: value });
-    console.log(value);
+
+    if (name === "order_value_amount") {
+      if (/^\d*\.?\d*$/.test(value)) {
+        const digitsBeforeDecimal = value.split(".")[0];
+
+        if (digitsBeforeDecimal.length <= 3) {
+          setcouponData({ ...couponData, [name]: value });
+        }
+      }
+    } else if (name === "validity_start" || name === "validity_end") {
+      const selectedDate = new Date(value);
+      const currentDate = new Date();
+
+      if (selectedDate < currentDate) {
+        setcouponData({
+          ...couponData,
+          [name]: currentDate.toISOString().split("T")[0],
+        });
+      } else {
+        setcouponData({ ...couponData, [name]: value });
+      }
+    } else {
+      setcouponData({ ...couponData, [name]: value });
+    }
   };
+  useEffect(() => {
+    setcouponData((prevCouponData) => ({
+      ...prevCouponData,
+      state_name: selectedOption,
+    }));
+  }, [selectedOption]);
+
+  console.log(couponData);
+  console.log(selectedOption);
   return (
     <>
       <form onSubmit={handleSent} className="w-full">
@@ -126,11 +156,8 @@ const OffersPage = () => {
                       onChange={handleInputChange}
                       name="validity_start"
                       value={couponData.validity_start}
-                      className={`${
-                        couponData > new Date().toLocaleDateString()
-                          ? "!border-red-500"
-                          : "!border-green-500"
-                      } h-12 2xl:h-[62px] border outline-none border-[#6E6E73] w-full uppercase text-[#6E6E73] rounded-[10px] py-3.5 px-5 leading-5 text-2xl border-spacing-[0.5px]`}
+                      min={new Date().toISOString().split("T")[0]}
+                      className="h-12 2xl:h-[62px] border outline-none border-[#6E6E73] w-full uppercase text-[#6E6E73] rounded-[10px] py-3.5 px-5 leading-5 text-2xl border-spacing-[0.5px]"
                       type="date"
                     />
                     <CalendarTwoIcon style="absolute top-1/2 bg-white -translate-y-1/2 right-[25px] pointer-events-none max-2xl:w-7" />
@@ -144,6 +171,7 @@ const OffersPage = () => {
                       onChange={handleInputChange}
                       name="validity_end"
                       value={couponData.validity_end}
+                      min={new Date().toISOString().split("T")[0]}
                       className="h-12 2xl:h-[62px] border outline-none border-[#6E6E73] w-full uppercase text-[#6E6E73] rounded-[10px] py-3.5 px-5 leading-5 text-2xl border-spacing-[0.5px]"
                       type="date"
                     />
@@ -159,6 +187,7 @@ const OffersPage = () => {
                   Enter T&C
                 </label>
                 <textarea
+                  required
                   onChange={handleInputChange}
                   name="term_conditions"
                   id="t&c"
@@ -236,22 +265,6 @@ const OffersPage = () => {
               <p className="text-2xl font-medium text-black mb-4">
                 Select State
               </p>
-              {/* <Select>
-                <SelectTrigger className="w-[401px]">
-                  <SelectValue placeholder="Choose Location" />
-                </SelectTrigger>
-                <SelectContent width="w-[401px]">
-                  <SelectItem color="text-[#6E6E73]" value="Haryana">
-                    Haryana
-                  </SelectItem>
-                  <SelectItem color="text-[#6E6E73]" value="Karnataka">
-                    Karnataka
-                  </SelectItem>
-                  <SelectItem color="text-[#6E6E73]" value="Maharashtra">
-                    Maharashtra
-                  </SelectItem>
-                </SelectContent>
-              </Select> */}
               <div className="relative">
                 <div
                   className="border border-spacing-[0.5px] flex text-2xl w-[401px] font-medium h-12 2xl:h-[62px] text-[#6E6E73] justify-between items-center pl-[18px] pr-8 border-[#6E6E73] p-2 rounded-[10px] cursor-pointer"
