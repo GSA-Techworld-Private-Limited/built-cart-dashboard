@@ -5,11 +5,43 @@ import CommonBtn from "./common/CommonBtn";
 import { Check } from "lucide-react";
 import { FiPlusCircle, FiMinusCircle } from "react-icons/fi";
 import AddPics from "./common/AddPics";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 const AddProduct = () => {
-  const { setActiveSubTab } = useContext(MyContext);
+  const { setActiveSubTab, categoryData } = useContext(MyContext);
   const [isChecked, setIsChecked] = useState(false);
   const [variantCount, setVariantCount] = useState(1);
   const [variants, setVariants] = useState(false);
+  const [addProducts, setAddProducts] = useState({
+    name: "",
+    description: "",
+    selling_price: "",
+    category_id: "", // Specify valid category ID
+    benifits: "",
+    product_galleries: [
+      {
+        image: null,
+      },
+      {
+        image: null,
+      },
+    ],
+    product_color_galleries: [
+      {
+        color: "",
+        image: null,
+      },
+      {
+        color: "",
+        image: null,
+      },
+    ],
+  });
   const decrementCount = () => {
     if (variantCount > 1) {
       setVariantCount(variantCount - 1);
@@ -17,6 +49,7 @@ const AddProduct = () => {
       setVariantCount(1);
     }
   };
+  console.log(categoryData);
   return (
     <>
       <div className="pl-[26px] pb-10">
@@ -64,7 +97,7 @@ const AddProduct = () => {
               />
             </div>
           </div>
-          <div className="flex gap-[129px] mt-9">
+          <div className="flex gap-[129px] my-9">
             <div className="flex flex-col w-full max-w-[396px]">
               <label
                 htmlFor="description"
@@ -95,6 +128,20 @@ const AddProduct = () => {
                 rows="6"
               ></textarea>
             </div>
+          </div>
+          <div className="flex gap-[129px]">
+            <Select>
+              <SelectTrigger className="w-[396px]">
+                <SelectValue placeholder="Choose Category" />
+              </SelectTrigger>
+              <SelectContent width="w-[396px]">
+                {categoryData.map((val) => (
+                  <SelectItem color="text-dark" value={val.name}>
+                    {val.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
         </form>
         <div className="flex items-center gap-7 mt-12">

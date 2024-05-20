@@ -5,12 +5,14 @@ import MyContext from "./context/MyContext";
 import { formatDateTime } from "./OrdersTable";
 import { handleCheckBoxChange } from "./utils/handleCheckBox";
 import CheckBox from "./common/CheckBox";
+import { getUserDetails } from "./UserDetails";
 const UserDataTable = () => {
   const {
     setActiveSubTab,
     userData,
     checkedItems,
     setCheckedItems,
+    setCurrUser,
     setCategorySelect,
     categorySelect,
   } = useContext(MyContext);
@@ -75,7 +77,9 @@ const UserDataTable = () => {
                   {formatDateTime(val.updated_at)}
                 </p>
                 <p
-                  onClick={() => setActiveSubTab("user-details")}
+                  onClick={() =>
+                    getUserDetails(val.full_name, setActiveSubTab, setCurrUser)
+                  }
                   className="font-medium cursor-pointer underline text-nowrap pl-6 w-[204px] text-2xl leading-5 text-[#282828]"
                 >
                   {val.full_name}

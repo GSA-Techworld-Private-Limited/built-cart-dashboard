@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { BsPatchCheckFill } from "react-icons/bs";
 import { CalendarTwoIcon, DownArrowIcon } from "./common/Icons";
 import { addOffer } from "./utils/auth";
+import MyContext from "./context/MyContext";
 const OffersPage = () => {
-  const [isSent, setIsSent] = useState(false);
+  const { isOfferSent, setIsOfferSent } = useContext(MyContext);
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("Choose Location");
-  const options = ["Bangalore", "New York"];
+  const [selectedOption, setSelectedOption] = useState("Karnataka");
+  const options = ["Karnataka", "Haryana"];
   const [couponData, setcouponData] = useState({
     coupon_code: "",
     order_value_amount: "",
@@ -32,17 +33,16 @@ const OffersPage = () => {
   };
   const handleSent = (e) => {
     e.preventDefault();
-    addOffer(couponData);
-    setIsSent(true);
-    setTimeout(() => {
-      setIsSent(false);
-    }, 2000);
+    addOffer(couponData, setIsOfferSent,setcouponData);
   };
   // const handleInputChange = (e) => {
   //   const { name, value } = e.target;
   //   setcouponData({ ...couponData, [name]: value });
   //   console.log(value);
   // };
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(today.getDate() + 1);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
@@ -61,7 +61,7 @@ const OffersPage = () => {
       if (selectedDate < currentDate) {
         setcouponData({
           ...couponData,
-          [name]: currentDate.toISOString().split("T")[0],
+          [name]: tomorrow.toISOString().split("T")[0],
         });
       } else {
         setcouponData({ ...couponData, [name]: value });
@@ -79,6 +79,7 @@ const OffersPage = () => {
 
   console.log(couponData);
   console.log(selectedOption);
+
   return (
     <>
       <form onSubmit={handleSent} className="w-full">
@@ -88,12 +89,12 @@ const OffersPage = () => {
           </p>
           <button
             className={`text-2xl font-semibold text-white duration-200 text-nowrap border w-[256px] text-center rounded-[10px] px-16 py-3.5 ${
-              isSent
+              isOfferSent
                 ? "flex items-center gap-3 justify-center border-[#0FB001]"
                 : "hover:text-[#0FB001] text-white bg-[#0FB001] hover:bg-transparent border-transparent hover:border-current"
             }`}
           >
-            {isSent ? (
+            {isOfferSent ? (
               <>
                 <span className="text-[#0FB001]">Sent</span>
                 <BsPatchCheckFill className="text-[#0FB001] text-lg" />
@@ -156,7 +157,7 @@ const OffersPage = () => {
                       onChange={handleInputChange}
                       name="validity_start"
                       value={couponData.validity_start}
-                      min={new Date().toISOString().split("T")[0]}
+                      // min={tomorrow.toISOString().split("T")[0]}
                       className="h-12 2xl:h-[62px] border outline-none border-[#6E6E73] w-full uppercase text-[#6E6E73] rounded-[10px] py-3.5 px-5 leading-5 text-2xl border-spacing-[0.5px]"
                       type="date"
                     />
@@ -171,7 +172,7 @@ const OffersPage = () => {
                       onChange={handleInputChange}
                       name="validity_end"
                       value={couponData.validity_end}
-                      min={new Date().toISOString().split("T")[0]}
+                      // min={tomorrow.toISOString().split("T")[0]}
                       className="h-12 2xl:h-[62px] border outline-none border-[#6E6E73] w-full uppercase text-[#6E6E73] rounded-[10px] py-3.5 px-5 leading-5 text-2xl border-spacing-[0.5px]"
                       type="date"
                     />
@@ -296,7 +297,7 @@ const OffersPage = () => {
                   Total Beneficiaries
                 </label>
                 <input
-                  required
+                 
                   onChange={handleInputChange}
                   name="total_beneficiaries"
                   value={couponData.total_beneficiaries}

@@ -17,6 +17,8 @@ export const MyContextProvider = ({ children }) => {
   const [productDetailsData, setProductDetailsData] = useState(null);
   const [checkedItems, setCheckedItems] = useState({});
   const [userOrderDetails, setUserOrderDetails] = useState();
+  const [currUser, setCurrUser] = useState(null);
+  const [isOfferSent, setIsOfferSent] = useState(false);
   return (
     <MyContext.Provider
       value={{
@@ -48,6 +50,11 @@ export const MyContextProvider = ({ children }) => {
         setSelectExport,
         userOrderDetails,
         setUserOrderDetails,
+        setCurrUser,
+        setCurrUser,
+        currUser,
+        isOfferSent,
+        setIsOfferSent,
       }}
     >
       {children}

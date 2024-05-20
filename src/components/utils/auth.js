@@ -30,6 +30,7 @@ export const fetchUserData = async (
     fetchOrderData(setOrderData);
     fetchStatusData(setStatusData);
     setUserData(userDataList.data);
+    console.log(userDataList.data);
 
     setCategoryData(categoryDataList.data.response);
   } catch (error) {
@@ -83,33 +84,42 @@ export const fetchStatusData = async (setStatusData, value) => {
 };
 export const removeCategory = async (id, setActiveSubTab, setCategoryData) => {
   const accessToken = sessionStorage.getItem("accessToken");
-  const requestData = { id: id.toString() };
-  console.log(requestData);
-  try {
-    // Send POST request with Axios
-    const response = await axios.post(
-      `${baseUrl}/superadmin/delete-category-dashboard/`,
-      requestData,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "application/json",
-        },
+
+  if (id) {
+    const requestData = { id: id.toString() };
+    console.log(requestData);
+    try {
+      // Send POST request with Axios
+      const response = await axios.post(
+        `${baseUrl}/superadmin/delete-category-dashboard/`,
+        requestData,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      setActiveSubTab(null);
+      const categoryDataList = await axios.get(
+        `${baseUrl}/superadmin/add-category-dashboard/`,
+        {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        }
+      );
+      setCategoryData(categoryDataList.data.response);
+      toast.success("Category Deleted Successfully!!", {
+        className: "rounded-[10px]",
+      });
+      if (!id) {
       }
-    );
-    setActiveSubTab(null);
-    const categoryDataList = await axios.get(
-      `${baseUrl}/superadmin/add-category-dashboard/`,
-      {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      }
-    );
-    setCategoryData(categoryDataList.data.response);
-    toast.success("Category Deleted Successfully!!", {
-      className: "rounded-[10px]",
-    });
-  } catch (error) {
-    toast.error("Request Failed!! Try Again", {
+    } catch (error) {
+      toast.error("Request Failed!! Try Again", {
+        className: "rounded-[10px]",
+      });
+    }
+  } else {
+    toast.warning("Select Any Item First!!", {
       className: "rounded-[10px]",
     });
   }
@@ -179,6 +189,7 @@ export const updateCategory = async (
     );
     setCategoryData(categoryDataList.data.response);
     setEditCategoryData({ name: "", image: null });
+    console.log(response);
     toast.success("Category Updated Successfully!!", {
       className: "rounded-[10px]",
     });
@@ -189,7 +200,7 @@ export const updateCategory = async (
   }
 };
 
-export const addOffer = async (couponData) => {
+export const addOffer = async (couponData, setIsOfferSent, setcouponData) => {
   const accessToken = sessionStorage.getItem("accessToken");
   console.log(couponData);
   try {
@@ -203,15 +214,33 @@ export const addOffer = async (couponData) => {
         },
       }
     );
-    console.log(response);
+   
+    setIsOfferSent(true);
+    setTimeout(() => {
+      setIsOfferSent(false);
+    }, 2000);
+    setcouponData({
+      coupon_code: "",
+      order_value_amount: "",
+      validity_start: "",
+      validity_end: "",
+      term_conditions: "",
+      account_created_from: "",
+      account_created_to: "",
+      number_of_referral_from: "",
+      number_of_referral_to: "",
+      state_name: selectedOption,
+      total_beneficiaries: "",
+    });
     toast.success("Coupon Added Successfully!!", {
       className: "rounded-[10px]",
     });
   } catch (error) {
-    toast.error(`Request Failed!! ${error.request.response}`, {
+    toast.error(`Request Failed!! ${error.request}`, {
       className: "rounded-[10px]",
     });
-    console.log(error.request.response);
+
+    console.log(error);
   }
 };
 

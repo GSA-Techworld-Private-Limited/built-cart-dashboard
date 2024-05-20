@@ -4,10 +4,37 @@ import MyContext from "./context/MyContext";
 import CommonBtn from "./common/CommonBtn";
 import ReferralsTable from "./ReferralsTable";
 import UserOrderTable from "./UserOrderTable";
+import axios from "axios";
+import { baseUrl } from "./utils/auth";
+export const getUserDetails = async (
+  currElem,
+  setActiveSubTab,
+  setCurrUser
+) => {
+  const accessToken = sessionStorage.getItem("accessToken");
+  try {
+    const response = await axios.get(
+      `${baseUrl}/superadmin/add-user-dashboard/?name_contains=${currElem}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
 
+    setCurrUser(response.data);
+    console.log(response.data);
+    setActiveSubTab("user-details");
+  } catch (error) {
+    console.error("Fetch user data error:", error);
+  }
+};
 const UserDetails = () => {
-  const { setActiveSubTab } = useContext(MyContext);
+  const { setActiveSubTab, currUser } = useContext(MyContext);
   const [userTabs, setUserTabs] = useState("Referrals");
+
+  const userDetails = currUser[0];
+  console.log(currUser[0]);
   return (
     <>
       <div className="pl-[26px]">
@@ -18,7 +45,7 @@ const UserDetails = () => {
           >
             <IoArrowBack className="text-3xxl 2xl:text-[50px]" />
             <p className="text-2xl 2xl:text-3xxl text-black font-semibold">
-              Kiran(User)
+              {userDetails.full_name}
             </p>
           </div>
           <CommonBtn
@@ -29,84 +56,49 @@ const UserDetails = () => {
         <form className="w-[95%] xl:w-[87%]">
           <div className="flex gap-6 justify-between">
             <div className="flex flex-col w-full max-w-[396px]">
-              <label
-                htmlFor="name"
-                className="text-2xl font-normal text-black mb-2"
-              >
+              <p className="text-2xl font-normal text-black mb-2">
                 Customer name
-              </label>
-              <input
-                id="name"
-                type="text"
-                className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
-              />
+              </p>
+              <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full 2xl:py-3 py-2 2xl:min-h-[62px] min-h-11 rounded-[10px] bg-transparent outline-none">
+                {userDetails.full_name}
+              </p>
             </div>
             <div className="flex flex-col w-full max-w-[396px]">
-              <label
-                htmlFor="number"
-                className="text-2xl font-normal text-black mb-2"
-              >
+              <p className="text-2xl font-normal text-black mb-2">
                 Mobile Number
-              </label>
-              <input
-                id="number"
-                type="number"
-                className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
-              />
+              </p>
+              <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full 2xl:py-3 py-2 2xl:min-h-[62px] min-h-11 rounded-[10px] bg-transparent outline-none">
+                {userDetails.mobile_number}
+              </p>
             </div>
             <div className="flex flex-col w-full max-w-[396px]">
-              <label
-                htmlFor="Email"
-                className="text-2xl font-normal text-black mb-2"
-              >
-                Email ID
-              </label>
-              <input
-                id="Email"
-                type="email"
-                className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
-              />
+              <p className="text-2xl font-normal text-black mb-2">Email ID</p>
+              <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full 2xl:py-3 py-2 2xl:min-h-[62px] min-h-11 rounded-[10px] bg-transparent outline-none">
+                {" "}
+                {userDetails.email}
+              </p>
             </div>
           </div>
           <div className="flex gap-6 justify-between mb-[52px] mt-7">
             <div className="flex flex-col w-full max-w-[396px]">
-              <label
-                htmlFor="Location"
-                className="text-2xl font-normal text-black mb-2"
-              >
-                Location
-              </label>
-              <input
-                id="Location"
-                type="text"
-                className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
-              />
+              <p className="text-2xl font-normal text-black mb-2">Location</p>
+              <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full 2xl:py-3 py-2 2xl:min-h-[62px] min-h-11 rounded-[10px] bg-transparent outline-none">
+                {userDetails.city}
+              </p>
             </div>
             <div className="flex flex-col w-full max-w-[396px]">
-              <label
-                htmlFor="total-referrals"
-                className="text-2xl font-normal text-black mb-2"
-              >
+              <p className="text-2xl font-normal text-black mb-2">
                 Total Referrals
-              </label>
-              <input
-                id="total-referrals"
-                type="number"
-                className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
-              />
+              </p>
+              <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full 2xl:py-3 py-2 2xl:min-h-[62px] min-h-11 rounded-[10px] bg-transparent outline-none">
+                {userDetails.referral_counts}
+              </p>
             </div>
             <div className="flex flex-col w-full max-w-[396px]">
-              <label
-                htmlFor="Total"
-                className="text-2xl font-normal text-black mb-2"
-              >
+              <p className="text-2xl font-normal text-black mb-2">
                 Total Orders
-              </label>
-              <input
-                id="Total"
-                type="number"
-                className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
-              />
+              </p>
+              <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full 2xl:py-3 py-2 2xl:min-h-[62px] min-h-11 rounded-[10px] bg-transparent outline-none"></p>
             </div>
           </div>
         </form>

@@ -52,12 +52,12 @@ const ProductDetails = () => {
               Add Product
             </button>
             <CommonBtn
-              clickEvent={() => setEditOverlay(!editOverlay)}
+              // clickEvent={() => setEditOverlay(!editOverlay)}
               style="text-white bg-[#606060] hover:bg-transparent hover:text-[#606060]"
               btntext="Edit"
             />
             <CommonBtn
-              clickEvent={() => deleteCategory(categorySelect)}
+              // clickEvent={() => deleteCategory(categorySelect)}
               style="text-white bg-[#FF3D00] hover:bg-transparent hover:text-[#FF3D00]"
               btntext="Delete"
             />

@@ -22,6 +22,8 @@ const CategoriesTable = ({ onCategorySelect }) => {
     console.log(id);
     setProductDetailsData(data);
     setCategorySelect(id);
+    console.log(data);
+    console.log(categoryData);
   };
 
   console.log(categorySelect);
