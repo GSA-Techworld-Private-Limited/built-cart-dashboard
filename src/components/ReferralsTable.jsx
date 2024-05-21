@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { referralData } from "./common/Helper";
+import MyContext from "./context/MyContext";
+import { formatDateTime } from "./OrdersTable";
 
 const ReferralsTable = () => {
+  const { currUser } = useContext(MyContext);
   return (
     <>
       <div className="overflow-auto hide_scroll">
@@ -29,42 +32,42 @@ const ReferralsTable = () => {
               Referral type
             </p>
           </div>
-          {referralData.map((val, i) => (
-            <div
-              key={i}
-              className={`h-[60px] mt-2 flex items-center ${
-                i % 2 === 0 ? "bg-[#FEF9EB]" : "bg-white"
-              }`}
-            >
-              <div className="px-[54px] w-[136px]">
-                <Checkbox border="border-[#686868]" />
-              </div>
-              <p className="font-medium pl-6 w-[196px] text-nowrap text-2xl leading-5 text-[#282828]">
-                {val.date}
-              </p>
-              <p className="font-medium text-nowrap pl-6 w-[270px] text-2xl leading-5 text-[#282828]">
-                {val.user}
-              </p>
-              <p className="font-medium text-nowrap pl-6 w-[340px] text-2xl leading-5 text-[#282828]">
-                {val.mobile}
-              </p>
-
-              <p className="font-medium text-nowrap pl-6 w-[370px] text-2xl leading-5 text-[#282828]">
-                {val.location}
-              </p>
-              <p
-                className={`font-medium text-nowrap pl-6 w-[250px] text-2xl leading-5 ${
-                  val.referral === "Secondary"
-                    ? "text-[#FDC63A]"
-                    : val.referral === "Primary"
-                    ? "text-[#0FB001]"
-                    : ""
+          {currUser.referred_users ? (
+            currUser.referred_users.map((val, i) => (
+              <div
+                key={i}
+                className={`h-[60px] mt-2 flex items-center ${
+                  i % 2 === 0 ? "bg-[#FEF9EB]" : "bg-white"
                 }`}
               >
-                {val.referral}
-              </p>
-            </div>
-          ))}
+                <div className="px-[54px] w-[136px]">
+                  <Checkbox border="border-[#686868]" />
+                </div>
+                <p className="font-medium pl-6 w-[196px] text-nowrap text-2xl leading-5 text-[#282828]">
+                  {formatDateTime(val.created_at)}
+                </p>
+                <p className="font-medium text-nowrap pl-6 w-[270px] text-2xl leading-5 text-[#282828]">
+                  {val.full_name}
+                </p>
+                <p className="font-medium text-nowrap pl-6 w-[340px] text-2xl leading-5 text-[#282828]">
+                  {val.mobile_number}
+                </p>
+
+                <p className="font-medium text-nowrap pl-6 w-[370px] text-2xl leading-5 text-[#282828]">
+                  {val.city}
+                </p>
+                <p
+                  className={`font-medium text-nowrap pl-6 w-[250px] text-2xl leading-5 
+                
+                  `}
+                >
+                  {/* {val.referral} */}
+                </p>
+              </div>
+            ))
+          ) : (
+            <p>No Referals Yet</p>
+          )}
         </div>
       </div>
     </>
@@ -72,3 +75,10 @@ const ReferralsTable = () => {
 };
 
 export default ReferralsTable;
+// ${
+//   val.referral === "Secondary"
+//     ? "text-[#FDC63A]"
+//     : val.referral === "Primary"
+//     ? "text-[#0FB001]"
+//     : ""
+// }

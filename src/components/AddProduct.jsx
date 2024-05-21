@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { IoArrowBack } from "react-icons/io5";
 import MyContext from "./context/MyContext";
 import CommonBtn from "./common/CommonBtn";
@@ -12,35 +12,29 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { DownArrowIcon } from "./common/Icons";
+import { baseUrl } from "./utils/auth";
+import axios from "axios";
+import { toast } from "react-toastify";
 const AddProduct = () => {
   const { setActiveSubTab, categoryData } = useContext(MyContext);
   const [isChecked, setIsChecked] = useState(false);
   const [variantCount, setVariantCount] = useState(1);
   const [variants, setVariants] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("newly added");
+  const currId = categoryData.find((val) => val.name === selectedOption);
+  const [category, setCategory] = useState(currId.id);
   const [addProducts, setAddProducts] = useState({
     name: "",
     description: "",
     selling_price: "",
-    category_id: "", // Specify valid category ID
+    category_id: category, // Specify valid category ID
     benifits: "",
-    product_galleries: [
-      {
-        image: null,
-      },
-      {
-        image: null,
-      },
-    ],
-    product_color_galleries: [
-      {
-        color: "",
-        image: null,
-      },
-      {
-        color: "",
-        image: null,
-      },
-    ],
+    quantity: null,
+    rating: 0.5,
+    product_galleries: [],
+    product_color_galleries: [],
   });
   const decrementCount = () => {
     if (variantCount > 1) {
@@ -49,10 +43,69 @@ const AddProduct = () => {
       setVariantCount(1);
     }
   };
+  const toggleDropdown = (e) => {
+    setIsOpen(!isOpen);
+    console.log(e.value);
+  };
+  const handleOptionClick = (option, id) => {
+    setCategory(id);
+    setSelectedOption(option);
+    setIsOpen(false);
+    console.log(id);
+  };
+  // handle the submit
+  const handleProductSubmit = async (e) => {
+    e.preventDefault();
+    // append the data to formdata
+    const formData = new FormData();
+    for (const key in addProducts) {
+      if (Object.hasOwnProperty.call(addProducts, key)) {
+        formData.append(key, addProducts[key]);
+      }
+    }
+    const accessToken = sessionStorage.getItem("accessToken");
+    try {
+      // Send POST request with Axios
+      const response = await axios.post(
+        `${baseUrl}superadmin/add-products-dashboard/`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      console.log(response.data);
+      toast.success(response.data.Message, {
+        className: "rounded-[10px]",
+      });
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  // handle input change
+  const handleChange = (e) => {
+    setAddProducts({ ...addProducts, [e.target.name]: e.target.value });
+  };
+  // update the category in state
+  useEffect(() => {
+    setAddProducts((prevProductData) => ({
+      ...prevProductData,
+      category_id: category,
+    }));
+  }, [category]);
+  // handle the file change
+  const handleFileChange = (uploadedFile, product) => {
+    const updatedAddProducts = { ...addProducts };
+    updatedAddProducts.product_galleries.push({ image: uploadedFile });
+    setAddProducts(updatedAddProducts);
+  };
   console.log(categoryData);
+  console.log(addProducts);
   return (
     <>
-      <div className="pl-[26px] pb-10">
+      <form onSubmit={handleProductSubmit} className="pl-[26px] pb-10">
         <div className="flex items-center justify-between w-[95%] xl:w-[91%] mb-[31px]">
           <div
             onClick={() => setActiveSubTab(null)}
@@ -68,7 +121,7 @@ const AddProduct = () => {
             btntext="Add"
           />
         </div>
-        <form className="w-[95%] xl:w-[87%]">
+        <div className="w-[95%] xl:w-[87%]">
           <div className="flex gap-[129px]">
             <div className="flex flex-col w-full max-w-[396px]">
               <label
@@ -78,6 +131,10 @@ const AddProduct = () => {
                 Product Name
               </label>
               <input
+                required
+                name="name"
+                value={addProducts.name}
+                onChange={handleChange}
                 id="product-name"
                 type="text"
                 className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
@@ -91,8 +148,12 @@ const AddProduct = () => {
                 Product Price per Piece
               </label>
               <input
+                required
                 id="price"
+                name="selling_price"
                 type="number"
+                value={addProducts.selling_price}
+                onChange={handleChange}
                 className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
               />
             </div>
@@ -107,8 +168,11 @@ const AddProduct = () => {
               </label>
 
               <textarea
+                required
                 className="border h-[200px] 2xl:h-[224px] border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full rounded-[10px] bg-transparent outline-none"
-                name=""
+                name="description"
+                value={addProducts.description}
+                onChange={handleChange}
                 id="description"
                 rows="6"
               ></textarea>
@@ -122,28 +186,66 @@ const AddProduct = () => {
               </label>
 
               <textarea
+                required
                 className="border h-[200px] 2xl:h-[224px] border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full rounded-[10px] bg-transparent outline-none"
-                name=""
+                name="benifits"
+                value={addProducts.benifits}
+                onChange={handleChange}
                 id="benefits"
                 rows="6"
               ></textarea>
             </div>
           </div>
           <div className="flex gap-[129px]">
-            <Select>
-              <SelectTrigger className="w-[396px]">
-                <SelectValue placeholder="Choose Category" />
-              </SelectTrigger>
-              <SelectContent width="w-[396px]">
-                {categoryData.map((val) => (
-                  <SelectItem color="text-dark" value={val.name}>
-                    {val.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <div className="flex flex-col max-w-[396px] w-full">
+              <p className="text-2xl font-normal text-black mb-2">
+                Select Category
+              </p>
+              <div className="relative">
+                <div
+                  className="border border-spacing-[0.5px] flex text-2xl max-w-[396px] font-medium h-12 2xl:h-[62px] text-[#6E6E73] justify-between items-center pl-[18px] pr-8 border-[#6E6E73] p-2 rounded-[10px] cursor-pointer"
+                  onClick={toggleDropdown}
+                >
+                  {selectedOption}
+
+                  <DownArrowIcon />
+                </div>
+                {isOpen && (
+                  <div className="absolute z-10 bg-white border-t-0 top-9 2xl:top-[52px] rounded-t-none border border-spacing-[0.5px] rounded-[10px] border-[#6E6E73] mt-1 py-1 w-full">
+                    {categoryData.map((option, index) => (
+                      <div
+                        key={index}
+                        className="px-4 py-2 cursor-pointer text-2xl font-medium text-[#6E6E73]"
+                        onClick={() =>
+                          handleOptionClick(option.name, option.id)
+                        }
+                      >
+                        {option.name}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="flex flex-col w-full max-w-[396px]">
+              <label
+                htmlFor="product_qyt"
+                className="text-2xl font-normal text-black mb-2"
+              >
+                Product Quantity
+              </label>
+              <input
+                required
+                id="product_qyt"
+                name="quantity"
+                type="number"
+                value={addProducts.quantity}
+                onChange={handleChange}
+                className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
+              />
+            </div>
           </div>
-        </form>
+        </div>
         <div className="flex items-center gap-7 mt-12">
           <label className="inline-flex items-center">
             <div className="relative inline-block">
@@ -174,39 +276,29 @@ const AddProduct = () => {
           {isChecked ? (
             variants ? (
               <>
-                <div className="flex gap-6 2xl:gap-9 w-[95%] mt-8">
-                  <div className="border border-black rounded-[30px] py-6 w-full 2xl:py-[30px] px-8 2xl:px-10">
-                    <div className="flex flex-col w-full max-w-[396px] mb-5">
-                      <label
-                        htmlFor="colour-name"
-                        className="text-2xl font-normal text-black mb-2"
-                      >
-                        Colour Name
-                      </label>
-                      <input
-                        id="colour-name"
-                        type="text"
-                        className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
-                      />
+                <div className="grid grid-cols-2 gap-6 2xl:gap-9 w-[95%] mt-8">
+                  {[...Array(variantCount)].map((_, idx) => (
+                    <div
+                      key={idx}
+                      className="border border-black rounded-[30px] py-6 w-full 2xl:py-[30px] px-8 2xl:px-10"
+                    >
+                      <div className="flex flex-col w-full max-w-[396px] mb-5">
+                        <label
+                          htmlFor={`colour-name-${idx}`}
+                          className="text-2xl font-normal text-black mb-2"
+                        >
+                          Colour Name
+                        </label>
+                        <input
+                          required
+                          id={`colour-name-${idx}`}
+                          type="text"
+                          className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
+                        />
+                      </div>
+                      <AddPics />
                     </div>
-                    <AddPics />
-                  </div>
-                  <div className="border border-black rounded-[30px] py-6 w-full 2xl:py-[30px] px-8 2xl:px-10">
-                    <div className="flex flex-col w-full max-w-[396px] mb-5">
-                      <label
-                        htmlFor="colour-name"
-                        className="text-2xl font-normal text-black mb-2"
-                      >
-                        Colour Name
-                      </label>
-                      <input
-                        id="colour-name"
-                        type="text"
-                        className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
-                      />
-                    </div>
-                    <AddPics />
-                  </div>
+                  ))}
                 </div>
               </>
             ) : (
@@ -243,11 +335,17 @@ const AddProduct = () => {
             )
           ) : (
             <div className="w-[41%] mt-11">
-              <AddPics />
+              <AddPics
+                handleFileChange={handleFileChange}
+                image1={addProducts.product_galleries[0]?.image || null}
+                image2={addProducts.product_galleries[1]?.image || null}
+                image3={addProducts.product_galleries[2]?.image || null}
+                image4={addProducts.product_galleries[3]?.image || null}
+              />
             </div>
           )}
         </div>
-      </div>
+      </form>
     </>
   );
 };

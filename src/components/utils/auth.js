@@ -214,7 +214,7 @@ export const addOffer = async (couponData, setIsOfferSent, setcouponData) => {
         },
       }
     );
-   
+
     setIsOfferSent(true);
     setTimeout(() => {
       setIsOfferSent(false);
@@ -244,31 +244,6 @@ export const addOffer = async (couponData, setIsOfferSent, setcouponData) => {
   }
 };
 
-// export const showOrderDetails = async (
-//   id,
-//   setActiveSubTab,
-//   setUserOrderDetails
-// ) => {
-//   const accessToken = sessionStorage.getItem("accessToken");
-//   try {
-//     const response = await axios.get(
-//       `${baseUrl}superadmin/get-orders-dashboard/${id}`,
-//       {
-//         headers: {
-//           Authorization: `Bearer ${accessToken}`,
-//         },
-//       }
-//     );
-//     // setUserOrderDetails(response);
-//     console.log(response);
-//     console.log("success");
-//     // setActiveSubTab("order-details");
-//   } catch (error) {
-//     toast.error("Request Failed!! Try Again", {
-//       className: "rounded-[10px]",
-//     });
-//   }
-// };
 export const showOrderDetails = async (
   id,
   setActiveSubTab,
@@ -298,6 +273,23 @@ export const showOrderDetails = async (
     console.error("Fetch user data error:", error);
     // Show error message
     toast.error("Error fetching user data. Try again", {
+      className: "rounded-[10px]",
+    });
+  }
+};
+
+export const getCoupon = async (setCouponData) => {
+  const accessToken = sessionStorage.getItem("accessToken");
+  try {
+    const res = await axios.get(`${baseUrl}superadmin/add-coupons-dashboard/`, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    console.log(res.data);
+    setCouponData(res.data);
+  } catch (error) {
+    console.error("Fetch coupon data error:", error);
+    // Show error message
+    toast.error("Error fetching coupon data. Try again", {
       className: "rounded-[10px]",
     });
   }

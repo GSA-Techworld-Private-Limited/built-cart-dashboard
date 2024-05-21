@@ -19,9 +19,12 @@ export const MyContextProvider = ({ children }) => {
   const [userOrderDetails, setUserOrderDetails] = useState();
   const [currUser, setCurrUser] = useState(null);
   const [isOfferSent, setIsOfferSent] = useState(false);
+  const [allCoupons, setAllCoupons] = useState(null);
   return (
     <MyContext.Provider
       value={{
+        setAllCoupons,
+        allCoupons,
         checkedItems,
         setCheckedItems,
         activeSubTab,
@@ -50,7 +53,6 @@ export const MyContextProvider = ({ children }) => {
         setSelectExport,
         userOrderDetails,
         setUserOrderDetails,
-        setCurrUser,
         setCurrUser,
         currUser,
         isOfferSent,

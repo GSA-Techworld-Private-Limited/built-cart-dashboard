@@ -1,9 +1,12 @@
 import React, { useContext } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { userOrderData } from "./common/Helper";
+import MyContext from "./context/MyContext";
+import { formatDateTime } from "./OrdersTable";
 
 const UserOrderTable = () => {
-  return (  
+  const { currUser } = useContext(MyContext);
+  return (
     <>
       <div className="overflow-auto hide_scroll">
         <div className="w-[calc(1920px-265px)]">
@@ -32,45 +35,49 @@ const UserOrderTable = () => {
               Status
             </p>
           </div>
-          {userOrderData.map((val, i) => (
-            <div
-              key={i}
-              className={`h-[60px] mt-2 flex items-center ${
-                i % 2 === 0 ? "bg-[#FEF9EB]" : "bg-white"
-              }`}
-            >
-              <div className="px-[54px] w-[136px]">
-                <Checkbox border="border-[#686868]" />
-              </div>
-              <p className="font-medium pl-6 w-[196px] text-nowrap text-2xl leading-5 text-[#282828]">
-                {val.date}
-              </p>
-              <p className="font-medium underline text-nowrap pl-6 w-[270px] text-2xl leading-5 text-[#282828]">
-                {val.id}
-              </p>
-              <p className="font-medium text-nowrap pl-6 w-[277px] text-2xl leading-5 text-[#282828]">
-                {val.items}
-              </p>
-
-              <p className="font-medium text-nowrap pl-6 w-[287px] text-2xl leading-5 text-[#282828]">
-                {val.amount}
-              </p>
-              <p className="font-medium text-nowrap pl-6 w-[266px] text-2xl leading-5 text-[#282828]">
-                {val.payment}
-              </p>
-              <p
-                className={`font-medium text-nowrap pl-6 w-[250px] text-2xl leading-5 ${
-                  val.status === "Unpaid"
-                    ? "text-[#FDC63A]"
-                    : val.status === "Paid"
-                    ? "text-[#0FB001]"
-                    : ""
+          {currUser.user_orders.length > 0 ? (
+            currUser.user_orders.map((val, i) => (
+              <div
+                key={i}
+                className={`h-[60px] mt-2 flex items-center ${
+                  i % 2 === 0 ? "bg-[#FEF9EB]" : "bg-white"
                 }`}
               >
-                {val.status}
-              </p>
-            </div>
-          ))}
+                <div className="px-[54px] w-[136px]">
+                  <Checkbox border="border-[#686868]" />
+                </div>
+                <p className="font-medium pl-6 w-[196px] text-nowrap text-2xl leading-5 text-[#282828]">
+                  {formatDateTime(val.order_placed_date)}
+                </p>
+                <p className="font-medium underline text-nowrap pl-6 w-[270px] text-2xl leading-5 text-[#282828]">
+                  {val.order}
+                </p>
+                <p className="font-medium text-nowrap pl-6 w-[277px] text-2xl leading-5 text-[#282828]">
+                  {val.product}
+                </p>
+
+                <p className="font-medium text-nowrap pl-6 w-[287px] text-2xl leading-5 text-[#282828]">
+                  {val.is_paid || "Not Paid"}
+                </p>
+                <p className="font-medium text-nowrap pl-6 w-[266px] text-2xl leading-5 text-[#282828]">
+                  {val.mode_of_payment}
+                </p>
+                <p
+                  className={`font-medium text-nowrap pl-6 w-[250px] text-2xl leading-5 ${
+                    val.order_status === "pending"
+                      ? "text-[#FDC63A] "
+                      : "text-[#0FB001]"
+                  }`}
+                >
+                  {val.order_status}
+                </p>
+              </div>
+            ))
+          ) : (
+            <p className="text-red-500 text-3xl font-semibold text-center pt-3">
+              No Orders Yet
+            </p>
+          )}
         </div>
       </div>
     </>

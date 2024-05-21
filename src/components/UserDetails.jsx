@@ -14,7 +14,7 @@ export const getUserDetails = async (
   const accessToken = sessionStorage.getItem("accessToken");
   try {
     const response = await axios.get(
-      `${baseUrl}/superadmin/add-user-dashboard/?name_contains=${currElem}`,
+      `${baseUrl}/superadmin/get-user-dashboard/${currElem}/`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -33,8 +33,7 @@ const UserDetails = () => {
   const { setActiveSubTab, currUser } = useContext(MyContext);
   const [userTabs, setUserTabs] = useState("Referrals");
 
-  const userDetails = currUser[0];
-  console.log(currUser[0]);
+  console.log(currUser);
   return (
     <>
       <div className="pl-[26px]">
@@ -45,7 +44,7 @@ const UserDetails = () => {
           >
             <IoArrowBack className="text-3xxl 2xl:text-[50px]" />
             <p className="text-2xl 2xl:text-3xxl text-black font-semibold">
-              {userDetails.full_name}
+              {currUser.full_name}
             </p>
           </div>
           <CommonBtn
@@ -60,7 +59,7 @@ const UserDetails = () => {
                 Customer name
               </p>
               <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full 2xl:py-3 py-2 2xl:min-h-[62px] min-h-11 rounded-[10px] bg-transparent outline-none">
-                {userDetails.full_name}
+                {currUser.full_name}
               </p>
             </div>
             <div className="flex flex-col w-full max-w-[396px]">
@@ -68,14 +67,14 @@ const UserDetails = () => {
                 Mobile Number
               </p>
               <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full 2xl:py-3 py-2 2xl:min-h-[62px] min-h-11 rounded-[10px] bg-transparent outline-none">
-                {userDetails.mobile_number}
+                {currUser.mobile_number}
               </p>
             </div>
             <div className="flex flex-col w-full max-w-[396px]">
               <p className="text-2xl font-normal text-black mb-2">Email ID</p>
               <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full 2xl:py-3 py-2 2xl:min-h-[62px] min-h-11 rounded-[10px] bg-transparent outline-none">
                 {" "}
-                {userDetails.email}
+                {currUser.email}
               </p>
             </div>
           </div>
@@ -83,7 +82,7 @@ const UserDetails = () => {
             <div className="flex flex-col w-full max-w-[396px]">
               <p className="text-2xl font-normal text-black mb-2">Location</p>
               <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full 2xl:py-3 py-2 2xl:min-h-[62px] min-h-11 rounded-[10px] bg-transparent outline-none">
-                {userDetails.city}
+                {currUser.city}
               </p>
             </div>
             <div className="flex flex-col w-full max-w-[396px]">
@@ -91,7 +90,7 @@ const UserDetails = () => {
                 Total Referrals
               </p>
               <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full 2xl:py-3 py-2 2xl:min-h-[62px] min-h-11 rounded-[10px] bg-transparent outline-none">
-                {userDetails.referral_counts}
+                {currUser.referral_counts}
               </p>
             </div>
             <div className="flex flex-col w-full max-w-[396px]">

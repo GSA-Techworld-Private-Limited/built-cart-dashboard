@@ -5,7 +5,7 @@ import LoginPage from "./components/LoginPage";
 import Dashboard from "./components/Dashboard";
 import { ToastContainer } from "react-toastify";
 import MyContext from "./components/context/MyContext";
-import { fetchUserData } from "./components/utils/auth";
+import { fetchUserData, getCoupon } from "./components/utils/auth";
 import ProtectedRoute from "./components/routes/ProtectedRoute";
 
 function App() {
@@ -16,11 +16,13 @@ function App() {
     setUserData,
     setStatusData,
     setCategoryData,
+    setAllCoupons,
   } = useContext(MyContext);
   useEffect(() => {
     const accessToken = sessionStorage.getItem("accessToken");
     if (accessToken) {
       fetchUserData(setUserData, setOrderData, setStatusData, setCategoryData);
+      getCoupon(setAllCoupons);
     }
   }, []);
 

@@ -78,7 +78,7 @@ const UserDataTable = () => {
                 </p>
                 <p
                   onClick={() =>
-                    getUserDetails(val.full_name, setActiveSubTab, setCurrUser)
+                    getUserDetails(val.id, setActiveSubTab, setCurrUser)
                   }
                   className="font-medium cursor-pointer underline text-nowrap pl-6 w-[204px] text-2xl leading-5 text-[#282828]"
                 >

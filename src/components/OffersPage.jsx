@@ -4,9 +4,11 @@ import { CalendarTwoIcon, DownArrowIcon } from "./common/Icons";
 import { addOffer } from "./utils/auth";
 import MyContext from "./context/MyContext";
 const OffersPage = () => {
-  const { isOfferSent, setIsOfferSent } = useContext(MyContext);
+  const { isOfferSent, setIsOfferSent, setAllCoupons, allCoupons } =
+    useContext(MyContext);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("Karnataka");
+  const [isCouponUnique, setisCouponUnique] = useState(true);
   const options = ["Karnataka", "Haryana"];
   const [couponData, setcouponData] = useState({
     coupon_code: "",
@@ -33,19 +35,20 @@ const OffersPage = () => {
   };
   const handleSent = (e) => {
     e.preventDefault();
-    addOffer(couponData, setIsOfferSent,setcouponData);
+    addOffer(couponData, setIsOfferSent, setcouponData);
   };
-  // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setcouponData({ ...couponData, [name]: value });
-  //   console.log(value);
-  // };
   const today = new Date();
   const tomorrow = new Date(today);
   tomorrow.setDate(today.getDate() + 1);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-
+    if (name === "coupon_code") {
+      const valid = allCoupons.find((val) => val.coupon_code === value);
+      if (valid) {
+        setisCouponUnique(false);
+        console.log(valid);
+      } else setisCouponUnique(true);
+    }
     if (name === "order_value_amount") {
       if (/^\d*\.?\d*$/.test(value)) {
         const digitsBeforeDecimal = value.split(".")[0];
@@ -113,6 +116,9 @@ const OffersPage = () => {
                   className="text-2xl font-medium text-black mb-4"
                 >
                   Enter Coupon Code
+                  <span className="text-sm ml-4 text-red-500">
+                    {!isCouponUnique ? "Enter Unique Code" : ""}
+                  </span>
                 </label>
                 <input
                   required
@@ -121,7 +127,9 @@ const OffersPage = () => {
                   type="text"
                   name="coupon_code"
                   value={couponData.coupon_code}
-                  className="text-2xl 2xl:text-3xxl font-medium h-12 2xl:h-[62px] text-[#6E6E73] placeholder:text-[#6E6E73] border border-spacing-[0.5px] border-[#6E6E73] rounded-[10px] py-2 px-5 w-[420px] outline-none"
+                  className={`${
+                    isCouponUnique ? "border-[#6E6E73]" : "border-red-500"
+                  } text-2xl 2xl:text-3xxl font-medium h-12 2xl:h-[62px] text-[#6E6E73] placeholder:text-[#6E6E73] border border-spacing-[0.5px] rounded-[10px] py-2 px-5 w-[420px] outline-none`}
                   placeholder="Enter Code"
                 />
               </div>
@@ -297,7 +305,6 @@ const OffersPage = () => {
                   Total Beneficiaries
                 </label>
                 <input
-                 
                   onChange={handleInputChange}
                   name="total_beneficiaries"
                   value={couponData.total_beneficiaries}

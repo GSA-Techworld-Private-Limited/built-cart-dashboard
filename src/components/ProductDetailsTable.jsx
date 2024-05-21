@@ -2,8 +2,15 @@ import React, { useContext } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import MyContext from "./context/MyContext";
 import { formatDateTime } from "./OrdersTable";
+import CheckBox from "./common/CheckBox";
+import { handleCheckBoxChange } from "./utils/handleCheckBox";
 const ProductDetailsTables = () => {
-  const { productDetailsData } = useContext(MyContext);
+  const {
+    productDetailsData,
+    setCheckedItems,
+    checkedItems,
+    setCategorySelect,
+  } = useContext(MyContext);
   console.log(productDetailsData);
   return (
     <>
