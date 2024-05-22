@@ -14,6 +14,7 @@ const ProductDetails = () => {
     editOverlay,
     categoryData,
     setProductDetailsData,
+    productDetailsData,
   } = useContext(MyContext);
   const deleteCategory = (id) => {
     console.log(id);
@@ -44,6 +45,7 @@ const ProductDetails = () => {
       console.error("Fetch user data error:", error);
     }
   };
+  console.log(productDetailsData);
   return (
     <>
       <div className="w-full">

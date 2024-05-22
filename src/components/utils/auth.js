@@ -108,7 +108,7 @@ export const removeCategory = async (id, setActiveSubTab, setCategoryData) => {
         }
       );
       setCategoryData(categoryDataList.data.response);
-      toast.success("Category Deleted Successfully!!", {
+      toast.success(response, {
         className: "rounded-[10px]",
       });
       if (!id) {

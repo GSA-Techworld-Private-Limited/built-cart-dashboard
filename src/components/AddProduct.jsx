@@ -5,13 +5,6 @@ import CommonBtn from "./common/CommonBtn";
 import { Check } from "lucide-react";
 import { FiPlusCircle, FiMinusCircle } from "react-icons/fi";
 import AddPics from "./common/AddPics";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { DownArrowIcon } from "./common/Icons";
 import { baseUrl } from "./utils/auth";
 import axios from "axios";
@@ -59,10 +52,17 @@ const AddProduct = () => {
     // append the data to formdata
     const formData = new FormData();
     for (const key in addProducts) {
-      if (Object.hasOwnProperty.call(addProducts, key)) {
+      if (
+        key !== "product_galleries" &&
+        Object.hasOwnProperty.call(addProducts, key)
+      ) {
         formData.append(key, addProducts[key]);
       }
     }
+
+    addProducts.product_galleries.forEach((gallery, index) => {
+      formData.append(`product_galleries[${index}][image]`, gallery.image);
+    });
     const accessToken = sessionStorage.getItem("accessToken");
     try {
       // Send POST request with Axios

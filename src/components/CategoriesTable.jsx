@@ -87,7 +87,7 @@ const CategoriesTable = () => {
                     alt="category pic"
                   />
                 </div>
-                <p className="font-medium underline text-nowrap overflow-hidden text-ellipsis pl-6 w-[204px] text-2xl leading-5 text-[#282828]">
+                <p className="font-medium underline text-nowrap overflow-hidden text-ellipsis pl-6 w-[204px] text-2xl text-[#282828]">
                   {val.name}
                 </p>
 

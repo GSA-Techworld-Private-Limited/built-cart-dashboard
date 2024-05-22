@@ -24,17 +24,17 @@ const Orders = () => {
   const handleChange = (event) => {
     const term = event.target.value.toLowerCase();
 
-    const filteredData = orderData.filter((order) =>
-      order.orders.some((item) =>
-        Object.values(item).some(
-          (val) => typeof val === "string" && val.toLowerCase().includes(term)
-        )
-      )
-    );
-    console.log(filteredData);
-    if (filteredData.length === 0) {
+    if (term === "") {
       fetchOrderData(setOrderData);
     } else {
+      const filteredData = orderData.filter((order) =>
+        order.orders.some((item) =>
+          Object.values(item).some(
+            (val) => typeof val === "string" && val.toLowerCase().includes(term)
+          )
+        )
+      );
+      console.log(filteredData);
       setOrderData(filteredData);
     }
   };
