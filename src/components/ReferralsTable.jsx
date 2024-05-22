@@ -3,9 +3,12 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { referralData } from "./common/Helper";
 import MyContext from "./context/MyContext";
 import { formatDateTime } from "./OrdersTable";
+import { handleCheckBoxChange } from "./utils/handleCheckBox";
+import CheckBox from "./common/CheckBox";
 
 const ReferralsTable = () => {
-  const { currUser } = useContext(MyContext);
+  const { currUser, checkedItems, setCategorySelect, setCheckedItems } =
+    useContext(MyContext);
   return (
     <>
       <div className="overflow-auto hide_scroll">
@@ -41,7 +44,19 @@ const ReferralsTable = () => {
                 }`}
               >
                 <div className="px-[54px] w-[136px]">
-                  <Checkbox border="border-[#686868]" />
+                  {/* <Checkbox border="border-[#686868]" /> */}
+                  <CheckBox
+                    inputStyle="!border-[#686868]"
+                    checkStyle="!border-[#686868] !bg-transparent"
+                    isChecked={checkedItems[val.id] || false}
+                    handleCheckBox={() =>
+                      handleCheckBoxChange(
+                        val.id,
+                        setCheckedItems,
+                        setCategorySelect
+                      )
+                    }
+                  />
                 </div>
                 <p className="font-medium pl-6 w-[196px] text-nowrap text-2xl leading-5 text-[#282828]">
                   {formatDateTime(val.created_at)}
@@ -66,7 +81,9 @@ const ReferralsTable = () => {
               </div>
             ))
           ) : (
-            <p>No Referals Yet</p>
+            <p className="text-red-500 text-3xl font-semibold text-center pt-3">
+              No Referals Yet
+            </p>
           )}
         </div>
       </div>

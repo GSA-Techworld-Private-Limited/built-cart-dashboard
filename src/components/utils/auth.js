@@ -1,6 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-export const baseUrl = "https://v3h2dw9k-8000.inc1.devtunnels.ms/";
+export const baseUrl = "https://v3h2dw9k-8001.inc1.devtunnels.ms";
 
 export const fetchUserData = async (
   setUserData,
@@ -255,7 +255,7 @@ export const showOrderDetails = async (
   };
   try {
     const res = await axios.get(
-      `${baseUrl}superadmin/get-orders-dashboard/${id}/`,
+      `${baseUrl}/superadmin/get-orders-dashboard/${id}/`,
       {
         headers: options,
       }
@@ -281,9 +281,12 @@ export const showOrderDetails = async (
 export const getCoupon = async (setCouponData) => {
   const accessToken = sessionStorage.getItem("accessToken");
   try {
-    const res = await axios.get(`${baseUrl}superadmin/add-coupons-dashboard/`, {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    });
+    const res = await axios.get(
+      `${baseUrl}/superadmin/add-coupons-dashboard/`,
+      {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      }
+    );
     console.log(res.data);
     setCouponData(res.data);
   } catch (error) {

@@ -72,7 +72,7 @@ const LoginPage = () => {
       <section className="min-h-screen bg-primary-gradient flex items-center flex-col justify-center py-14">
         <div className="container px-4 flex justify-center flex-col items-center">
           <img
-            className="w-1/3 2xl:w-full md:w-1/5 2xl:max-w-[292px] mb-9"
+            className="w-1/3 2xl:w-full md:w-1/5 lg:w-[15%] 2xl:max-w-[292px] mb-9"
             src={pageLogo}
             alt="pagelogo"
           />

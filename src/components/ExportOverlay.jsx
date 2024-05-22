@@ -57,7 +57,7 @@ const ExportOverlay = () => {
       >
         <div onClick={closeOverlay} className="fixed inset-0"></div>
         <form
-          onSubmit={handleClick}
+          // onSubmit={handleClick}
           className="px-7 py-6 rounded-[30px] bg-white relative"
         >
           <span
@@ -133,6 +133,7 @@ const ExportOverlay = () => {
               </SelectContent>
             </Select>
             <button
+              onClick={handleClick}
               type="submit"
               className={`w-full text-center p-4 border border-transparent duration-200 rounded-[10px] mt-[50px] text-xl font-semibold ${
                 status === "export" ? "bg-[#FDC63A] text-white" : ""

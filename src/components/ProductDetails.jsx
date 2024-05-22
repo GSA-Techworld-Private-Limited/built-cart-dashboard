@@ -3,7 +3,8 @@ import { IoSearchSharp } from "react-icons/io5";
 import CommonBtn from "./common/CommonBtn";
 import ProductDetailsTables from "./ProductDetailsTable";
 import MyContext from "./context/MyContext";
-import { removeCategory, updateCategory } from "./utils/auth";
+import { baseUrl, removeCategory, updateCategory } from "./utils/auth";
+import axios from "axios";
 const ProductDetails = () => {
   const {
     setActiveSubTab,
@@ -12,6 +13,7 @@ const ProductDetails = () => {
     setEditOverlay,
     editOverlay,
     categoryData,
+    setProductDetailsData,
   } = useContext(MyContext);
   const deleteCategory = (id) => {
     console.log(id);
@@ -25,7 +27,23 @@ const ProductDetails = () => {
   const dataForCurrTitle = categoryData.filter(
     (currElem) => currElem.id === categorySelect
   );
-
+  const filterUserWithName = async (e) => {
+    const accessToken = sessionStorage.getItem("accessToken");
+    try {
+      const res = await axios.get(
+        `${baseUrl}/superadmin/add-products-dashboard/?name_contains=${e.target.value}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      console.log(res.data);
+      // setProductDetailsData(userDataList.data);
+    } catch (error) {
+      console.error("Fetch user data error:", error);
+    }
+  };
   return (
     <>
       <div className="w-full">
@@ -38,6 +56,7 @@ const ProductDetails = () => {
             <div className="flex items-center gap-[10px] me-4 max-h-[54px] 2xl:max-h-[62px] border w-[432px] border-black rounded-[10px] px-[13px]">
               <IoSearchSharp className="text-dark text-[28px]" />
               <input
+                onChange={filterUserWithName}
                 type="text"
                 placeholder="Search Name, Location..."
                 className="text-2xl text-[#6E6E73] leading-5 w-full placeholder:text-[#6E6E73] font-medium outline-none border-0 bg-transparent py-4 2xl:py-5"
@@ -47,7 +66,7 @@ const ProductDetails = () => {
           <div className="flex items-center gap-6 2xl:gap-[30px]">
             <button
               onClick={() => setActiveSubTab("add-products")}
-              className="py-5 w-[224px] text-center duration-200 border border-transparent hover:border-current hover:bg-transparent hover:text-current leading-5 text-2xl font-medium px-6 rounded-[10px] bg-[#0028B7] text-white"
+              className="py-4 2xl:py-5 w-[224px] text-center duration-200 border border-transparent hover:border-current hover:bg-transparent hover:text-current leading-5 text-2xl font-medium px-6 rounded-[10px] bg-[#0028B7] text-white"
             >
               Add Product
             </button>

@@ -37,30 +37,48 @@ const ProductDetailsTables = () => {
           </div>
           {productDetailsData &&
             productDetailsData.map((val, i) =>
-              val.total_product.map((obj) => (
-                <div
-                  className={`h-[60px] mt-2 gap-[65px] flex items-center ${
-                    i % 2 === 0 ? "bg-[#FEF9EB]" : "bg-white"
-                  }`}
-                  key={i}
-                >
-                  <div className="px-[54px] w-[136px]">
-                    <Checkbox border="border-[#686868]" />
+              val.total_product.length > 0 ? (
+                val.total_product.map((obj) => (
+                  <div
+                    className={`h-[60px] mt-2 gap-[65px] flex items-center ${
+                      i % 2 === 0 ? "bg-[#FEF9EB]" : "bg-white"
+                    }`}
+                    key={i}
+                  >
+                    <div className="px-[54px] w-[136px]">
+                      <Checkbox border="border-[#686868]" />
+                      {/* <CheckBox
+                      inputStyle="!border-[#686868]"
+                      checkStyle="!border-[#686868] !bg-transparent"
+                      isChecked={checkedItems[val.id] || false}
+                      handleCheckBox={() =>
+                        handleCheckBoxChange(
+                          val.id,
+                          setCheckedItems,
+                          setCategorySelect
+                        )
+                      }
+                    /> */}
+                    </div>
+                    <p className="font-medium pl-6 w-[244px] text-nowrap text-2xl leading-5 text-[#282828] -ml-[65px]">
+                      {formatDateTime(obj.created_at)}
+                    </p>
+                    <p className="font-medium pl-6 w-[280px] text-nowrap text-2xl leading-5 text-[#282828]">
+                      {obj.name}
+                    </p>
+                    <p className="font-medium text-nowrap pl-6 w-[280px] text-2xl leading-5 text-[#282828]">
+                      {obj.selling_price}
+                    </p>
+                    <p className="font-medium text-nowrap pl-6 w-[280px] text-2xl leading-5 text-[#282828]">
+                      {obj.order_products}
+                    </p>
                   </div>
-                  <p className="font-medium pl-6 w-[244px] text-nowrap text-2xl leading-5 text-[#282828] -ml-[65px]">
-                    {formatDateTime(obj.created_at)}
-                  </p>
-                  <p className="font-medium pl-6 w-[280px] text-nowrap text-2xl leading-5 text-[#282828]">
-                    {obj.name}
-                  </p>
-                  <p className="font-medium text-nowrap pl-6 w-[280px] text-2xl leading-5 text-[#282828]">
-                    {obj.selling_price}
-                  </p>
-                  <p className="font-medium text-nowrap pl-6 w-[280px] text-2xl leading-5 text-[#282828]">
-                    {obj.order_products}
-                  </p>
-                </div>
-              ))
+                ))
+              ) : (
+                <p className="text-red-500 text-3xl font-semibold text-center pt-3">
+                  No Orders Yet
+                </p>
+              )
             )}
         </div>
       </div>

@@ -1,4 +1,8 @@
-export const handleCheckBoxChange = (id, setCheckedItems,setCategorySelect) => {
+export const handleCheckBoxChange = (
+  id,
+  setCheckedItems,
+  setCategorySelect
+) => {
   setCheckedItems((prevCheckedItems) => {
     const newCheckedItems = { ...prevCheckedItems };
     // Check if the checkbox was already selected

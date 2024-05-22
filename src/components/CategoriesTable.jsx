@@ -1,11 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import MyContext from "./context/MyContext";
 import { DateRangeIcon } from "./common/Icons";
 import { formatDateTime } from "./OrdersTable";
 import CheckBox from "./common/CheckBox";
 import { handleCheckBoxChange } from "./utils/handleCheckBox";
-const CategoriesTable = ({ onCategorySelect }) => {
+const CategoriesTable = () => {
   const {
     setActiveSubTab,
     categoryData,
@@ -27,7 +27,6 @@ const CategoriesTable = ({ onCategorySelect }) => {
   };
 
   console.log(categorySelect);
-
   return (
     <>
       <div className="overflow-auto hide_scroll">
@@ -64,11 +63,9 @@ const CategoriesTable = ({ onCategorySelect }) => {
                 }`}
               >
                 <div className="px-[54px] w-[136px]">
-                  {/* <Checkbox
-                    changeEvent={() => console.log(val.id)}
-                    border="border-[#686868]"
-                  /> */}
                   <CheckBox
+                    inputStyle="!border-[#686868]"
+                    checkStyle="!border-[#686868] !bg-transparent"
                     isChecked={checkedItems[val.id] || false}
                     handleCheckBox={() =>
                       handleCheckBoxChange(
@@ -85,12 +82,12 @@ const CategoriesTable = ({ onCategorySelect }) => {
                 <div className=" pl-6 w-[204px]">
                   <img
                     width={67}
-                    src={`https://v3h2dw9k-8000.inc1.devtunnels.ms${val.image}`}
-                    className="rounded"
+                    src={`https://v3h2dw9k-8001.inc1.devtunnels.ms${val.image}`}
+                    className="rounded object-cover max-h-[67px]"
                     alt="category pic"
                   />
                 </div>
-                <p className="font-medium underline text-nowrap pl-6 w-[204px] text-2xl leading-5 text-[#282828]">
+                <p className="font-medium underline text-nowrap overflow-hidden text-ellipsis pl-6 w-[204px] text-2xl leading-5 text-[#282828]">
                   {val.name}
                 </p>
 

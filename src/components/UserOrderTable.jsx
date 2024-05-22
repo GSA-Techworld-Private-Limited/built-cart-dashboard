@@ -3,9 +3,18 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { userOrderData } from "./common/Helper";
 import MyContext from "./context/MyContext";
 import { formatDateTime } from "./OrdersTable";
+import CheckBox from "./common/CheckBox";
+import { handleCheckBoxChange } from "./utils/handleCheckBox";
 
 const UserOrderTable = () => {
-  const { currUser } = useContext(MyContext);
+  const {
+    currUser,
+    setCheckedItems,
+    setCategorySelect,
+    categorySelect,
+    checkedItems,
+  } = useContext(MyContext);
+  console.log(categorySelect);
   return (
     <>
       <div className="overflow-auto hide_scroll">
@@ -44,7 +53,19 @@ const UserOrderTable = () => {
                 }`}
               >
                 <div className="px-[54px] w-[136px]">
-                  <Checkbox border="border-[#686868]" />
+                  {/* <Checkbox border="border-[#686868]" /> */}
+                  <CheckBox
+                    inputStyle="!border-[#686868]"
+                    checkStyle="!border-[#686868] !bg-transparent"
+                    isChecked={checkedItems[val.id] || false}
+                    handleCheckBox={() =>
+                      handleCheckBoxChange(
+                        val.id,
+                        setCheckedItems,
+                        setCategorySelect
+                      )
+                    }
+                  />
                 </div>
                 <p className="font-medium pl-6 w-[196px] text-nowrap text-2xl leading-5 text-[#282828]">
                   {formatDateTime(val.order_placed_date)}

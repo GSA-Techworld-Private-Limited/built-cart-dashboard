@@ -6,6 +6,7 @@ import ReferralsTable from "./ReferralsTable";
 import UserOrderTable from "./UserOrderTable";
 import axios from "axios";
 import { baseUrl } from "./utils/auth";
+import { toast } from "react-toastify";
 export const getUserDetails = async (
   currElem,
   setActiveSubTab,
@@ -30,9 +31,28 @@ export const getUserDetails = async (
   }
 };
 const UserDetails = () => {
-  const { setActiveSubTab, currUser } = useContext(MyContext);
+  const {
+    setActiveSubTab,
+    currUser,
+    setSelectExport,
+    setShowExport,
+    showExport,
+  } = useContext(MyContext);
   const [userTabs, setUserTabs] = useState("Referrals");
-
+  const handleExport = () => {
+    const data =
+      userTabs === "Referrals"
+        ? currUser.referred_users
+        : currUser.user_orders;
+    if (data.length > 0) {
+      setSelectExport(data);
+      setShowExport(!showExport);
+    } else {
+      toast.warning("No orders to export", {
+        className: "rounded-[10px]",
+      });
+    }
+  };
   console.log(currUser);
   return (
     <>
@@ -48,6 +68,7 @@ const UserDetails = () => {
             </p>
           </div>
           <CommonBtn
+            clickEvent={handleExport}
             style="text-black bg-[#FDC63A] hover:bg-transparent hover:text-[#FDC63A]"
             btntext="Export"
           />
@@ -58,7 +79,7 @@ const UserDetails = () => {
               <p className="text-2xl font-normal text-black mb-2">
                 Customer name
               </p>
-              <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full 2xl:py-3 py-2 2xl:min-h-[62px] min-h-11 rounded-[10px] bg-transparent outline-none">
+              <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full 2xl:py-3 py-[5px] 2xl:min-h-[62px] min-h-12 rounded-[10px] bg-transparent outline-none">
                 {currUser.full_name}
               </p>
             </div>
@@ -66,13 +87,13 @@ const UserDetails = () => {
               <p className="text-2xl font-normal text-black mb-2">
                 Mobile Number
               </p>
-              <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full 2xl:py-3 py-2 2xl:min-h-[62px] min-h-11 rounded-[10px] bg-transparent outline-none">
+              <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full 2xl:py-3 py-[5px] 2xl:min-h-[62px] min-h-12 rounded-[10px] bg-transparent outline-none">
                 {currUser.mobile_number}
               </p>
             </div>
             <div className="flex flex-col w-full max-w-[396px]">
               <p className="text-2xl font-normal text-black mb-2">Email ID</p>
-              <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full 2xl:py-3 py-2 2xl:min-h-[62px] min-h-11 rounded-[10px] bg-transparent outline-none">
+              <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full 2xl:py-3 py-[5px] 2xl:min-h-[62px] min-h-12 rounded-[10px] bg-transparent outline-none">
                 {" "}
                 {currUser.email}
               </p>
@@ -81,7 +102,7 @@ const UserDetails = () => {
           <div className="flex gap-6 justify-between mb-[52px] mt-7">
             <div className="flex flex-col w-full max-w-[396px]">
               <p className="text-2xl font-normal text-black mb-2">Location</p>
-              <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full 2xl:py-3 py-2 2xl:min-h-[62px] min-h-11 rounded-[10px] bg-transparent outline-none">
+              <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full 2xl:py-3 py-[5px] 2xl:min-h-[62px] min-h-12 rounded-[10px] bg-transparent outline-none">
                 {currUser.city}
               </p>
             </div>
@@ -89,7 +110,7 @@ const UserDetails = () => {
               <p className="text-2xl font-normal text-black mb-2">
                 Total Referrals
               </p>
-              <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full 2xl:py-3 py-2 2xl:min-h-[62px] min-h-11 rounded-[10px] bg-transparent outline-none">
+              <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full 2xl:py-3 py-[5px] 2xl:min-h-[62px] min-h-12 rounded-[10px] bg-transparent outline-none">
                 {currUser.referral_counts}
               </p>
             </div>
@@ -97,7 +118,7 @@ const UserDetails = () => {
               <p className="text-2xl font-normal text-black mb-2">
                 Total Orders
               </p>
-              <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full 2xl:py-3 py-2 2xl:min-h-[62px] min-h-11 rounded-[10px] bg-transparent outline-none"></p>
+              <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full 2xl:py-3 py-[5px] 2xl:min-h-[62px] min-h-12 rounded-[10px] bg-transparent outline-none"></p>
             </div>
           </div>
         </form>

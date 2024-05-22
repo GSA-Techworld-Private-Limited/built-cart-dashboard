@@ -67,7 +67,7 @@ const AddProduct = () => {
     try {
       // Send POST request with Axios
       const response = await axios.post(
-        `${baseUrl}superadmin/add-products-dashboard/`,
+        `${baseUrl}/superadmin/add-products-dashboard/`,
         formData,
         {
           headers: {
