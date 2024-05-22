@@ -31,26 +31,26 @@ const CategoriesTable = () => {
     <>
       <div className="overflow-auto hide_scroll">
         <div className="w-[calc(1920px-265px)]">
-          <div className="bg-[#BDBDBD] h-16 flex gap-[62px] items-center">
+          <div className="bg-[#BDBDBD] h-[54px] 2xl:h-16 flex gap-[62px] items-center">
             <div className="px-[54px]">
               <Checkbox border="border-dark" />
             </div>
             <div className="flex pl-6 items-center gap-2 w-[178px] -ml-[62px]">
-              <p className="font-semibold text-nowrap text-2xl leading-5 text-[#282828]">
+              <p className="font-semibold text-nowrap 2xl:text-2xl text-xl leading-5 text-[#282828]">
                 Date
               </p>
               <DateRangeIcon />
             </div>
-            <p className="font-semibold text-nowrap pl-6 w-[204px] text-2xl leading-5 text-[#282828]">
+            <p className="font-semibold text-nowrap pl-6 w-[204px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
               Category Pic
             </p>
-            <p className="font-semibold text-nowrap pl-6 w-[204px] text-2xl leading-5 text-[#282828]">
+            <p className="font-semibold text-nowrap pl-6 w-[204px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
               Category
             </p>
-            <p className="font-semibold text-nowrap pl-6 w-[270px] text-2xl leading-5 text-[#282828]">
+            <p className="font-semibold text-nowrap pl-6 w-[270px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
               Total Products
             </p>
-            <p className="font-semibold text-nowrap pl-6 w-[204px] text-2xl leading-5 text-[#282828]">
+            <p className="font-semibold text-nowrap pl-6 w-[204px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
               Total Orders
             </p>
           </div>
@@ -58,7 +58,7 @@ const CategoriesTable = () => {
             categoryData.map((val, i) => (
               <div
                 key={val.id}
-                className={`h-[60px] mt-2 gap-[62px] flex items-center ${
+                className={`2xl:h-[60px] h-[54px] mt-2 gap-[62px] flex items-center ${
                   i % 2 === 0 ? "bg-[#FEF9EB]" : "bg-white"
                 }`}
               >
@@ -76,7 +76,7 @@ const CategoriesTable = () => {
                     }
                   />
                 </div>
-                <p className="font-medium pl-6 w-[178px] text-nowrap text-2xl leading-5 text-[#282828] -ml-[62px]">
+                <p className="font-medium pl-6 w-[178px] text-nowrap 2xl:text-2xl text-xl leading-5 text-[#282828] -ml-[62px]">
                   {formatDateTime(val.created_at)}
                 </p>
                 <div className=" pl-6 w-[204px]">
@@ -87,17 +87,17 @@ const CategoriesTable = () => {
                     alt="category pic"
                   />
                 </div>
-                <p className="font-medium underline text-nowrap overflow-hidden text-ellipsis pl-6 w-[204px] text-2xl text-[#282828]">
+                <p className="font-medium underline text-nowrap overflow-hidden text-ellipsis pl-6 w-[204px] 2xl:text-2xl text-xl text-[#282828]">
                   {val.name}
                 </p>
 
                 <p
                   onClick={() => showProductDetails(val.id)}
-                  className="font-medium cursor-pointer underline text-nowrap pl-6 w-[270px] text-2xl leading-5 text-[#0028B7]"
+                  className="font-medium cursor-pointer underline text-nowrap pl-6 w-[270px] 2xl:text-2xl text-xl leading-5 text-[#0028B7]"
                 >
                   {val.total_product_count}
                 </p>
-                <p className="font-medium text-nowrap pl-6 w-[204px] text-2xl leading-5 text-[#282828]">
+                <p className="font-medium text-nowrap pl-6 w-[204px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
                   {val.total_order}
                 </p>
               </div>

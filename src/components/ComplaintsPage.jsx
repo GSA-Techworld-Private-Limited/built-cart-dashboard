@@ -25,7 +25,7 @@ const ComplaintsPage = () => {
               <input
                 type="text"
                 placeholder="Search Name, Location..."
-                className="text-2xl text-[#6E6E73] leading-5 w-full placeholder:text-[#6E6E73] font-medium outline-none border-0 bg-transparent py-4 2xl:py-5"
+                className="2xl:text-2xl text-xl text-[#6E6E73] leading-5 w-full placeholder:text-[#6E6E73] font-medium outline-none border-0 bg-transparent py-4 2xl:py-5"
               />
             </div>
             <Select>

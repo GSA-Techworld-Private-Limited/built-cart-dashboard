@@ -64,13 +64,13 @@ const CategoriesPage = () => {
           </p>
           <button
             onClick={showCategoryPopUp}
-            className="py-4 2xl:py-5 w-[224px] text-center duration-200 border border-transparent hover:border-current hover:bg-transparent hover:text-current leading-5 ml-9 text-2xl font-medium px-6 rounded-[10px] bg-[#0FA958] text-white"
+            className="py-4 2xl:py-5 w-[224px] text-center duration-200 border border-transparent hover:border-current hover:bg-transparent hover:text-current leading-5 ml-9 2xl:text-2xl text-xl font-medium px-6 rounded-[10px] bg-[#0FA958] text-white"
           >
             Add Category
           </button>
           <button
             onClick={() => setActiveSubTab("add-products")}
-            className="py-4 2xl:py-5 w-[224px] text-center duration-200 border border-transparent hover:border-current hover:bg-transparent hover:text-current leading-5 text-2xl font-medium px-6 rounded-[10px] bg-[#0028B7] text-white"
+            className="py-4 2xl:py-5 w-[224px] text-center duration-200 border border-transparent hover:border-current hover:bg-transparent hover:text-current leading-5 2xl:text-2xl text-xl font-medium px-6 rounded-[10px] bg-[#0028B7] text-white"
           >
             Add Product
           </button>
@@ -82,7 +82,7 @@ const CategoriesPage = () => {
               onChange={filterCategoryWithName}
               type="text"
               placeholder="Search Name, Location..."
-              className="text-2xl text-[#6E6E73] leading-5 w-full placeholder:text-[#6E6E73] font-medium outline-none border-0 bg-transparent py-4 2xl:py-5"
+              className="2xl:text-2xl text-xl text-[#6E6E73] leading-5 w-full placeholder:text-[#6E6E73] font-medium outline-none border-0 bg-transparent py-4 2xl:py-5"
             />
           </div>
           <div className="flex items-center gap-6 2xl:gap-[30px]">

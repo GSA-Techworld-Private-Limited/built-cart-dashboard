@@ -13,25 +13,25 @@ const ReferralsTable = () => {
     <>
       <div className="overflow-auto hide_scroll">
         <div className="w-[calc(1920px-265px)]">
-          <div className="bg-[#BDBDBD] h-16 flex items-center">
+          <div className="bg-[#BDBDBD] h-[54px] 2xl:h-16 flex items-center">
             <div className="px-[54px]">
               <Checkbox border="border-dark" />
             </div>
             <div className="flex pl-6 items-center gap-2 w-[196px]">
-              <p className="font-semibold text-nowrap text-2xl leading-5 text-[#282828]">
+              <p className="font-semibold text-nowrap 2xl:text-2xl text-xl leading-5 text-[#282828]">
                 Join Date
               </p>
             </div>
-            <p className="font-semibold text-nowrap pl-6 w-[270px] text-2xl leading-5 text-[#282828]">
+            <p className="font-semibold text-nowrap pl-6 w-[270px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
               Name
             </p>
-            <p className="font-semibold text-nowrap pl-6 w-[340px] text-2xl leading-5 text-[#282828]">
+            <p className="font-semibold text-nowrap pl-6 w-[340px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
               Mobile
             </p>
-            <p className="font-semibold text-nowrap pl-6 w-[370px] text-2xl leading-5 text-[#282828]">
+            <p className="font-semibold text-nowrap pl-6 w-[370px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
               Location
             </p>
-            <p className="font-semibold text-nowrap pl-6 w-[250px] text-2xl leading-5 text-[#282828]">
+            <p className="font-semibold text-nowrap pl-6 w-[250px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
               Referral type
             </p>
           </div>
@@ -39,7 +39,7 @@ const ReferralsTable = () => {
             currUser.referred_users.map((val, i) => (
               <div
                 key={i}
-                className={`h-[60px] mt-2 flex items-center ${
+                className={`2xl:h-[60px] h-[54px] mt-2 flex items-center ${
                   i % 2 === 0 ? "bg-[#FEF9EB]" : "bg-white"
                 }`}
               >
@@ -58,21 +58,21 @@ const ReferralsTable = () => {
                     }
                   />
                 </div>
-                <p className="font-medium pl-6 w-[196px] text-nowrap text-2xl leading-5 text-[#282828]">
+                <p className="font-medium pl-6 w-[196px] text-nowrap 2xl:text-2xl text-xl leading-5 text-[#282828]">
                   {formatDateTime(val.created_at)}
                 </p>
-                <p className="font-medium text-nowrap pl-6 w-[270px] text-2xl leading-5 text-[#282828]">
+                <p className="font-medium text-nowrap pl-6 w-[270px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
                   {val.full_name}
                 </p>
-                <p className="font-medium text-nowrap pl-6 w-[340px] text-2xl leading-5 text-[#282828]">
+                <p className="font-medium text-nowrap pl-6 w-[340px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
                   {val.mobile_number}
                 </p>
 
-                <p className="font-medium text-nowrap pl-6 w-[370px] text-2xl leading-5 text-[#282828]">
+                <p className="font-medium text-nowrap pl-6 w-[370px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
                   {val.city}
                 </p>
                 <p
-                  className={`font-medium text-nowrap pl-6 w-[250px] text-2xl leading-5 
+                  className={`font-medium text-nowrap pl-6 w-[250px] 2xl:text-2xl text-xl leading-5 
                 
                   `}
                 >

@@ -16,22 +16,22 @@ const ProductDetailsTables = () => {
     <>
       <div className="overflow-auto hide_scroll">
         <div className="w-[calc(1920px-265px)]">
-          <div className="bg-[#BDBDBD] h-16 flex gap-[65px] items-center">
+          <div className="bg-[#BDBDBD] h-[54px] 2xl:h-16 flex gap-[65px] items-center">
             <div className="px-[54px]">
               <Checkbox border="border-dark" />
             </div>
             <div className="flex pl-6 items-center gap-2 w-[244px] -ml-[65px]">
-              <p className="font-semibold text-nowrap text-2xl leading-5 text-[#282828]">
+              <p className="font-semibold text-nowrap 2xl:text-2xl text-xl leading-5 text-[#282828]">
                 Date
               </p>
             </div>
-            <p className="font-semibold text-nowrap pl-6 w-[280px] text-2xl leading-5 text-[#282828]">
+            <p className="font-semibold text-nowrap pl-6 w-[280px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
               Product
             </p>
-            <p className="font-semibold text-nowrap pl-6 w-[280px] text-2xl leading-5 text-[#282828]">
+            <p className="font-semibold text-nowrap pl-6 w-[280px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
               Price per piece
             </p>
-            <p className="font-semibold text-nowrap pl-6 w-[280px] text-2xl leading-5 text-[#282828]">
+            <p className="font-semibold text-nowrap pl-6 w-[280px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
               Total Orders
             </p>
           </div>
@@ -40,7 +40,7 @@ const ProductDetailsTables = () => {
               val.total_product.length > 0 ? (
                 val.total_product.map((obj) => (
                   <div
-                    className={`h-[60px] mt-2 gap-[65px] flex items-center ${
+                    className={`2xl:h-[60px] h-[54px] mt-2 gap-[65px] flex items-center ${
                       i % 2 === 0 ? "bg-[#FEF9EB]" : "bg-white"
                     }`}
                     key={i}
@@ -60,16 +60,16 @@ const ProductDetailsTables = () => {
                       }
                     /> */}
                     </div>
-                    <p className="font-medium pl-6 w-[244px] text-nowrap text-2xl leading-5 text-[#282828] -ml-[65px]">
+                    <p className="font-medium pl-6 w-[244px] text-nowrap 2xl:text-2xl text-xl leading-5 text-[#282828] -ml-[65px]">
                       {formatDateTime(obj.created_at)}
                     </p>
-                    <p className="font-medium pl-6 w-[280px] text-nowrap text-2xl leading-5 text-[#282828]">
+                    <p className="font-medium pl-6 w-[280px] text-nowrap 2xl:text-2xl text-xl leading-5 text-[#282828]">
                       {obj.name}
                     </p>
-                    <p className="font-medium text-nowrap pl-6 w-[280px] text-2xl leading-5 text-[#282828]">
+                    <p className="font-medium text-nowrap pl-6 w-[280px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
                       {obj.selling_price}
                     </p>
-                    <p className="font-medium text-nowrap pl-6 w-[280px] text-2xl leading-5 text-[#282828]">
+                    <p className="font-medium text-nowrap pl-6 w-[280px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
                       {obj.order_products}
                     </p>
                   </div>

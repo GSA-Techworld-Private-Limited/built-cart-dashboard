@@ -23,16 +23,16 @@ const AdminNav = () => {
           </p>
         </div>
         <img
-          className="w-14 md:w-[69px] md:h-[73px]"
+          className="w-14 md:w-14 2xl:h-[73px]"
           src={pageLogo}
           alt="page logo"
         />
 
         <button
           onClick={logout}
-          className="py-[6px] md:py-[9px] px-3 hover:text-primary group hover:bg-white duration-200 md:px-[18px] border border-white flex gap-2 sm:gap-4 items-center text-white text-base sm:text-xl md:text-2xl font-medium rounded-[10px] bg-transparent"
+          className="py-[6px] 2xl:py-[9px] px-3 hover:text-primary group hover:bg-white duration-200 md:px-[18px] border border-white flex gap-2 2xl:gap-4 items-center text-white text-base sm:text-xl 2xl:text-2xl font-medium rounded-[10px] bg-transparent"
         >
-          <IoMdPower className="text-white w-5 group-hover:text-primary duration-200 sm:w-[31px] h-6 sm:h-[31px]" />
+          <IoMdPower className="text-white group-hover:text-primary duration-200 2xl:w-[31px] w-6 h-6 2xl:h-[31px]" />
           Log Out
         </button>
       </nav>

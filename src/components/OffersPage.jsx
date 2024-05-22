@@ -91,7 +91,7 @@ const OffersPage = () => {
             Offers
           </p>
           <button
-            className={`text-2xl font-semibold text-white duration-200 text-nowrap border w-[256px] text-center rounded-[10px] px-16 py-3.5 ${
+            className={`2xl:text-2xl text-xl font-semibold text-white duration-200 text-nowrap border w-[210px] 2xl:w-[256px] text-center rounded-[10px] px-10 py-3 2xl:py-3.5 ${
               isOfferSent
                 ? "flex items-center gap-3 justify-center border-[#0FB001]"
                 : "hover:text-[#0FB001] text-white bg-[#0FB001] hover:bg-transparent border-transparent hover:border-current"
@@ -129,7 +129,7 @@ const OffersPage = () => {
                   value={couponData.coupon_code}
                   className={`${
                     isCouponUnique ? "border-[#6E6E73]" : "border-red-500"
-                  } text-2xl 2xl:text-3xxl font-medium h-12 2xl:h-[62px] text-[#6E6E73] placeholder:text-[#6E6E73] border border-spacing-[0.5px] rounded-[10px] py-2 px-5 w-[420px] outline-none`}
+                  } 2xl:text-2xl text-xl 2xl:text-3xxl font-medium h-12 2xl:h-[62px] text-[#6E6E73] placeholder:text-[#6E6E73] border border-spacing-[0.5px] rounded-[10px] py-2 px-5 w-[420px] outline-none`}
                   placeholder="Enter Code"
                 />
               </div>
@@ -166,7 +166,7 @@ const OffersPage = () => {
                       name="validity_start"
                       value={couponData.validity_start}
                       // min={tomorrow.toISOString().split("T")[0]}
-                      className="h-12 2xl:h-[62px] border outline-none border-[#6E6E73] w-full uppercase text-[#6E6E73] rounded-[10px] py-3.5 px-5 leading-5 text-2xl border-spacing-[0.5px]"
+                      className="h-12 2xl:h-[62px] border outline-none border-[#6E6E73] w-full uppercase text-[#6E6E73] rounded-[10px] py-3.5 px-5 leading-5 2xl:text-2xl text-xl border-spacing-[0.5px]"
                       type="date"
                     />
                     <CalendarTwoIcon style="absolute top-1/2 bg-white -translate-y-1/2 right-[25px] pointer-events-none max-2xl:w-7" />
@@ -181,7 +181,7 @@ const OffersPage = () => {
                       name="validity_end"
                       value={couponData.validity_end}
                       // min={tomorrow.toISOString().split("T")[0]}
-                      className="h-12 2xl:h-[62px] border outline-none border-[#6E6E73] w-full uppercase text-[#6E6E73] rounded-[10px] py-3.5 px-5 leading-5 text-2xl border-spacing-[0.5px]"
+                      className="h-12 2xl:h-[62px] border outline-none border-[#6E6E73] w-full uppercase text-[#6E6E73] rounded-[10px] py-3.5 px-5 leading-5 2xl:text-2xl text-xl border-spacing-[0.5px]"
                       type="date"
                     />
                     <CalendarTwoIcon style="absolute top-1/2 bg-white -translate-y-1/2 right-[25px] pointer-events-none max-2xl:w-7" />
@@ -223,7 +223,7 @@ const OffersPage = () => {
                       onChange={handleInputChange}
                       name="account_created_from"
                       value={couponData.account_created_from}
-                      className="h-12 2xl:h-[62px] border outline-none border-[#6E6E73] w-full uppercase text-[#6E6E73] rounded-[10px] py-3.5 px-5 leading-5 text-2xl border-spacing-[0.5px]"
+                      className="h-12 2xl:h-[62px] border outline-none border-[#6E6E73] w-full uppercase text-[#6E6E73] rounded-[10px] py-3.5 px-5 leading-5 2xl:text-2xl text-xl border-spacing-[0.5px]"
                       type="date"
                     />
                     <CalendarTwoIcon style="absolute top-1/2 bg-white -translate-y-1/2 right-[25px] pointer-events-none max-2xl:w-7" />
@@ -237,7 +237,7 @@ const OffersPage = () => {
                       onChange={handleInputChange}
                       name="account_created_to"
                       value={couponData.account_created_to}
-                      className="h-12 2xl:h-[62px] border outline-none border-[#6E6E73] w-full uppercase text-[#6E6E73] rounded-[10px] py-3.5 px-5 leading-5 text-2xl border-spacing-[0.5px]"
+                      className="h-12 2xl:h-[62px] border outline-none border-[#6E6E73] w-full uppercase text-[#6E6E73] rounded-[10px] py-3.5 px-5 leading-5 2xl:text-2xl text-xl border-spacing-[0.5px]"
                       type="date"
                     />
                     <CalendarTwoIcon style="absolute top-1/2 bg-white -translate-y-1/2 right-[25px] pointer-events-none max-2xl:w-7" />
@@ -255,7 +255,7 @@ const OffersPage = () => {
                     onChange={handleInputChange}
                     name="number_of_referral_from"
                     value={couponData.number_of_referral_from}
-                    className="border h-12 2xl:h-[62px] outline-none max-w-[113px] border-[#6E6E73] w-full uppercase text-[#6E6E73] rounded-[10px] py-3.5 px-5 leading-5 text-2xl border-spacing-[0.5px]"
+                    className="border h-12 2xl:h-[62px] outline-none max-w-[113px] border-[#6E6E73] w-full uppercase text-[#6E6E73] rounded-[10px] py-3.5 px-5 leading-5 2xl:text-2xl text-xl border-spacing-[0.5px]"
                     type="number"
                   />
                 </div>
@@ -266,7 +266,7 @@ const OffersPage = () => {
                     onChange={handleInputChange}
                     name="number_of_referral_to"
                     value={couponData.number_of_referral_to}
-                    className="border h-12 2xl:h-[62px] outline-none max-w-[113px] border-[#6E6E73] w-full uppercase text-[#6E6E73] rounded-[10px] py-3.5 px-5 leading-5 text-2xl border-spacing-[0.5px]"
+                    className="border h-12 2xl:h-[62px] outline-none max-w-[113px] border-[#6E6E73] w-full uppercase text-[#6E6E73] rounded-[10px] py-3.5 px-5 leading-5 2xl:text-2xl text-xl border-spacing-[0.5px]"
                     type="number"
                   />
                 </div>
@@ -276,7 +276,7 @@ const OffersPage = () => {
               </p>
               <div className="relative">
                 <div
-                  className="border border-spacing-[0.5px] flex text-2xl w-[401px] font-medium h-12 2xl:h-[62px] text-[#6E6E73] justify-between items-center pl-[18px] pr-8 border-[#6E6E73] p-2 rounded-[10px] cursor-pointer"
+                  className="border border-spacing-[0.5px] flex 2xl:text-2xl text-xl w-[401px] font-medium h-12 2xl:h-[62px] text-[#6E6E73] justify-between items-center pl-[18px] pr-8 border-[#6E6E73] p-2 rounded-[10px] cursor-pointer"
                   onClick={toggleDropdown}
                 >
                   {selectedOption}
@@ -288,7 +288,7 @@ const OffersPage = () => {
                     {options.map((option, index) => (
                       <div
                         key={index}
-                        className="px-4 py-2 cursor-pointer text-2xl font-medium text-[#6E6E73]"
+                        className="px-4 py-2 cursor-pointer 2xl:text-2xl text-xl font-medium text-[#6E6E73]"
                         onClick={() => handleOptionClick(option)}
                       >
                         {option}

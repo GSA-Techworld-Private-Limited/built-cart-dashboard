@@ -35,7 +35,7 @@ const OrderLogsDetails = (props) => {
               <input
                 id="name"
                 type="text"
-                className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
+                className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
               />
             </div>
             <div className="flex flex-col w-full max-w-[396px]">
@@ -48,7 +48,7 @@ const OrderLogsDetails = (props) => {
               <input
                 id="number"
                 type="number"
-                className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
+                className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
               />
             </div>
             <div className="flex flex-col w-full max-w-[396px]">
@@ -61,7 +61,7 @@ const OrderLogsDetails = (props) => {
               <input
                 id="Location"
                 type="text"
-                className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
+                className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
               />
             </div>
           </div>
@@ -76,7 +76,7 @@ const OrderLogsDetails = (props) => {
               <input
                 id="Referral"
                 type="text"
-                className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
+                className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
               />
             </div>
             <div className="flex flex-col w-full max-w-[396px]">
@@ -89,7 +89,7 @@ const OrderLogsDetails = (props) => {
               <input
                 id="Payment"
                 type="text"
-                className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
+                className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
               />
             </div>
             <div className="flex flex-col w-full max-w-[396px]">
@@ -101,7 +101,7 @@ const OrderLogsDetails = (props) => {
               </label>
 
               <textarea
-                className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full rounded-[10px] bg-transparent outline-none"
+                className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full rounded-[10px] bg-transparent outline-none"
                 name=""
                 id="Address"
                 rows="4"
@@ -122,7 +122,7 @@ const OrderLogsDetails = (props) => {
               <input
                 id="Product"
                 type="text"
-                className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
+                className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
               />
             </div>
 
@@ -136,7 +136,7 @@ const OrderLogsDetails = (props) => {
               <input
                 id="Price"
                 type="number"
-                className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
+                className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
               />
             </div>
             <div className="flex flex-col w-full max-w-[396px]">
@@ -149,7 +149,7 @@ const OrderLogsDetails = (props) => {
               <input
                 id="Quantity"
                 type="number"
-                className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
+                className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
               />
             </div>
           </div>
@@ -163,7 +163,7 @@ const OrderLogsDetails = (props) => {
             <input
               id="Amount"
               type="number"
-              className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
+              className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
             />
           </div>
         </form>

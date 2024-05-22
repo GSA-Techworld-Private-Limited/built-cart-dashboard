@@ -137,7 +137,7 @@ const AddProduct = () => {
                 onChange={handleChange}
                 id="product-name"
                 type="text"
-                className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
+                className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
               />
             </div>
             <div className="flex flex-col w-full max-w-[396px]">
@@ -154,7 +154,7 @@ const AddProduct = () => {
                 type="number"
                 value={addProducts.selling_price}
                 onChange={handleChange}
-                className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
+                className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
               />
             </div>
           </div>
@@ -169,7 +169,7 @@ const AddProduct = () => {
 
               <textarea
                 required
-                className="border h-[200px] 2xl:h-[224px] border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full rounded-[10px] bg-transparent outline-none"
+                className="border h-[200px] 2xl:h-[224px] border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full rounded-[10px] bg-transparent outline-none"
                 name="description"
                 value={addProducts.description}
                 onChange={handleChange}
@@ -187,7 +187,7 @@ const AddProduct = () => {
 
               <textarea
                 required
-                className="border h-[200px] 2xl:h-[224px] border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full rounded-[10px] bg-transparent outline-none"
+                className="border h-[200px] 2xl:h-[224px] border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full rounded-[10px] bg-transparent outline-none"
                 name="benifits"
                 value={addProducts.benifits}
                 onChange={handleChange}
@@ -203,7 +203,7 @@ const AddProduct = () => {
               </p>
               <div className="relative">
                 <div
-                  className="border border-spacing-[0.5px] flex text-2xl max-w-[396px] font-medium h-12 2xl:h-[62px] text-[#6E6E73] justify-between items-center pl-[18px] pr-8 border-[#6E6E73] p-2 rounded-[10px] cursor-pointer"
+                  className="border border-spacing-[0.5px] flex 2xl:text-2xl text-xl max-w-[396px] font-medium h-12 2xl:h-[62px] text-[#6E6E73] justify-between items-center pl-[18px] pr-8 border-[#6E6E73] p-2 rounded-[10px] cursor-pointer"
                   onClick={toggleDropdown}
                 >
                   {selectedOption}
@@ -215,7 +215,7 @@ const AddProduct = () => {
                     {categoryData.map((option, index) => (
                       <div
                         key={index}
-                        className="px-4 py-2 cursor-pointer text-2xl font-medium text-[#6E6E73]"
+                        className="px-4 py-2 cursor-pointer 2xl:text-2xl text-xl font-medium text-[#6E6E73]"
                         onClick={() =>
                           handleOptionClick(option.name, option.id)
                         }
@@ -241,7 +241,7 @@ const AddProduct = () => {
                 type="number"
                 value={addProducts.quantity}
                 onChange={handleChange}
-                className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
+                className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
               />
             </div>
           </div>
@@ -259,7 +259,7 @@ const AddProduct = () => {
                 {isChecked && <Check className=" text-sm text-[#0FB001]" />}
               </span>
             </div>
-            <span className="ml-4 text-2xl leading-5 text-[#0028B7] font-normal">
+            <span className="ml-4 2xl:text-2xl text-xl leading-5 text-[#0028B7] font-normal">
               Add Product with different Colour Variants
             </span>
           </label>
@@ -293,7 +293,7 @@ const AddProduct = () => {
                           required
                           id={`colour-name-${idx}`}
                           type="text"
-                          className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
+                          className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
                         />
                       </div>
                       <AddPics />

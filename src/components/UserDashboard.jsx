@@ -52,10 +52,10 @@ const UserDashboard = () => {
           </SelectContent>
         </Select>
       </div>
-      <div className="inline-grid grid-cols-2 ps-7 gap-y-11 gap-x-[72px] pb-10">
+      <div className="inline-grid grid-cols-2 ps-7 gap-y-8 2xl:gap-y-11 gap-14 2xl:gap-x-[72px] pb-10">
         {statusData && (
           <>
-            <div className="w-[387px] p-[22px] bg-light shadow-lg text-center rounded-[10px]">
+            <div className="w-[320px] 2xl:w-[387px] p-[22px] bg-light shadow-lg text-center rounded-[10px]">
               <p className={`text-2xl font-medium mb-2 text-dark `}>
                 Total User{" "}
               </p>
@@ -63,7 +63,7 @@ const UserDashboard = () => {
                 {statusData.Total_User}
               </p>
             </div>
-            <div className="w-[387px] p-[22px] bg-light shadow-lg text-center rounded-[10px]">
+            <div className="w-[320px] 2xl:w-[387px] p-[22px] bg-light shadow-lg text-center rounded-[10px]">
               <p className={`text-2xl font-medium mb-2 text-[#FDC63A] `}>
                 Total Orders
               </p>
@@ -73,7 +73,7 @@ const UserDashboard = () => {
                 {statusData.Total_Order}
               </p>
             </div>
-            <div className="w-[387px] p-[22px] bg-light shadow-lg text-center rounded-[10px]">
+            <div className="w-[320px] 2xl:w-[387px] p-[22px] bg-light shadow-lg text-center rounded-[10px]">
               <p className={`text-2xl font-medium mb-2 text-[#D31010] `}>
                 Orders Pending
               </p>
@@ -83,7 +83,7 @@ const UserDashboard = () => {
                 {statusData.Order_Pending}
               </p>
             </div>
-            <div className="w-[387px] p-[22px] bg-light shadow-lg text-center rounded-[10px]">
+            <div className="w-[320px] 2xl:w-[387px] p-[22px] bg-light shadow-lg text-center rounded-[10px]">
               <p className={`text-2xl font-medium mb-2 text-[#0FB001] `}>
                 Orders Completed
               </p>

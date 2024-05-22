@@ -19,28 +19,28 @@ const UserOrderTable = () => {
     <>
       <div className="overflow-auto hide_scroll">
         <div className="w-[calc(1920px-265px)]">
-          <div className="bg-[#BDBDBD] h-16 flex items-center">
+          <div className="bg-[#BDBDBD] h-[54px] 2xl:h-16 flex items-center">
             <div className="px-[54px]">
               <Checkbox border="border-dark" />
             </div>
             <div className="flex pl-6 items-center gap-2 w-[196px]">
-              <p className="font-semibold text-nowrap text-2xl leading-5 text-[#282828]">
+              <p className="font-semibold text-nowrap 2xl:text-2xl text-xl leading-5 text-[#282828]">
                 Delivery Date
               </p>
             </div>
-            <p className="font-semibold text-nowrap pl-6 w-[270px] text-2xl leading-5 text-[#282828]">
+            <p className="font-semibold text-nowrap pl-6 w-[270px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
               Order ID
             </p>
-            <p className="font-semibold text-nowrap pl-6 w-[277px] text-2xl leading-5 text-[#282828]">
+            <p className="font-semibold text-nowrap pl-6 w-[277px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
               Items
             </p>
-            <p className="font-semibold text-nowrap pl-6 w-[287px] text-2xl leading-5 text-[#282828]">
+            <p className="font-semibold text-nowrap pl-6 w-[287px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
               Amount Paid
             </p>
-            <p className="font-semibold text-nowrap pl-6 w-[266px] text-2xl leading-5 text-[#282828]">
+            <p className="font-semibold text-nowrap pl-6 w-[266px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
               Payment Mode
             </p>
-            <p className="font-semibold text-nowrap pl-6 w-[250px] text-2xl leading-5 text-[#282828]">
+            <p className="font-semibold text-nowrap pl-6 w-[250px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
               Status
             </p>
           </div>
@@ -48,7 +48,7 @@ const UserOrderTable = () => {
             currUser.user_orders.map((val, i) => (
               <div
                 key={i}
-                className={`h-[60px] mt-2 flex items-center ${
+                className={`2xl:h-[60px] h-[54px] mt-2 flex items-center ${
                   i % 2 === 0 ? "bg-[#FEF9EB]" : "bg-white"
                 }`}
               >
@@ -67,24 +67,24 @@ const UserOrderTable = () => {
                     }
                   />
                 </div>
-                <p className="font-medium pl-6 w-[196px] text-nowrap text-2xl leading-5 text-[#282828]">
+                <p className="font-medium pl-6 w-[196px] text-nowrap 2xl:text-2xl text-xl leading-5 text-[#282828]">
                   {formatDateTime(val.order_placed_date)}
                 </p>
-                <p className="font-medium underline text-nowrap pl-6 w-[270px] text-2xl leading-5 text-[#282828]">
+                <p className="font-medium underline text-nowrap pl-6 w-[270px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
                   {val.order}
                 </p>
-                <p className="font-medium text-nowrap pl-6 w-[277px] text-2xl leading-5 text-[#282828]">
+                <p className="font-medium text-nowrap pl-6 w-[277px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
                   {val.product}
                 </p>
 
-                <p className="font-medium text-nowrap pl-6 w-[287px] text-2xl leading-5 text-[#282828]">
+                <p className="font-medium text-nowrap pl-6 w-[287px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
                   {val.is_paid || "Not Paid"}
                 </p>
-                <p className="font-medium text-nowrap pl-6 w-[266px] text-2xl leading-5 text-[#282828]">
+                <p className="font-medium text-nowrap pl-6 w-[266px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
                   {val.mode_of_payment}
                 </p>
                 <p
-                  className={`font-medium text-nowrap pl-6 w-[250px] text-2xl leading-5 ${
+                  className={`font-medium text-nowrap pl-6 w-[250px] 2xl:text-2xl text-xl leading-5 ${
                     val.order_status === "pending"
                       ? "text-[#FDC63A] "
                       : "text-[#0FB001]"

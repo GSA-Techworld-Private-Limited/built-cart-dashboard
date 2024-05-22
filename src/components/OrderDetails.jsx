@@ -26,7 +26,7 @@ const OrderDetails = (props) => {
                 : userOrderDetails.orders[0].order_status === "delivered"
                 ? "after:bg-[#0FB001] text-[#0FB001]"
                 : ""
-            } text-2xl 2xl:text-3xxl font-semibold relative after:absolute after:w-[15px] after:h-[15px] after:top-1/2 after:-translate-y-1/2 after:rounded-full after:-left-[35px] `}
+            } 2xl:text-2xl text-xl 2xl:text-3xxl font-semibold relative after:absolute after:w-[15px] after:h-[15px] after:top-1/2 after:-translate-y-1/2 after:rounded-full after:-left-[35px] `}
           >
             {userOrderDetails.orders[0].order_status}
           </p>
@@ -37,7 +37,7 @@ const OrderDetails = (props) => {
               <p className="text-2xl font-normal text-black mb-2">
                 Customer name
               </p>
-              <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 rounded-[10px] bg-transparent outline-none">
+              <p className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 rounded-[10px] bg-transparent outline-none">
                 {userOrderDetails.orders[0].order_address.full_name}
               </p>
             </div>
@@ -45,13 +45,13 @@ const OrderDetails = (props) => {
               <p className="text-2xl font-normal text-black mb-2">
                 Mobile Number
               </p>
-              <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 rounded-[10px] bg-transparent outline-none">
+              <p className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 rounded-[10px] bg-transparent outline-none">
                 {userOrderDetails.orders[0].order_address.mobile_number}
               </p>
             </div>
             <div className="flex flex-col w-full max-w-[396px]">
               <p className="text-2xl font-normal text-black mb-2">Location</p>
-              <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 rounded-[10px] bg-transparent outline-none">
+              <p className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 rounded-[10px] bg-transparent outline-none">
                 {userOrderDetails.orders[0].order_address.city}
               </p>
             </div>
@@ -61,13 +61,13 @@ const OrderDetails = (props) => {
               <p className="text-2xl font-normal text-black mb-2">
                 Referral ID
               </p>
-              <input className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 rounded-[10px] bg-transparent outline-none" />
+              <input className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 rounded-[10px] bg-transparent outline-none" />
             </div>
             <div className="flex flex-col w-full max-w-[396px]">
               <p className="text-2xl font-normal text-black mb-2">
                 Payment Mode
               </p>
-              <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 rounded-[10px] bg-transparent outline-none">
+              <p className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 rounded-[10px] bg-transparent outline-none">
                 {userOrderDetails.orders[0].mode_of_payment}
               </p>
             </div>
@@ -76,7 +76,7 @@ const OrderDetails = (props) => {
                 Delivery Address
               </p>
 
-              <div className="border py-[5px] 2xl:py-3 border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full rounded-[10px] bg-transparent outline-none">
+              <div className="border py-[5px] 2xl:py-3 border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full rounded-[10px] bg-transparent outline-none">
                 {`House No.${userOrderDetails.orders[0].order_address.house_no}, ${userOrderDetails.orders[0].order_address.street}, ${userOrderDetails.orders[0].order_address.area}, ${userOrderDetails.orders[0].order_address.city}, ${userOrderDetails.orders[0].order_address.state}, ${userOrderDetails.orders[0].order_address.pincode}`}
               </div>
             </div>
@@ -90,7 +90,7 @@ const OrderDetails = (props) => {
                     <p className="text-2xl font-normal text-black mb-2">
                       Product Name
                     </p>
-                    <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 rounded-[10px] bg-transparent outline-none">
+                    <p className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 rounded-[10px] bg-transparent outline-none">
                       {obj.product.name}
                     </p>
                   </div>
@@ -98,7 +98,7 @@ const OrderDetails = (props) => {
                     <p className="text-2xl font-normal text-black mb-2">
                       Quantity
                     </p>
-                    <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 rounded-[10px] bg-transparent outline-none">
+                    <p className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 rounded-[10px] bg-transparent outline-none">
                       {obj.product.total_quantity}
                     </p>
                   </div>
@@ -106,7 +106,7 @@ const OrderDetails = (props) => {
                     <p className="text-2xl font-normal text-black mb-2">
                       Price
                     </p>
-                    <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 rounded-[10px] bg-transparent outline-none">
+                    <p className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 rounded-[10px] bg-transparent outline-none">
                       {(
                         obj.product.selling_price * obj.product.total_quantity
                       ).toFixed(2)}
@@ -117,7 +117,7 @@ const OrderDetails = (props) => {
                   <p className="text-2xl font-normal text-black mb-2">
                     Total Amount
                   </p>
-                  <p className="border border-black text-2xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 rounded-[10px] bg-transparent outline-none">
+                  <p className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 rounded-[10px] bg-transparent outline-none">
                     {(
                       obj.product.selling_price * obj.product.total_quantity
                     ).toFixed(2)}
