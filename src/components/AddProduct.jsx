@@ -126,7 +126,7 @@ const AddProduct = () => {
             <div className="flex flex-col w-full max-w-[396px]">
               <label
                 htmlFor="product-name"
-                className="text-2xl font-normal text-black mb-2"
+                className="text-xl 2xl:text-2xl font-normal text-black mb-2"
               >
                 Product Name
               </label>
@@ -143,7 +143,7 @@ const AddProduct = () => {
             <div className="flex flex-col w-full max-w-[396px]">
               <label
                 htmlFor="price"
-                className="text-2xl font-normal text-black mb-2"
+                className="text-xl 2xl:text-2xl font-normal text-black mb-2"
               >
                 Product Price per Piece
               </label>
@@ -162,7 +162,7 @@ const AddProduct = () => {
             <div className="flex flex-col w-full max-w-[396px]">
               <label
                 htmlFor="description"
-                className="text-2xl font-normal text-black mb-2"
+                className="text-xl 2xl:text-2xl font-normal text-black mb-2"
               >
                 Product Description
               </label>
@@ -180,7 +180,7 @@ const AddProduct = () => {
             <div className="flex flex-col w-full max-w-[396px]">
               <label
                 htmlFor="benefits"
-                className="text-2xl font-normal text-black mb-2"
+                className="text-xl 2xl:text-2xl font-normal text-black mb-2"
               >
                 Product Benefits
               </label>
@@ -198,7 +198,7 @@ const AddProduct = () => {
           </div>
           <div className="flex gap-[129px]">
             <div className="flex flex-col max-w-[396px] w-full">
-              <p className="text-2xl font-normal text-black mb-2">
+              <p className="text-xl 2xl:text-2xl font-normal text-black mb-2">
                 Select Category
               </p>
               <div className="relative">
@@ -230,7 +230,7 @@ const AddProduct = () => {
             <div className="flex flex-col w-full max-w-[396px]">
               <label
                 htmlFor="product_qyt"
-                className="text-2xl font-normal text-black mb-2"
+                className="text-xl 2xl:text-2xl font-normal text-black mb-2"
               >
                 Product Quantity
               </label>
@@ -285,7 +285,7 @@ const AddProduct = () => {
                       <div className="flex flex-col w-full max-w-[396px] mb-5">
                         <label
                           htmlFor={`colour-name-${idx}`}
-                          className="text-2xl font-normal text-black mb-2"
+                          className="text-xl 2xl:text-2xl font-normal text-black mb-2"
                         >
                           Colour Name
                         </label>

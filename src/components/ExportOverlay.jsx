@@ -21,12 +21,11 @@ const ExportOverlay = () => {
     e.preventDefault();
     if (status === "export") {
       exportData(timeFrame, selectExport, fileType, () => {
-        setStatus("exported");
+        setStatus("exported"),
+          setTimeout(() => {
+            setStatus("done");
+          }, 1000);
       });
-
-      setTimeout(() => {
-        setStatus("done");
-      }, 1000);
     } else if (status === "done") {
       onComplete();
     }

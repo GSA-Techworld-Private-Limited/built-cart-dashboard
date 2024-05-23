@@ -11,7 +11,7 @@ const logout = async (navigate, setAuthenticated) => {
       });
 
       if (response.status === 200) {
-        console.log("Logout successful");
+        console.log("Logout Successfully");
         // Example: clear refresh token from sessionStorage
         sessionStorage.removeItem("accessToken");
         sessionStorage.removeItem("refreshToken");

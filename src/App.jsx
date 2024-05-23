@@ -17,11 +17,20 @@ function App() {
     setStatusData,
     setCategoryData,
     setAllCoupons,
+    setComplaints,
+    setOrderLogs,
   } = useContext(MyContext);
   useEffect(() => {
     const accessToken = sessionStorage.getItem("accessToken");
     if (accessToken) {
-      fetchUserData(setUserData, setOrderData, setStatusData, setCategoryData);
+      fetchUserData(
+        setUserData,
+        setOrderData,
+        setStatusData,
+        setCategoryData,
+        setComplaints,
+        setOrderLogs
+      );
       getCoupon(setAllCoupons);
     }
   }, []);

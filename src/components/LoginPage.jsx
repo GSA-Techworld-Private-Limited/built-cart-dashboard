@@ -15,6 +15,8 @@ const LoginPage = () => {
     setOrderData,
     setStatusData,
     setCategoryData,
+    setComplaints,
+    setOrderLogs,
   } = useContext(MyContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ username: "", password: "" });
@@ -51,7 +53,9 @@ const LoginPage = () => {
         setUserData,
         setOrderData,
         setStatusData,
-        setCategoryData
+        setCategoryData,
+        setComplaints,
+        setOrderLogs
       );
       setAuthenticated(true);
       // Redirect to dashboard

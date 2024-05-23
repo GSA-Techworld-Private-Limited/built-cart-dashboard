@@ -59,7 +59,7 @@ const CategoriesPage = () => {
     <>
       <div className="w-full">
         <div className="flex gap-6 mb-[31px]">
-          <p className="text-4xl ps-7 font-bold text-black leading-[80%]">
+          <p className="text-3xxl 2xl:text-4xl ps-7 font-bold text-black leading-[80%]">
             Categories
           </p>
           <button

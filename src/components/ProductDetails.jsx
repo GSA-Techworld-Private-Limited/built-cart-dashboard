@@ -49,7 +49,7 @@ const ProductDetails = () => {
   return (
     <>
       <div className="w-full">
-        <p className="text-4xl ps-7 font-bold text-black leading-[80%] mb-[62px]">
+        <p className="text-3xxl 2xl:text-4xl ps-7 font-bold text-black leading-[80%] mb-[62px]">
           {dataForCurrTitle[0].name}
         </p>
 

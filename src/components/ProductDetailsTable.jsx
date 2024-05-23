@@ -38,12 +38,12 @@ const ProductDetailsTables = () => {
           {productDetailsData &&
             productDetailsData.map((val, i) =>
               val.total_product.length > 0 ? (
-                val.total_product.map((obj) => (
+                val.total_product.map((obj, index) => (
                   <div
                     className={`2xl:h-[60px] h-[54px] mt-2 gap-[65px] flex items-center ${
                       i % 2 === 0 ? "bg-[#FEF9EB]" : "bg-white"
                     }`}
-                    key={i}
+                    key={index}
                   >
                     <div className="px-[54px] w-[136px]">
                       <Checkbox border="border-[#686868]" />

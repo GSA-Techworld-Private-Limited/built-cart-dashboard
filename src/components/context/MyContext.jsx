@@ -21,6 +21,8 @@ export const MyContextProvider = ({ children }) => {
   const [isOfferSent, setIsOfferSent] = useState(false);
   const [allCoupons, setAllCoupons] = useState(null);
   const [complaints, setComplaints] = useState(null);
+  const [orderLogs, setOrderLogs] = useState(null);
+  const [logsDetails, setLogsDetails] = useState(null);
   return (
     <MyContext.Provider
       value={{
@@ -60,6 +62,10 @@ export const MyContextProvider = ({ children }) => {
         setIsOfferSent,
         setComplaints,
         complaints,
+        orderLogs,
+        setOrderLogs,
+        setLogsDetails,
+        logsDetails,
       }}
     >
       {children}

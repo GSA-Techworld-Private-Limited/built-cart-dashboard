@@ -1,25 +1,20 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-export const baseUrl = "https://v3h2dw9k-8001.inc1.devtunnels.ms";
+export const baseUrl = "https://v3h2dw9k-8020.inc1.devtunnels.ms/";
 
 export const fetchUserData = async (
   setUserData,
   setOrderData,
   setStatusData,
-  setCategoryData
+  setCategoryData,
+  setComplaints,
+  setOrderLogs
 ) => {
   const accessToken = sessionStorage.getItem("accessToken");
   const options = {
     Authorization: `Bearer ${accessToken}`,
   };
   try {
-    const userDataList = await axios.get(
-      `${baseUrl}/superadmin/add-user-dashboard/`,
-      {
-        headers: options,
-      }
-    );
-
     const categoryDataList = await axios.get(
       `${baseUrl}/superadmin/add-category-dashboard/`,
       {
@@ -27,12 +22,32 @@ export const fetchUserData = async (
       }
     );
     // console.log(categoryDataList.data.response);
+    fetchDataOfUser(setUserData);
     fetchOrderData(setOrderData);
     fetchStatusData(setStatusData);
-    setUserData(userDataList.data);
-    console.log(userDataList.data);
+    getComplaints(setComplaints);
+    getOrderLogs(setOrderLogs);
 
     setCategoryData(categoryDataList.data.response);
+  } catch (error) {
+    console.error("Fetch user data error:", error);
+    // Show error message
+    toast.error("Error fetching user data. Try again", {
+      className: "rounded-[10px]",
+    });
+  }
+};
+export const fetchDataOfUser = async (setUserData) => {
+  const accessToken = sessionStorage.getItem("accessToken");
+  const options = {
+    Authorization: `Bearer ${accessToken}`,
+  };
+  try {
+    const res = await axios.get(`${baseUrl}/superadmin/add-user-dashboard/`, {
+      headers: options,
+    });
+    console.log(res.data);
+    setUserData(res.data);
   } catch (error) {
     console.error("Fetch user data error:", error);
     // Show error message
@@ -289,6 +304,38 @@ export const getCoupon = async (setCouponData) => {
     );
     console.log(res.data);
     setCouponData(res.data);
+  } catch (error) {
+    console.error("Fetch coupon data error:", error);
+    // Show error message
+    toast.error("Error fetching coupon data. Try again", {
+      className: "rounded-[10px]",
+    });
+  }
+};
+export const getComplaints = async (setComplaints) => {
+  const accessToken = sessionStorage.getItem("accessToken");
+  try {
+    const res = await axios.get(`${baseUrl}/superadmin/user-complaints`, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    console.log(res.data.response);
+    setComplaints(res.data.response);
+  } catch (error) {
+    console.error("Fetch coupon data error:", error);
+    // Show error message
+    toast.error("Error fetching coupon data. Try again", {
+      className: "rounded-[10px]",
+    });
+  }
+};
+export const getOrderLogs = async (setOrderLogs) => {
+  const accessToken = sessionStorage.getItem("accessToken");
+  try {
+    const res = await axios.get(`${baseUrl}/superadmin/user-logs`, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    console.log(res.data.response);
+    setOrderLogs(res.data.response);
   } catch (error) {
     console.error("Fetch coupon data error:", error);
     // Show error message

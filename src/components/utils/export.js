@@ -3,6 +3,24 @@ import * as XLSX from "xlsx";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { toast } from "react-toastify";
+
+const flattenObject = (obj, parent = "", res = {}) => {
+  for (let key in obj) {
+    const propName = parent ? `${parent}.${key}` : key;
+    if (Array.isArray(obj[key])) {
+      // obj[key].forEach((item, index) => {
+      //   flattenObject(item, `${propName}[${index}]`, res);
+      // });
+      continue;
+    } else if (typeof obj[key] == "object" && obj[key] !== null) {
+      flattenObject(obj[key], propName, res);
+    } else {
+      res[propName] = obj[key];
+    }
+  }
+  return res;
+};
+
 export const exportData = (timeFrame, userData, fileType, afterComplete) => {
   const startDate = new Date(`${timeFrame.from}T00:00:00Z`);
   const endDate = new Date(`${timeFrame.to}T23:59:59Z`);
@@ -12,10 +30,12 @@ export const exportData = (timeFrame, userData, fileType, afterComplete) => {
     });
     return;
   }
+
   const filteredData = userData.filter((item) => {
     const itemDate = new Date(item.created_at);
     return itemDate >= startDate && itemDate <= endDate;
   });
+
   if (filteredData.length === 0) {
     toast.error("No data found for the selected date range.", {
       className: "rounded-[10px]",
@@ -23,10 +43,10 @@ export const exportData = (timeFrame, userData, fileType, afterComplete) => {
     return;
   }
 
-  // Generate and download Excel file
+  const flattenedData = filteredData.map((item) => flattenObject(item));
+
   if (fileType === "xlsx" || fileType === "xls") {
-    // Export to Excel
-    const worksheet = XLSX.utils.json_to_sheet(filteredData);
+    const worksheet = XLSX.utils.json_to_sheet(flattenedData);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Data");
 
@@ -50,12 +70,14 @@ export const exportData = (timeFrame, userData, fileType, afterComplete) => {
       return result;
     };
 
-    const keys = Object.keys(filteredData[0]);
+    const keys = Object.keys(flattenedData[0]);
     const chunkedKeys = chunkArray(keys, 9);
 
     chunkedKeys.forEach((keyChunk, index) => {
       const columns = keyChunk.map((key) => ({ header: key, dataKey: key }));
-      const rows = filteredData.map((item) => keyChunk.map((key) => item[key]));
+      const rows = flattenedData.map((item) =>
+        keyChunk.map((key) => item[key])
+      );
 
       doc.autoTable({
         head: [columns.map((col) => col.header)],
@@ -94,5 +116,5 @@ export const exportData = (timeFrame, userData, fileType, afterComplete) => {
     });
   }
 
-  console.log(filteredData);
+  console.log(flattenedData);
 };

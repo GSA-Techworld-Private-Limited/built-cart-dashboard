@@ -3,12 +3,18 @@ import { IoSearchSharp } from "react-icons/io5";
 import CommonBtn from "./common/CommonBtn";
 import UserDataTable from "./UserDataTable";
 import axios from "axios";
-import { baseUrl } from "./utils/auth";
+import { baseUrl, fetchDataOfUser } from "./utils/auth";
 import MyContext from "./context/MyContext";
-import { exportData } from "./utils/export";
+import { toast } from "react-toastify";
 const UserDataPage = () => {
-  const { setUserData, userData, setShowExport, showExport, setSelectExport } =
-    useContext(MyContext);
+  const {
+    setUserData,
+    userData,
+    setShowExport,
+    showExport,
+    setSelectExport,
+    categorySelect,
+  } = useContext(MyContext);
   const filterUserWithName = async (e) => {
     const accessToken = sessionStorage.getItem("accessToken");
     try {
@@ -26,10 +32,38 @@ const UserDataPage = () => {
       console.error("Fetch user data error:", error);
     }
   };
+  const deleteUser = async () => {
+    const accessToken = sessionStorage.getItem("accessToken");
+    if (!categorySelect) {
+      toast.warning("First Select Any Item!", {
+        className: "rounded-[10px]",
+      });
+    } else {
+      try {
+        const res = await axios.delete(
+          `${baseUrl}/superadmin/get-user-dashboard/${categorySelect}/`,
+          {
+            headers: { Authorization: `Bearer ${accessToken}` },
+          }
+        );
+        fetchDataOfUser(setUserData);
+        console.log(res);
+        toast.success(res.data.message, {
+          className: "rounded-[10px]",
+        });
+      } catch (error) {
+        console.error("Error While Blocking!", error);
+        // Show error message
+        toast.error("Failed!! Try again", {
+          className: "rounded-[10px]",
+        });
+      }
+    }
+  };
   return (
     <>
       <div className="w-full">
-        <p className="text-4xl ps-7 font-bold text-black leading-[80%] mb-[62px]">
+        <p className="text-3xxl 2xl:text-4xl ps-7 font-bold text-black leading-[80%] mb-[62px]">
           User Data
         </p>
         <div className="flex items-center ps-7 mb-[18px] gap-3 justify-between pr-8">
@@ -44,6 +78,7 @@ const UserDataPage = () => {
           </div>
           <div className="flex items-center gap-7">
             <CommonBtn
+              clickEvent={deleteUser}
               style="text-white bg-[#FF3D00] hover:bg-transparent hover:text-[#FF3D00]"
               btntext="Block"
             />

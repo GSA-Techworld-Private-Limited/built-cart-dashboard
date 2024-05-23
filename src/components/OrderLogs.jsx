@@ -12,13 +12,14 @@ import CommonBtn from "./common/CommonBtn";
 import OrderLogTable from "./OrderLogTable";
 import MyContext from "./context/MyContext";
 const OrderLogs = () => {
-  const { showExport, setShowExport } = useContext(MyContext);
+  const { showExport, setShowExport, setSelectExport, orderLogs } =
+    useContext(MyContext);
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
       <div className="w-full">
-        <p className="text-4xl ps-7 font-bold text-black leading-[80%] mb-24">
+        <p className="text-3xxl 2xl:text-4xl ps-7 font-bold text-black leading-[80%] mb-24">
           Order logs
         </p>
         <div className="flex items-center ps-7 mb-[18px] gap-3 justify-between pr-8">
@@ -54,7 +55,9 @@ const OrderLogs = () => {
             </div>
           </div>
           <CommonBtn
-            clickEvent={() => setShowExport(!showExport)}
+            clickEvent={() => {
+              setSelectExport(orderLogs), setShowExport(!showExport);
+            }}
             style="text-black bg-[#FDC63A] hover:bg-transparent hover:text-[#FDC63A]"
             btntext="Export"
           />

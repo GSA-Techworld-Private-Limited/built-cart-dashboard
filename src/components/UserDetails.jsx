@@ -74,24 +74,26 @@ const UserDetails = () => {
         <form className="w-[95%] xl:w-[87%]">
           <div className="flex gap-6 justify-between">
             <div className="flex flex-col w-full max-w-[396px]">
-              <p className="text-2xl font-normal text-black mb-2">
+              <p className="text-xl 2xl:text-2xl font-normal text-black mb-2">
                 Customer name
               </p>
-              <p className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full 2xl:py-3 py-[5px] 2xl:min-h-[62px] min-h-12 rounded-[10px] bg-transparent outline-none">
+              <p className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 h-10 2xl:h-[54px] rounded-[10px] bg-transparent outline-none">
                 {currUser.full_name}
               </p>
             </div>
             <div className="flex flex-col w-full max-w-[396px]">
-              <p className="text-2xl font-normal text-black mb-2">
+              <p className="text-xl 2xl:text-2xl font-normal text-black mb-2">
                 Mobile Number
               </p>
-              <p className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full 2xl:py-3 py-[5px] 2xl:min-h-[62px] min-h-12 rounded-[10px] bg-transparent outline-none">
+              <p className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 h-10 2xl:h-[54px] rounded-[10px] bg-transparent outline-none">
                 {currUser.mobile_number}
               </p>
             </div>
             <div className="flex flex-col w-full max-w-[396px]">
-              <p className="text-2xl font-normal text-black mb-2">Email ID</p>
-              <p className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full 2xl:py-3 py-[5px] 2xl:min-h-[62px] min-h-12 rounded-[10px] bg-transparent outline-none">
+              <p className="text-xl 2xl:text-2xl font-normal text-black mb-2">
+                Email ID
+              </p>
+              <p className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 h-10 2xl:h-[54px] rounded-[10px] bg-transparent outline-none">
                 {" "}
                 {currUser.email}
               </p>
@@ -99,24 +101,26 @@ const UserDetails = () => {
           </div>
           <div className="flex gap-6 justify-between mb-[52px] mt-7">
             <div className="flex flex-col w-full max-w-[396px]">
-              <p className="text-2xl font-normal text-black mb-2">Location</p>
-              <p className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full 2xl:py-3 py-[5px] 2xl:min-h-[62px] min-h-12 rounded-[10px] bg-transparent outline-none">
+              <p className="text-xl 2xl:text-2xl font-normal text-black mb-2">
+                Location
+              </p>
+              <p className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 h-10 2xl:h-[54px] rounded-[10px] bg-transparent outline-none">
                 {currUser.city}
               </p>
             </div>
             <div className="flex flex-col w-full max-w-[396px]">
-              <p className="text-2xl font-normal text-black mb-2">
+              <p className="text-xl 2xl:text-2xl font-normal text-black mb-2">
                 Total Referrals
               </p>
-              <p className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full 2xl:py-3 py-[5px] 2xl:min-h-[62px] min-h-12 rounded-[10px] bg-transparent outline-none">
+              <p className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 h-10 2xl:h-[54px] rounded-[10px] bg-transparent outline-none">
                 {currUser.referral_counts}
               </p>
             </div>
             <div className="flex flex-col w-full max-w-[396px]">
-              <p className="text-2xl font-normal text-black mb-2">
+              <p className="text-xl 2xl:text-2xl font-normal text-black mb-2">
                 Total Orders
               </p>
-              <p className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full 2xl:py-3 py-[5px] 2xl:min-h-[62px] min-h-12 rounded-[10px] bg-transparent outline-none"></p>
+              <p className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 h-10 2xl:h-[54px] rounded-[10px] bg-transparent outline-none"></p>
             </div>
           </div>
         </form>

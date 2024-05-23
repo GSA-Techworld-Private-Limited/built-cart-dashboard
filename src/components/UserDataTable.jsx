@@ -59,7 +59,6 @@ const UserDataTable = () => {
                 }`}
               >
                 <div className="px-[54px] w-[136px]">
-                  {/* <Checkbox border="border-[#686868]" /> */}
                   <CheckBox
                     inputStyle="!border-[#686868]"
                     checkStyle="!border-[#686868] !bg-transparent"
@@ -109,7 +108,7 @@ const UserDataTable = () => {
                       : ""
                   }`}
                 >
-                  {val.status}
+                  {val.status ? val.status : "N/A"}
                 </p>
               </div>
             ))}
@@ -118,5 +117,4 @@ const UserDataTable = () => {
     </>
   );
 };
-
 export default UserDataTable;

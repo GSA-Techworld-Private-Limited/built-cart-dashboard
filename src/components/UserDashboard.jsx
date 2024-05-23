@@ -12,7 +12,6 @@ import MyContext from "./context/MyContext";
 import { fetchStatusData } from "./utils/auth";
 const UserDashboard = () => {
   const { statusData, setStatusData } = useContext(MyContext);
-
   const handleStatusUpdate = (value) => {
     fetchStatusData(setStatusData, value);
   };
@@ -99,5 +98,4 @@ const UserDashboard = () => {
     </>
   );
 };
-
 export default UserDashboard;

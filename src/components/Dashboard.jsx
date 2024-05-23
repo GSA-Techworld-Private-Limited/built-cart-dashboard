@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from "react";
 import AdminNav from "./common/AdminNav";
-
 import UserDashboard from "./UserDashboard";
 import Orders from "./Orders";
 import OrderDetails from "./OrderDetails";
@@ -74,5 +73,4 @@ const Dashboard = () => {
     </>
   );
 };
-
 export default Dashboard;

@@ -87,7 +87,7 @@ const OffersPage = () => {
     <>
       <form onSubmit={handleSent} className="w-full">
         <div className="flex justify-between items-start pr-[26px] mb-[38px]">
-          <p className="text-4xl pl-9 font-bold text-black leading-[80%]">
+          <p className="text-3xxl 2xl:text-4xl pl-9 font-bold text-black leading-[80%]">
             Offers
           </p>
           <button
@@ -113,7 +113,7 @@ const OffersPage = () => {
               <div className="flex flex-col">
                 <label
                   htmlFor="coupon"
-                  className="text-2xl font-medium text-black mb-4"
+                  className="text-xl 2xl:text-2xl font-medium text-black mb-2 2xl:mb-4"
                 >
                   Enter Coupon Code
                   <span className="text-sm ml-4 text-red-500">
@@ -129,14 +129,14 @@ const OffersPage = () => {
                   value={couponData.coupon_code}
                   className={`${
                     isCouponUnique ? "border-[#6E6E73]" : "border-red-500"
-                  } 2xl:text-2xl text-xl 2xl:text-3xxl font-medium h-12 2xl:h-[62px] text-[#6E6E73] placeholder:text-[#6E6E73] border border-spacing-[0.5px] rounded-[10px] py-2 px-5 w-[420px] outline-none`}
+                  } text-xl 2xl:text-3xxl font-medium h-12 2xl:h-[62px] text-[#6E6E73] placeholder:text-[#6E6E73] border border-spacing-[0.5px] rounded-[10px] py-2 px-5 w-[420px] outline-none`}
                   placeholder="Enter Code"
                 />
               </div>
-              <div className="flex flex-col mt-[46px]">
+              <div className="flex flex-col mt-8 2xl:mt-[46px]">
                 <label
                   htmlFor="order-value"
-                  className="text-2xl font-medium text-black mb-4"
+                  className="text-xl 2xl:text-2xl font-medium text-black mb-2 2xl:mb-4"
                 >
                   Order value
                 </label>
@@ -148,17 +148,17 @@ const OffersPage = () => {
                     type="number"
                     name="order_value_amount"
                     value={couponData.order_value_amount}
-                    className="text-2xl 2xl:text-3xxl font-medium h-12 2xl:h-[62px] text-[#6E6E73] placeholder:text-[#6E6E73] border border-spacing-[0.5px] border-[#6E6E73] rounded-[10px] py-2 px-5 w-[420px] outline-none"
+                    className="text-xl 2xl:text-3xxl font-medium h-12 2xl:h-[62px] text-[#6E6E73] placeholder:text-[#6E6E73] border border-spacing-[0.5px] border-[#6E6E73] rounded-[10px] py-2 px-5 w-[420px] outline-none"
                     placeholder="₹"
                   />
                 </div>
               </div>
-              <p className="text-2xl font-medium text-black mb-6 mt-[53px]">
+              <p className="text-xl 2xl:text-2xl font-medium text-black mb-4 2xl:mb-6 mt-11 2xl:mt-[53px]">
                 Coupon Validity
               </p>
-              <div className="flex items-center flex-col min-[1800px]:flex-row gap-8 mb-[72px]">
+              <div className="flex items-center flex-col min-[1800px]:flex-row gap-5 2xl:gap-8 mb-12 2xl:mb-[72px]">
                 <div className="flex items-center gap-5 w-full">
-                  <p className="text-2xl font-normal text-black">From</p>
+                  <p className="text-xl 2xl:text-2xl font-normal text-black">From</p>
                   <div className="flex relative w-full items-center">
                     <input
                       required
@@ -172,8 +172,8 @@ const OffersPage = () => {
                     <CalendarTwoIcon style="absolute top-1/2 bg-white -translate-y-1/2 right-[25px] pointer-events-none max-2xl:w-7" />
                   </div>
                 </div>
-                <div className="flex items-center gap-[51px] min-[1800px]:gap-5 w-full">
-                  <p className="text-2xl font-normal text-black">To</p>
+                <div className="flex items-center gap-12 2xl:gap-[51px] min-[1800px]:gap-5 w-full">
+                  <p className="text-xl 2xl:text-2xl font-normal text-black">To</p>
                   <div className="flex relative w-full items-center">
                     <input
                       required
@@ -191,7 +191,7 @@ const OffersPage = () => {
               <div className="flex flex-col mb-3">
                 <label
                   htmlFor="t&c"
-                  className="text-2xl font-medium text-black mb-4"
+                  className="text-xl 2xl:text-2xl font-medium text-black mb-2 2xl:mb-4"
                 >
                   Enter T&C
                 </label>
@@ -203,20 +203,20 @@ const OffersPage = () => {
                   rows={8}
                   value={couponData.term_conditions}
                   placeholder="Write here"
-                  className="text-xl font-normal max-h-[200px] 2xl:max-h-[262px] text-[#6E6E73] placeholder:text-[#6E6E73] border border-spacing-[0.5px] border-[#6E6E73] rounded-[10px] py-[22px] px-[26px] outline-none"
+                  className="text-xl font-normal max-h-[180px] 2xl:max-h-[262px] text-[#6E6E73] placeholder:text-[#6E6E73] border border-spacing-[0.5px] border-[#6E6E73] rounded-[10px] py-[22px] px-[26px] outline-none"
                 ></textarea>
               </div>
             </div>
             <div className="w-full overflow-hidden">
-              <p className="text-[28px] font-medium text-black">
+              <p className="text-2xl 2xl:text-[28px] font-medium text-black">
                 Select Criteria
               </p>
-              <p className="text-2xl font-medium text-black mb-7 mt-6">
+              <p className="text-xl 2xl:text-2xl font-medium text-black mb-5 2xl:mb-7 mt-2 2xl:mt-6">
                 Account Creation Date :
               </p>
-              <div className="flex items-center flex-col min-[1800px]:flex-row gap-8 mb-[72px]">
+              <div className="flex items-center flex-col min-[1800px]:flex-row gap-5 2xl:gap-8 mb-12 2xl:mb-[72px]">
                 <div className="flex items-center gap-5 w-full">
-                  <p className="text-2xl font-normal text-black">From</p>
+                  <p className="text-xl 2xl:text-2xl font-normal text-black">From</p>
                   <div className="flex relative w-full items-center">
                     <input
                       required
@@ -229,8 +229,8 @@ const OffersPage = () => {
                     <CalendarTwoIcon style="absolute top-1/2 bg-white -translate-y-1/2 right-[25px] pointer-events-none max-2xl:w-7" />
                   </div>
                 </div>
-                <div className="flex items-center gap-[51px] min-[1800px]:gap-5 w-full">
-                  <p className="text-2xl font-normal text-black">To</p>
+                <div className="flex items-center gap-12 2xl:gap-[51px] min-[1800px]:gap-5 w-full">
+                  <p className="text-xl 2xl:text-2xl font-normal text-black">To</p>
                   <div className="flex relative w-full items-center">
                     <input
                       required
@@ -244,12 +244,12 @@ const OffersPage = () => {
                   </div>
                 </div>
               </div>
-              <p className="text-2xl font-medium text-black mb-6">
+              <p className="text-xl 2xl:text-2xl font-medium text-black mb-4 2xl:mb-6">
                 Number of Referrals :
               </p>
               <div className="flex items-center gap-8 mb-10">
                 <div className="flex items-center gap-5">
-                  <p className="text-2xl font-normal text-black">From:</p>
+                  <p className="text-xl 2xl:text-2xl font-normal text-black">From:</p>
                   <input
                     required
                     onChange={handleInputChange}
@@ -260,7 +260,7 @@ const OffersPage = () => {
                   />
                 </div>
                 <div className="flex items-center gap-5">
-                  <p className="text-2xl font-normal text-black">To:</p>
+                  <p className="text-xl 2xl:text-2xl font-normal text-black">To:</p>
                   <input
                     required
                     onChange={handleInputChange}
@@ -271,7 +271,7 @@ const OffersPage = () => {
                   />
                 </div>
               </div>
-              <p className="text-2xl font-medium text-black mb-4">
+              <p className="text-xl 2xl:text-2xl font-medium text-black mb-2 2xl:mb-4">
                 Select State
               </p>
               <div className="relative">
@@ -297,10 +297,10 @@ const OffersPage = () => {
                   </div>
                 )}
               </div>
-              <div className="mt-[50px] flex flex-col">
+              <div className="mt-10 2xl:mt-[50px] flex flex-col">
                 <label
                   htmlFor="total-beneficiaries"
-                  className="text-2xl font-medium text-black mb-4"
+                  className="text-xl 2xl:text-2xl font-medium text-black mb-2 2xl:mb-4"
                 >
                   Total Beneficiaries
                 </label>

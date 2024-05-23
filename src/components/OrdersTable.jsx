@@ -9,7 +9,7 @@ export const formatDateTime = (dateTimeString) => {
   const date = new Date(dateTimeString);
   return date.toLocaleDateString();
 };
-const OrdersTable = () => {
+const OrdersTable = ({ filterData }) => {
   const {
     setActiveSubTab,
     orderData,
@@ -64,7 +64,7 @@ const OrdersTable = () => {
             </p>
           </div>
           {orderData &&
-            orderData.map((val, i) => (
+            (filterData.length > 0 ? filterData : orderData).map((val, i) => (
               <div
                 key={i}
                 className={`2xl:h-[60px] h-[54px] mt-2 flex items-center ${
@@ -72,7 +72,6 @@ const OrdersTable = () => {
                 }`}
               >
                 <div className="px-[54px] w-[136px]">
-                  {/* {val.user === "" || <Checkbox border="border-[#686868]" />} */}
                   <CheckBox
                     inputStyle="!border-[#686868]"
                     checkStyle="!border-[#686868] !bg-transparent"
@@ -111,7 +110,7 @@ const OrdersTable = () => {
                         {obj.order_address}
                       </p>
                       <p className="font-medium text-nowrap pl-6 w-[315px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
-                        {obj.referral}
+                        {obj.referral ? obj.referral : "N/A"}
                       </p>
                       <p
                         className={`font-medium text-nowrap pl-6 w-[209px] 2xl:text-2xl text-xl leading-5 ${
@@ -134,7 +133,7 @@ const OrdersTable = () => {
                       >
                         {obj.price}
                       </p>
-                      <p className="font-medium text-nowrap pl-6 w-[244px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+                      <p className="font-medium uppercase text-nowrap pl-6 w-[244px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
                         {obj.mode_of_payment}
                       </p>
                     </div>
@@ -142,16 +141,28 @@ const OrdersTable = () => {
                 </div>
                 <p
                   className={`font-medium text-nowrap pl-6 w-[244px] 2xl:text-2xl text-xl leading-5 ${
-                    val.status === "Pending" || val.status === "Cancelled"
+                    val.status === "payment_pending"
                       ? "text-[#FF3D00]"
-                      : val.status === "Dispatched"
+                      : val.status === "in_transit"
                       ? "text-[#FDC63A]"
-                      : val.status === "Delivered"
+                      : val.status === "delivered"
                       ? "text-[#0FB001]"
-                      : ""
+                      : val.status === "placed" || val.status === "created"
+                      ? "text-dark"
+                      : null
                   }`}
                 >
-                  {val.status}
+                  {val.status === "payment_pending"
+                    ? "Pending"
+                    : val.status === "in_transit"
+                    ? "In Transit"
+                    : val.status === "delivered"
+                    ? "Delivered"
+                    : val.status === "placed"
+                    ? "Placed"
+                    : val.status === "created"
+                    ? "Created"
+                    : ""}
                 </p>
               </div>
             ))}
