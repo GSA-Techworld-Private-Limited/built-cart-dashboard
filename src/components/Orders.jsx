@@ -28,7 +28,6 @@ const Orders = () => {
   const [filterData, setFilterData] = useState([]);
   const handleChange = (event) => {
     const term = event.target.value.toLowerCase();
-
     if (term === "") {
       // Clear filterData when the search term is empty
       setFilterData([]);
@@ -40,6 +39,20 @@ const Orders = () => {
           )
         )
       );
+      setFilterData(filteredData);
+    }
+  };
+  const filterWithStatus = (value) => {
+    if (value === "") {
+      // Clear filterData when the search term is empty
+      setFilterData([]);
+    } else {
+      const filteredData = orderData.filter(
+        (order) =>
+          typeof order.status === "string" &&
+          order.status.toLowerCase().includes(value)
+      );
+      console.log(filteredData);
       setFilterData(filteredData);
     }
   };
@@ -63,7 +76,7 @@ const Orders = () => {
         className: "rounded-[10px]",
       });
     } catch (error) {
-      console.error("Fetch user data error:", error);
+      console.error("No items selected:", error);
       // Show error message
       toast.warning("First Select Any Item!!", {
         className: "rounded-[10px]",
@@ -115,7 +128,7 @@ const Orders = () => {
                 Sort By
               </p>
             </div>
-            <Select>
+            <Select onValueChange={filterWithStatus}>
               <SelectTrigger className="w-[191px]">
                 <SelectValue placeholder="Status" />
               </SelectTrigger>

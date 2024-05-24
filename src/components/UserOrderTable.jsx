@@ -79,11 +79,15 @@ const UserOrderTable = () => {
                 <p className="font-medium text-nowrap pl-6 w-[287px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
                   {val.is_paid || "Not Paid"}
                 </p>
-                <p className="font-medium text-nowrap pl-6 w-[266px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+                <p
+                  className={`${
+                    val.mode_of_payment === "cod" && "!uppercase"
+                  } font-medium capitalize text-nowrap pl-6 w-[266px] 2xl:text-2xl text-xl leading-5 text-[#282828]`}
+                >
                   {val.mode_of_payment}
                 </p>
                 <p
-                  className={`font-medium text-nowrap pl-6 w-[250px] 2xl:text-2xl text-xl leading-5 ${
+                  className={`font-medium text-nowrap capitalize pl-6 w-[250px] 2xl:text-2xl text-xl leading-5 ${
                     val.order_status === "pending"
                       ? "text-[#FDC63A] "
                       : "text-[#0FB001]"

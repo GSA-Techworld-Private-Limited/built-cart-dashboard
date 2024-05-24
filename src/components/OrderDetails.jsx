@@ -4,7 +4,7 @@ import MyContext from "./context/MyContext";
 
 const OrderDetails = (props) => {
   const { setActiveSubTab, userOrderDetails } = useContext(MyContext);
-
+  const userDetails = userOrderDetails.orders[0];
   console.log(userOrderDetails);
   return (
     <>
@@ -50,7 +50,7 @@ const OrderDetails = (props) => {
                 Customer name
               </p>
               <p className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 rounded-[10px] bg-transparent outline-none">
-                {userOrderDetails.orders[0].order_address.full_name}
+                {userDetails.order_address.full_name}
               </p>
             </div>
             <div className="flex flex-col w-full max-w-[396px]">
@@ -58,7 +58,7 @@ const OrderDetails = (props) => {
                 Mobile Number
               </p>
               <p className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 rounded-[10px] bg-transparent outline-none">
-                {userOrderDetails.orders[0].order_address.mobile_number}
+                {userDetails.order_address.mobile_number}
               </p>
             </div>
             <div className="flex flex-col w-full max-w-[396px]">
@@ -66,7 +66,7 @@ const OrderDetails = (props) => {
                 Location
               </p>
               <p className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 rounded-[10px] bg-transparent outline-none">
-                {userOrderDetails.orders[0].order_address.city}
+                {userDetails.order_address.city}
               </p>
             </div>
           </div>
@@ -82,7 +82,7 @@ const OrderDetails = (props) => {
                 Payment Mode
               </p>
               <p className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 rounded-[10px] bg-transparent outline-none">
-                {userOrderDetails.orders[0].mode_of_payment}
+                {userDetails.mode_of_payment}
               </p>
             </div>
             <div className="flex flex-col w-full max-w-[396px]">
@@ -91,7 +91,7 @@ const OrderDetails = (props) => {
               </p>
 
               <div className="border py-[5px] 2xl:py-3 border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full rounded-[10px] bg-transparent outline-none">
-                {`House No.${userOrderDetails.orders[0].order_address.house_no}, ${userOrderDetails.orders[0].order_address.street}, ${userOrderDetails.orders[0].order_address.area}, ${userOrderDetails.orders[0].order_address.city}, ${userOrderDetails.orders[0].order_address.state}, ${userOrderDetails.orders[0].order_address.pincode}`}
+                {`House No.${userDetails.order_address.house_no}, ${userDetails.order_address.street}, ${userDetails.order_address.area}, ${userDetails.order_address.city}, ${userDetails.order_address.state}, ${userDetails.order_address.pincode}`}
               </div>
             </div>
           </div>

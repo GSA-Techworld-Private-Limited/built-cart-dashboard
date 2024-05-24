@@ -158,7 +158,9 @@ const OffersPage = () => {
               </p>
               <div className="flex items-center flex-col min-[1800px]:flex-row gap-5 2xl:gap-8 mb-12 2xl:mb-[72px]">
                 <div className="flex items-center gap-5 w-full">
-                  <p className="text-xl 2xl:text-2xl font-normal text-black">From</p>
+                  <p className="text-xl 2xl:text-2xl font-normal text-black">
+                    From
+                  </p>
                   <div className="flex relative w-full items-center">
                     <input
                       required
@@ -173,7 +175,9 @@ const OffersPage = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-12 2xl:gap-[51px] min-[1800px]:gap-5 w-full">
-                  <p className="text-xl 2xl:text-2xl font-normal text-black">To</p>
+                  <p className="text-xl 2xl:text-2xl font-normal text-black">
+                    To
+                  </p>
                   <div className="flex relative w-full items-center">
                     <input
                       required
@@ -216,7 +220,9 @@ const OffersPage = () => {
               </p>
               <div className="flex items-center flex-col min-[1800px]:flex-row gap-5 2xl:gap-8 mb-12 2xl:mb-[72px]">
                 <div className="flex items-center gap-5 w-full">
-                  <p className="text-xl 2xl:text-2xl font-normal text-black">From</p>
+                  <p className="text-xl 2xl:text-2xl font-normal text-black">
+                    From
+                  </p>
                   <div className="flex relative w-full items-center">
                     <input
                       required
@@ -230,7 +236,9 @@ const OffersPage = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-12 2xl:gap-[51px] min-[1800px]:gap-5 w-full">
-                  <p className="text-xl 2xl:text-2xl font-normal text-black">To</p>
+                  <p className="text-xl 2xl:text-2xl font-normal text-black">
+                    To
+                  </p>
                   <div className="flex relative w-full items-center">
                     <input
                       required
@@ -249,7 +257,9 @@ const OffersPage = () => {
               </p>
               <div className="flex items-center gap-8 mb-10">
                 <div className="flex items-center gap-5">
-                  <p className="text-xl 2xl:text-2xl font-normal text-black">From:</p>
+                  <p className="text-xl 2xl:text-2xl font-normal text-black">
+                    From:
+                  </p>
                   <input
                     required
                     onChange={handleInputChange}
@@ -260,7 +270,9 @@ const OffersPage = () => {
                   />
                 </div>
                 <div className="flex items-center gap-5">
-                  <p className="text-xl 2xl:text-2xl font-normal text-black">To:</p>
+                  <p className="text-xl 2xl:text-2xl font-normal text-black">
+                    To:
+                  </p>
                   <input
                     required
                     onChange={handleInputChange}

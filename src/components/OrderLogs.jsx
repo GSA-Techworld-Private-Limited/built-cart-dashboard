@@ -12,10 +12,27 @@ import CommonBtn from "./common/CommonBtn";
 import OrderLogTable from "./OrderLogTable";
 import MyContext from "./context/MyContext";
 const OrderLogs = () => {
-  const { showExport, setShowExport, setSelectExport, orderLogs } =
-    useContext(MyContext);
-  const [isOpen, setIsOpen] = useState(false);
-
+  const {
+    showExport,
+    setShowExport,
+    setSelectExport,
+    orderLogs,
+    setFilteredLogs,
+  } = useContext(MyContext);
+  const filterWithStatus = (value) => {
+    if (value === "") {
+      // Clear filterData when the search term is empty
+      setFilteredLogs([]);
+    } else {
+      const filteredData = orderLogs.filter(
+        (order) =>
+          typeof order.status === "string" &&
+          order.status.toLowerCase().includes(value)
+      );
+      console.log(filteredData);
+      setFilteredLogs(filteredData);
+    }
+  };
   return (
     <>
       <div className="w-full">
@@ -39,15 +56,15 @@ const OrderLogs = () => {
               </p>
             </div>
             <div className="ml-4">
-              <Select>
+              <Select onValueChange={filterWithStatus}>
                 <SelectTrigger className="w-[191px]">
                   <SelectValue placeholder="Status" />
                 </SelectTrigger>
                 <SelectContent width="w-[191px]">
-                  <SelectItem color="text-[#0FA958]" value="Delivered">
+                  <SelectItem color="text-[#0FA958]" value="delivered">
                     Delivered
                   </SelectItem>
-                  <SelectItem color="text-[#B22B00]" value="Cancelled">
+                  <SelectItem color="text-[#B22B00]" value="cancelled">
                     Cancelled
                   </SelectItem>
                 </SelectContent>

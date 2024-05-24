@@ -19,6 +19,7 @@ function App() {
     setAllCoupons,
     setComplaints,
     setOrderLogs,
+    setProductDetails,
   } = useContext(MyContext);
   useEffect(() => {
     const accessToken = sessionStorage.getItem("accessToken");
@@ -29,7 +30,8 @@ function App() {
         setStatusData,
         setCategoryData,
         setComplaints,
-        setOrderLogs
+        setOrderLogs,
+        setProductDetails
       );
       getCoupon(setAllCoupons);
     }

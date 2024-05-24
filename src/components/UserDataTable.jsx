@@ -87,7 +87,7 @@ const UserDataTable = () => {
                   {val.mobile_number}
                 </p>
                 <p className="font-medium text-nowrap pl-6 w-[270px] 2xl:text-2xl text-xl text-[#282828] text-ellipsis overflow-hidden">
-                  {val.email}
+                  {val.email ? val.email : "N/A"}
                 </p>
                 <p className="font-medium text-nowrap pl-6 w-[270px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
                   {val.city}

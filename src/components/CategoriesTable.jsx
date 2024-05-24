@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import MyContext from "./context/MyContext";
 import { DateRangeIcon } from "./common/Icons";
@@ -10,23 +10,38 @@ const CategoriesTable = () => {
     setActiveSubTab,
     categoryData,
     setProductDetailsData,
+    productDetailsData,
     setCategorySelect,
     setCheckedItems,
     checkedItems,
     categorySelect,
+    productDetails,
+    setProductDetails,
+    selectedCate,
+    setSelectedCate,
   } = useContext(MyContext);
 
-  const showProductDetails = (id) => {
+  const showProductDetails = (name) => {
+    console.log(name);
+    setSelectedCate(name);
+    const res = productDetails.filter((val) =>
+      val.category_names.includes(name)
+    );
+    console.log(res);
+    setProductDetailsData(res);
     setActiveSubTab("categories-products");
-    const data = categoryData.filter((currElem) => currElem.id === id);
-    console.log(id);
-    setProductDetailsData(data);
-    setCategorySelect(id);
-    console.log(data);
-    console.log(categoryData);
   };
+  // useEffect(() => {
+  //   console.log("hello");
+  //   if (selectedCate) {
+  //     showProductDetails(selectedCate);
+  //   }
+  //   console.log(selectedCate);
+  // }, [productDetails, selectedCate]);
 
+  console.log(selectedCate);
   console.log(categorySelect);
+  console.log(productDetailsData);
   return (
     <>
       <div className="overflow-auto hide_scroll">
@@ -82,7 +97,7 @@ const CategoriesTable = () => {
                 <div className=" pl-6 w-[204px]">
                   <img
                     width={67}
-                    src={`https://v3h2dw9k-8020.inc1.devtunnels.ms${val.image}`}
+                    src={`https://v3h2dw9k-8040.inc1.devtunnels.ms${val.image}`}
                     className="rounded object-cover max-h-[67px]"
                     alt="category pic"
                   />
@@ -90,9 +105,8 @@ const CategoriesTable = () => {
                 <p className="font-medium capitalize underline text-nowrap overflow-hidden text-ellipsis pl-6 w-[204px] 2xl:text-2xl text-xl text-[#282828]">
                   {val.name}
                 </p>
-
                 <p
-                  onClick={() => showProductDetails(val.id)}
+                  onClick={() => showProductDetails(val.name)}
                   className="font-medium cursor-pointer underline text-nowrap pl-6 w-[270px] 2xl:text-2xl text-xl leading-5 text-[#0028B7]"
                 >
                   {val.total_product_count}

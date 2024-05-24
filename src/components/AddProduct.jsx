@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useCallback } from "react";
 import { IoArrowBack } from "react-icons/io5";
 import MyContext from "./context/MyContext";
 import CommonBtn from "./common/CommonBtn";
@@ -40,29 +40,43 @@ const AddProduct = () => {
     setIsOpen(!isOpen);
     console.log(e.value);
   };
-  const handleOptionClick = (option, id) => {
-    setCategory(id);
-    setSelectedOption(option);
-    setIsOpen(false);
-    console.log(id);
-  };
+  const handleOptionClick = useCallback(
+    (option, id) => {
+      setCategory(id);
+      setSelectedOption(option);
+      setIsOpen(false);
+      console.log(id);
+    },
+    [setCategory, setSelectedOption, setIsOpen]
+  );
   // handle the submit
   const handleProductSubmit = async (e) => {
     e.preventDefault();
-    // append the data to formdata
     const formData = new FormData();
+
+    // Append main product data to formData
     for (const key in addProducts) {
       if (
         key !== "product_galleries" &&
+        key !== "product_color_galleries" && // Exclude color galleries
         Object.hasOwnProperty.call(addProducts, key)
       ) {
         formData.append(key, addProducts[key]);
       }
     }
 
-    addProducts.product_galleries.forEach((gallery, index) => {
-      formData.append(`product_galleries[${index}][image]`, gallery.image);
+    // Append product color galleries data
+    addProducts.product_color_galleries.forEach((colorGallery, index) => {
+      formData.append(
+        `product_color_galleries[${index}][color]`,
+        colorGallery.color
+      );
+      formData.append(
+        `product_color_galleries[${index}][image]`,
+        colorGallery.image
+      );
     });
+
     const accessToken = sessionStorage.getItem("accessToken");
     try {
       // Send POST request with Axios
@@ -84,6 +98,7 @@ const AddProduct = () => {
       console.error("Error fetching data:", error);
     }
   };
+
   // handle input change
   const handleChange = (e) => {
     setAddProducts({ ...addProducts, [e.target.name]: e.target.value });
@@ -100,6 +115,47 @@ const AddProduct = () => {
     const updatedAddProducts = { ...addProducts };
     updatedAddProducts.product_galleries.push({ image: uploadedFile });
     setAddProducts(updatedAddProducts);
+  };
+  const handleFile = (uploadedFile, product, color) => {
+    setAddProducts((prevState) => {
+      const updatedAddProducts = { ...prevState };
+      const updatedColorGalleries = [...prevState.product_color_galleries];
+
+      // Check if color already exists, if not, add it
+      let colorIndex = updatedColorGalleries.findIndex(
+        (gallery) => gallery.color === color
+      );
+
+      if (colorIndex === -1) {
+        // If color doesn't exist, add it with the image
+        updatedColorGalleries.push({ color, image: uploadedFile });
+        colorIndex = updatedColorGalleries.length - 1; // Set index to the last added
+      } else {
+        // If color exists, update its image
+        updatedColorGalleries[colorIndex] = {
+          ...updatedColorGalleries[colorIndex],
+          image: uploadedFile,
+        };
+      }
+      // Update the state with the updated color galleries
+      updatedAddProducts.product_color_galleries = updatedColorGalleries;
+
+      return updatedAddProducts;
+    });
+  };
+
+  const handleColorChange = (color, index) => {
+    setAddProducts((prevState) => {
+      const updatedGalleries = [...prevState.product_color_galleries];
+
+      // Update the color of the existing object at the specified index
+      updatedGalleries[index] = {
+        ...updatedGalleries[index], // Keep existing properties
+        color: color, // Update color property
+      };
+
+      return { ...prevState, product_color_galleries: updatedGalleries };
+    });
   };
   console.log(categoryData);
   console.log(addProducts);
@@ -287,16 +343,26 @@ const AddProduct = () => {
                           htmlFor={`colour-name-${idx}`}
                           className="text-xl 2xl:text-2xl font-normal text-black mb-2"
                         >
-                          Colour Name
+                          Color Name
                         </label>
                         <input
                           required
                           id={`colour-name-${idx}`}
+                          // name={addProducts.product_color_galleries[idx].color}
+                          onChange={(e) =>
+                            handleColorChange(e.target.value, idx)
+                          }
                           type="text"
                           className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
                         />
                       </div>
-                      <AddPics />
+                      <AddPics
+                        handleFileChange={handleFile}
+                        // image1={addProducts.product_galleries[0]?.image || null}
+                        // image2={addProducts.product_galleries[1]?.image || null}
+                        // image3={addProducts.product_galleries[2]?.image || null}
+                        // image4={addProducts.product_galleries[3]?.image || null}
+                      />
                     </div>
                   ))}
                 </div>

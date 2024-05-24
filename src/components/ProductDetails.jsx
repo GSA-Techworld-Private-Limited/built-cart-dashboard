@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { IoSearchSharp } from "react-icons/io5";
 import CommonBtn from "./common/CommonBtn";
 import ProductDetailsTables from "./ProductDetailsTable";
 import MyContext from "./context/MyContext";
-import { baseUrl, removeCategory, updateCategory } from "./utils/auth";
+import { baseUrl, deleteProduct } from "./utils/auth";
 import axios from "axios";
+import { toast } from "react-toastify";
 const ProductDetails = () => {
   const {
     setActiveSubTab,
@@ -15,16 +16,13 @@ const ProductDetails = () => {
     categoryData,
     setProductDetailsData,
     productDetailsData,
+    setProductDetails,
+    productDetails,
+    selectedCate,
+    setShowExport,
+    showExport,
+    setSelectExport,
   } = useContext(MyContext);
-  const deleteCategory = (id) => {
-    console.log(id);
-    removeCategory(id, setActiveSubTab, setCategoryData);
-  };
-  const editCategory = (id) => {
-    console.log(id);
-    updateCategory(id, setActiveSubTab, setCategoryData);
-  };
-
   const dataForCurrTitle = categoryData.filter(
     (currElem) => currElem.id === categorySelect
   );
@@ -40,17 +38,32 @@ const ProductDetails = () => {
         }
       );
       console.log(res.data);
-      // setProductDetailsData(userDataList.data);
+      const searchRes = res.data.data.filter((val) =>
+        val.category_names.includes(selectedCate)
+      );
+      setProductDetailsData(searchRes);
     } catch (error) {
       console.error("Fetch user data error:", error);
     }
   };
   console.log(productDetailsData);
+  console.log(productDetails);
+  const exportProductDetails = () => {
+    if (productDetailsData.length > 0) {
+      setSelectExport(productDetailsData), setShowExport(!showExport);
+    } else {
+      toast.warning("No Orders Yet!", {
+        className: "rounded-[10px]",
+      });
+    }
+  };
   return (
     <>
       <div className="w-full">
         <p className="text-3xxl 2xl:text-4xl ps-7 font-bold text-black leading-[80%] mb-[62px]">
-          {dataForCurrTitle[0].name}
+          {Array.isArray(dataForCurrTitle) &&
+            dataForCurrTitle.length > 0 &&
+            dataForCurrTitle[0].name}
         </p>
 
         <div className="flex items-center ps-7 mb-10 gap-3 justify-between pr-8 hide_scroll overflow-auto">
@@ -78,11 +91,20 @@ const ProductDetails = () => {
               btntext="Edit"
             />
             <CommonBtn
-              // clickEvent={() => deleteCategory(categorySelect)}
+              clickEvent={() =>
+                deleteProduct(
+                  categorySelect,
+                  setProductDetails,
+                  productDetails,
+                  setProductDetailsData,
+                  selectedCate
+                )
+              }
               style="text-white bg-[#FF3D00] hover:bg-transparent hover:text-[#FF3D00]"
               btntext="Delete"
             />
             <CommonBtn
+              clickEvent={exportProductDetails}
               style="text-black bg-[#FDC63A] hover:bg-transparent hover:text-[#FDC63A]"
               btntext="Export"
             />

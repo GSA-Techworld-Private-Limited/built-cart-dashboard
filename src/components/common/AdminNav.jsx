@@ -23,7 +23,7 @@ const AdminNav = () => {
           </p>
         </div>
         <img
-          className="w-14 md:w-14 2xl:h-[73px]"
+          className="w-14 md:w-14 2xl:w-[78px]"
           src={pageLogo}
           alt="page logo"
         />

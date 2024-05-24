@@ -14,6 +14,7 @@ const OrderLogTable = () => {
     setCategorySelect,
     orderLogs,
     setLogsDetails,
+    filteredLogs,
   } = useContext(MyContext);
   console.log(categorySelect);
   const getLogsDetails = (id) => {
@@ -71,81 +72,83 @@ const OrderLogTable = () => {
             </p>
           </div>
           {orderLogs &&
-            orderLogs.map((val, i) => (
-              <div
-                key={i}
-                className={`2xl:h-[60px] h-[54px] mt-2 flex items-center ${
-                  i === 0 || i === 2 || i === 4 || i === 7 || i === 9
-                    ? "bg-[#FEF9EB]"
-                    : "bg-white"
-                }`}
-              >
-                <div className="px-[54px] w-[136px]">
-                  {/* <Checkbox border="border-[#686868]" /> */}
-                  <CheckBox
-                    inputStyle="!border-[#686868]"
-                    checkStyle="!border-[#686868] !bg-transparent"
-                    isChecked={checkedItems[val.id] || false}
-                    handleCheckBox={() =>
-                      handleCheckBoxChange(
-                        val.id,
-                        setCheckedItems,
-                        setCategorySelect
-                      )
-                    }
-                  />
-                </div>
-                <p className="font-medium pl-6 w-[178px] text-nowrap 2xl:text-2xl text-xl leading-5 text-[#282828]">
-                  {formatDateTime(val.created_at)}
-                </p>
-                <p
-                  onClick={() => getLogsDetails(val.order_id)}
-                  className="font-medium cursor-pointer underline text-nowrap pl-6 w-[232px] 2xl:text-2xl text-xl leading-5 text-dark"
-                >
-                  {val.order_id}
-                </p>
-                <p className="font-medium text-nowrap pl-6 w-[249px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
-                  {val.user}
-                </p>
-                <p className="font-medium text-nowrap pl-6 w-[237px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
-                  {val.location_name}
-                </p>
-                <p className="font-medium text-nowrap pl-6 w-[315px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
-                  {val.ref_coupon}
-                </p>
-                <p className="font-medium text-nowrap pl-6 w-[314px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
-                  {val.order_item}
-                </p>
-                <p className="font-medium capitalize text-nowrap pl-6 w-[240px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
-                  {val.vendor_name}
-                </p>
-                <p className="font-medium text-nowrap pl-6 w-[119px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
-                  {val.quantity}
-                </p>
-                <p className="font-medium text-nowrap pl-6 w-[199px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
-                  ₹{val.total_price}
-                </p>
-                <p className="font-medium uppercase text-nowrap pl-6 w-[244px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
-                  {val.payment_mode}
-                </p>
-                <p className="font-medium capitalize text-nowrap pl-6 w-[244px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
-                  {val.delivery_person}
-                </p>
-                <p
-                  className={`font-medium text-nowrap capitalize pl-6 w-[244px] 2xl:text-2xl text-xl leading-5 ${
-                    val.status === "pending" || val.status === "cancelled"
-                      ? "text-[#FF3D00]"
-                      : val.status === "dispatched"
-                      ? "text-[#FDC63A]"
-                      : val.status === "delivered"
-                      ? "text-[#0FB001]"
-                      : ""
+            (filteredLogs.length > 0 ? filteredLogs : orderLogs).map(
+              (val, i) => (
+                <div
+                  key={i}
+                  className={`2xl:h-[60px] h-[54px] mt-2 flex items-center ${
+                    i === 0 || i === 2 || i === 4 || i === 7 || i === 9
+                      ? "bg-[#FEF9EB]"
+                      : "bg-white"
                   }`}
                 >
-                  {val.status}
-                </p>
-              </div>
-            ))}
+                  <div className="px-[54px] w-[136px]">
+                    {/* <Checkbox border="border-[#686868]" /> */}
+                    <CheckBox
+                      inputStyle="!border-[#686868]"
+                      checkStyle="!border-[#686868] !bg-transparent"
+                      isChecked={checkedItems[val.id] || false}
+                      handleCheckBox={() =>
+                        handleCheckBoxChange(
+                          val.id,
+                          setCheckedItems,
+                          setCategorySelect
+                        )
+                      }
+                    />
+                  </div>
+                  <p className="font-medium pl-6 w-[178px] text-nowrap 2xl:text-2xl text-xl leading-5 text-[#282828]">
+                    {formatDateTime(val.created_at)}
+                  </p>
+                  <p
+                    onClick={() => getLogsDetails(val.order_id)}
+                    className="font-medium cursor-pointer underline text-nowrap pl-6 w-[232px] 2xl:text-2xl text-xl leading-5 text-dark"
+                  >
+                    {val.order_id}
+                  </p>
+                  <p className="font-medium text-nowrap pl-6 w-[249px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+                    {val.user ? val.user : "N/A"}
+                  </p>
+                  <p className="font-medium text-nowrap pl-6 w-[237px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+                    {val.location_name}
+                  </p>
+                  <p className="font-medium text-nowrap pl-6 w-[315px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+                    {val.ref_coupon}
+                  </p>
+                  <p className="font-medium text-nowrap pl-6 w-[314px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+                    {val.order_item}
+                  </p>
+                  <p className="font-medium capitalize text-nowrap pl-6 w-[240px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+                    {val.vendor_name}
+                  </p>
+                  <p className="font-medium text-nowrap pl-6 w-[119px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+                    {val.quantity}
+                  </p>
+                  <p className="font-medium text-nowrap pl-6 w-[199px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+                    ₹{val.total_price}
+                  </p>
+                  <p className="font-medium uppercase text-nowrap pl-6 w-[244px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+                    {val.payment_mode}
+                  </p>
+                  <p className="font-medium capitalize text-nowrap pl-6 w-[244px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+                    {val.delivery_person}
+                  </p>
+                  <p
+                    className={`font-medium text-nowrap capitalize pl-6 w-[244px] 2xl:text-2xl text-xl leading-5 ${
+                      val.status === "pending" || val.status === "cancelled"
+                        ? "text-[#FF3D00]"
+                        : val.status === "dispatched"
+                        ? "text-[#FDC63A]"
+                        : val.status === "delivered"
+                        ? "text-[#0FB001]"
+                        : ""
+                    }`}
+                  >
+                    {val.status}
+                  </p>
+                </div>
+              )
+            )}
         </div>
       </div>
     </>

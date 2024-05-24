@@ -1,6 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-export const baseUrl = "https://v3h2dw9k-8020.inc1.devtunnels.ms/";
+export const baseUrl = "https://v3h2dw9k-8040.inc1.devtunnels.ms";
 
 export const fetchUserData = async (
   setUserData,
@@ -8,7 +8,8 @@ export const fetchUserData = async (
   setStatusData,
   setCategoryData,
   setComplaints,
-  setOrderLogs
+  setOrderLogs,
+  setProductDetails
 ) => {
   const accessToken = sessionStorage.getItem("accessToken");
   const options = {
@@ -27,7 +28,7 @@ export const fetchUserData = async (
     fetchStatusData(setStatusData);
     getComplaints(setComplaints);
     getOrderLogs(setOrderLogs);
-
+    getProductDetails(setProductDetails);
     setCategoryData(categoryDataList.data.response);
   } catch (error) {
     console.error("Fetch user data error:", error);
@@ -116,6 +117,8 @@ export const removeCategory = async (id, setActiveSubTab, setCategoryData) => {
         }
       );
       setActiveSubTab(null);
+      console.log(response);
+
       const categoryDataList = await axios.get(
         `${baseUrl}/superadmin/add-category-dashboard/`,
         {
@@ -123,11 +126,9 @@ export const removeCategory = async (id, setActiveSubTab, setCategoryData) => {
         }
       );
       setCategoryData(categoryDataList.data.response);
-      toast.success(response, {
+      toast.success(response.data.message, {
         className: "rounded-[10px]",
       });
-      if (!id) {
-      }
     } catch (error) {
       toast.error("Request Failed!! Try Again", {
         className: "rounded-[10px]",
@@ -340,6 +341,68 @@ export const getOrderLogs = async (setOrderLogs) => {
     console.error("Fetch coupon data error:", error);
     // Show error message
     toast.error("Error fetching coupon data. Try again", {
+      className: "rounded-[10px]",
+    });
+  }
+};
+export const getProductDetails = async (setProductDetails) => {
+  const accessToken = sessionStorage.getItem("accessToken");
+  try {
+    const res = await axios.get(
+      `${baseUrl}/superadmin/add-products-dashboard/`,
+      {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      }
+    );
+
+    setProductDetails(res.data.data);
+  } catch (error) {
+    console.error("Fetch coupon data error:", error);
+    // Show error message
+    toast.error("Error fetching coupon data. Try again", {
+      className: "rounded-[10px]",
+    });
+  }
+};
+export const deleteProduct = async (
+  id,
+  setProductDetails,
+  productDetails,
+  setProductDetailsData,
+  selectedCate
+) => {
+  const accessToken = sessionStorage.getItem("accessToken");
+  if (id) {
+    try {
+      const res = await axios.delete(
+        `${baseUrl}/superadmin/get-products-dashboard/${id}/`,
+        {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        }
+      );
+      console.log(res, "success");
+      // Immediately update productDetails to reflect changes
+      const updatedProductDetails = productDetails.filter(
+        (product) => product.product_id !== id
+      );
+      setProductDetails(updatedProductDetails);
+      // Update productDetailsData for the current category
+      const filteredProductDetails = updatedProductDetails.filter((val) =>
+        val.category_names.includes(selectedCate)
+      );
+      setProductDetailsData(filteredProductDetails);
+      toast.success("Product Deleted Successfully!", {
+        className: "rounded-[10px]",
+      });
+    } catch (error) {
+      console.error("error:", error);
+      // Show error message
+      toast.error("Error Try again", {
+        className: "rounded-[10px]",
+      });
+    }
+  } else {
+    toast.warning("First Select Any Item", {
       className: "rounded-[10px]",
     });
   }
