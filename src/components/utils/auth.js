@@ -216,7 +216,7 @@ export const updateCategory = async (
   }
 };
 
-export const addOffer = async (couponData, setIsOfferSent, setcouponData) => {
+export const addOffer = async (couponData, setIsOfferSent, setcouponData,selectedOption) => {
   const accessToken = sessionStorage.getItem("accessToken");
   console.log(couponData);
   try {

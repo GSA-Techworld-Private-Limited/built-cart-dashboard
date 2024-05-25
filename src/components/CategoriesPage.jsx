@@ -7,6 +7,7 @@ import { CloseIcon } from "./common/Icons";
 import { FiPlusCircle } from "react-icons/fi";
 import { addCategory, baseUrl, removeCategory } from "./utils/auth";
 import axios from "axios";
+import { toast } from "react-toastify";
 const CategoriesPage = () => {
   const {
     setActiveSubTab,
@@ -27,6 +28,15 @@ const CategoriesPage = () => {
   });
   const showCategoryPopUp = () => {
     setAddOverlay(!addOverlay);
+  };
+  const showEditOverlay = () => {
+    if (categorySelect) {
+      setEditOverlay(!editOverlay);
+    } else {
+      toast.warning("First Select Any Item!!", {
+        className: "rounded-[10px]",
+      });
+    }
   };
 
   const handleInputChange = (event) => {
@@ -87,7 +97,7 @@ const CategoriesPage = () => {
           </div>
           <div className="flex items-center gap-6 2xl:gap-[30px]">
             <CommonBtn
-              clickEvent={() => setEditOverlay(!editOverlay)}
+              clickEvent={showEditOverlay}
               style="text-white bg-[#606060] hover:bg-transparent hover:text-[#606060]"
               btntext="Edit"
             />

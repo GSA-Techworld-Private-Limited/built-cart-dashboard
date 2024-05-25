@@ -56,11 +56,7 @@ const AddProduct = () => {
 
     // Append main product data to formData
     for (const key in addProducts) {
-      if (
-        key !== "product_galleries" &&
-        key !== "product_color_galleries" && // Exclude color galleries
-        Object.hasOwnProperty.call(addProducts, key)
-      ) {
+      if (Object.hasOwnProperty.call(addProducts, key)) {
         formData.append(key, addProducts[key]);
       }
     }
@@ -116,44 +112,31 @@ const AddProduct = () => {
     updatedAddProducts.product_galleries.push({ image: uploadedFile });
     setAddProducts(updatedAddProducts);
   };
-  const handleFile = (uploadedFile, product, color) => {
+  const handleFile = (uploadedFile, index, color) => {
     setAddProducts((prevState) => {
-      const updatedAddProducts = { ...prevState };
-      const updatedColorGalleries = [...prevState.product_color_galleries];
-
-      // Check if color already exists, if not, add it
-      let colorIndex = updatedColorGalleries.findIndex(
-        (gallery) => gallery.color === color
+      const updatedGalleries = [...prevState.product_color_galleries];
+      // Check if the color gallery already exists
+      const colorGalleryIndex = updatedGalleries.findIndex(
+        (item) => item.color === color
       );
-
-      if (colorIndex === -1) {
-        // If color doesn't exist, add it with the image
-        updatedColorGalleries.push({ color, image: uploadedFile });
-        colorIndex = updatedColorGalleries.length - 1; // Set index to the last added
+      if (colorGalleryIndex !== -1) {
+        // If the color gallery already exists, update its image
+        updatedGalleries[colorGalleryIndex].image = uploadedFile;
       } else {
-        // If color exists, update its image
-        updatedColorGalleries[colorIndex] = {
-          ...updatedColorGalleries[colorIndex],
-          image: uploadedFile,
-        };
+        // If the color gallery doesn't exist, create a new one
+        updatedGalleries.push({ color: color, image: uploadedFile });
       }
-      // Update the state with the updated color galleries
-      updatedAddProducts.product_color_galleries = updatedColorGalleries;
-
-      return updatedAddProducts;
+      return { ...prevState, product_color_galleries: updatedGalleries };
     });
   };
 
   const handleColorChange = (color, index) => {
     setAddProducts((prevState) => {
       const updatedGalleries = [...prevState.product_color_galleries];
-
-      // Update the color of the existing object at the specified index
       updatedGalleries[index] = {
-        ...updatedGalleries[index], // Keep existing properties
-        color: color, // Update color property
+        ...updatedGalleries[index],
+        color: color,
       };
-
       return { ...prevState, product_color_galleries: updatedGalleries };
     });
   };
@@ -167,7 +150,7 @@ const AddProduct = () => {
             onClick={() => setActiveSubTab(null)}
             className="flex cursor-pointer items-center gap-4"
           >
-            <IoArrowBack className="text-3xxl 2xl:text-[50px]" />
+            <IoArrowBack className="text-3xxl 2xl :text-[50px]" />
             <p className="text-2xl 2xl:text-3xxl text-black font-semibold">
               Add Product
             </p>
@@ -333,38 +316,58 @@ const AddProduct = () => {
             variants ? (
               <>
                 <div className="grid grid-cols-2 gap-6 2xl:gap-9 w-[95%] mt-8">
-                  {[...Array(variantCount)].map((_, idx) => (
-                    <div
-                      key={idx}
-                      className="border border-black rounded-[30px] py-6 w-full 2xl:py-[30px] px-8 2xl:px-10"
-                    >
-                      <div className="flex flex-col w-full max-w-[396px] mb-5">
-                        <label
-                          htmlFor={`colour-name-${idx}`}
-                          className="text-xl 2xl:text-2xl font-normal text-black mb-2"
-                        >
-                          Color Name
-                        </label>
-                        <input
-                          required
-                          id={`colour-name-${idx}`}
-                          // name={addProducts.product_color_galleries[idx].color}
-                          onChange={(e) =>
-                            handleColorChange(e.target.value, idx)
+                  {[...Array(variantCount)].map((_, idx) => {
+                    // Get the color value for this iteration from the state
+                    const color =
+                      addProducts.product_color_galleries[idx]?.color || ""; // Adjust the access to color as per your data structure
+
+                    return (
+                      <div
+                        key={idx}
+                        className="border border-black rounded-[30px] py-6 w-full 2xl:py-[30px] px-8 2xl:px-10"
+                      >
+                        <div className="flex flex-col w-full max-w-[396px] mb-5">
+                          <label
+                            htmlFor={`colour-name-${idx}`}
+                            className="text-xl 2xl:text-2xl font-normal text-black mb-2"
+                          >
+                            Color Name
+                          </label>
+                          <input
+                            required
+                            id={`colour-name-${idx}`}
+                            onChange={(e) =>
+                              handleColorChange(e.target.value, idx)
+                            }
+                            type="text"
+                            className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
+                          />
+                        </div>
+                        <AddPics
+                          id={`uniqueId${idx}`}
+                          handleFileChange={(file) =>
+                            handleFile(file, idx, color)
                           }
-                          type="text"
-                          className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
+                          image1={
+                            addProducts.product_color_galleries[idx]?.image ||
+                            null
+                          }
+                          image2={
+                            addProducts.product_color_galleries[idx]?.image ||
+                            null
+                          }
+                          image3={
+                            addProducts.product_color_galleries[idx]?.image ||
+                            null
+                          }
+                          image4={
+                            addProducts.product_color_galleries[idx]?.image ||
+                            null
+                          }
                         />
                       </div>
-                      <AddPics
-                        handleFileChange={handleFile}
-                        // image1={addProducts.product_galleries[0]?.image || null}
-                        // image2={addProducts.product_galleries[1]?.image || null}
-                        // image3={addProducts.product_galleries[2]?.image || null}
-                        // image4={addProducts.product_galleries[3]?.image || null}
-                      />
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </>
             ) : (
@@ -402,6 +405,7 @@ const AddProduct = () => {
           ) : (
             <div className="w-[41%] mt-11">
               <AddPics
+                id="uniqueIdTwo" // Pass another unique id
                 handleFileChange={handleFileChange}
                 image1={addProducts.product_galleries[0]?.image || null}
                 image2={addProducts.product_galleries[1]?.image || null}

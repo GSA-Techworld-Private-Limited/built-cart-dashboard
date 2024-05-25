@@ -13,7 +13,7 @@ import MyContext from "./context/MyContext";
 const DashboardSideBar = () => {
   const { activeTab, setActiveTab } = useContext(MyContext);
   return (
-    <div className="rounded-br-[30px] flex flex-col gap-[14px] w-[265px] bg-dark pt-24 2xl:pt-32 pb-12 h-[calc(100vh-99px)] overflow-auto hide_scroll">
+    <div className="rounded-br-[30px] flex flex-col gap-[14px] w-[265px] bg-dark pt-24 2xl:pt-32 pb-12 h-[calc(100vh-86px)] 2xl:h-[calc(100vh-99px)] overflow-auto hide_scroll">
       <AdminTabBtn
         btntext="Dashboard"
         icon={<IoMdHome className="text-2xl text-white" />}

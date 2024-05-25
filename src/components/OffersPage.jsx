@@ -35,7 +35,7 @@ const OffersPage = () => {
   };
   const handleSent = (e) => {
     e.preventDefault();
-    addOffer(couponData, setIsOfferSent, setcouponData);
+    addOffer(couponData, setIsOfferSent, setcouponData,selectedOption);
   };
   const today = new Date();
   const tomorrow = new Date(today);
@@ -316,7 +316,7 @@ const OffersPage = () => {
                 >
                   Total Beneficiaries
                 </label>
-                <input
+                <input required
                   onChange={handleInputChange}
                   name="total_beneficiaries"
                   value={couponData.total_beneficiaries}
