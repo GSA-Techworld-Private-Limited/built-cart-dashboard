@@ -7,15 +7,17 @@ import { toast } from "react-toastify";
 const flattenObject = (obj, parent = "", res = {}) => {
   for (let key in obj) {
     const propName = parent ? `${parent}.${key}` : key;
+    let displayName = key.replace(/_/g, " "); // Replace underscores with spaces
+    displayName = displayName = displayName
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" "); // Capitalize each word; // Capitalize the first letter
     if (Array.isArray(obj[key])) {
-      // obj[key].forEach((item, index) => {
-      //   flattenObject(item, `${propName}[${index}]`, res);
-      // });
       continue;
     } else if (typeof obj[key] == "object" && obj[key] !== null) {
       flattenObject(obj[key], propName, res);
     } else {
-      res[propName] = obj[key];
+      res[propName] = { value: obj[key], display: displayName }; // Store both value and display name
     }
   }
   return res;
@@ -46,7 +48,17 @@ export const exportData = (timeFrame, userData, fileType, afterComplete) => {
   const flattenedData = filteredData.map((item) => flattenObject(item));
 
   if (fileType === "xlsx" || fileType === "xls") {
-    const worksheet = XLSX.utils.json_to_sheet(flattenedData);
+    // Convert flattenedData to an array of arrays
+    const dataArray = flattenedData.map((item) =>
+      Object.values(item).map((obj) => obj.value)
+    );
+
+    // Extract header row from flattenedData and map it to display names
+    const headerRow = Object.keys(flattenedData[0]).map(
+      (key) => flattenedData[0][key].display
+    );
+
+    const worksheet = XLSX.utils.aoa_to_sheet([headerRow, ...dataArray]);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Data");
 
@@ -74,9 +86,12 @@ export const exportData = (timeFrame, userData, fileType, afterComplete) => {
     const chunkedKeys = chunkArray(keys, 9);
 
     chunkedKeys.forEach((keyChunk, index) => {
-      const columns = keyChunk.map((key) => ({ header: key, dataKey: key }));
+      const columns = keyChunk.map((key) => ({
+        header: flattenedData[0][key].display,
+        dataKey: key,
+      }));
       const rows = flattenedData.map((item) =>
-        keyChunk.map((key) => item[key])
+        keyChunk.map((key) => item[key].value)
       );
 
       doc.autoTable({

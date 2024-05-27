@@ -21,6 +21,8 @@ const ComplaintsPage = () => {
     setShowExport,
     setComplaints,
     categorySelect,
+    filteredComplaints,
+    setFilteredComplaints,
   } = useContext(MyContext);
   const updateComplaintsStatus = async (value) => {
     const accessToken = sessionStorage.getItem("accessToken");
@@ -52,6 +54,32 @@ const ComplaintsPage = () => {
       }
     }
   };
+  const handleChange = (event) => {
+    const term = event.target.value.toLowerCase();
+    if (term === "") {
+      // Clear filteredComplaints when the search term is empty
+      setFilteredComplaints([]);
+    } else {
+      const filteredData = complaints.filter((complaint) => {
+        // Recursively check if any nested string property includes the search term
+        const checkNestedProperties = (obj) => {
+          return Object.values(obj).some((value) => {
+            if (typeof value === "string") {
+              return value.toLowerCase().includes(term);
+            } else if (typeof value === "object" && value !== null) {
+              return checkNestedProperties(value);
+            }
+            return false;
+          });
+        };
+
+        return checkNestedProperties(complaint);
+      });
+
+      setFilteredComplaints(filteredData);
+      console.log(filteredData);
+    }
+  };
   return (
     <>
       <div className="w-full">
@@ -63,6 +91,7 @@ const ComplaintsPage = () => {
             <div className="flex items-center gap-[10px] me-4 max-h-[54px] 2xl:max-h-[62px] border w-[432px] border-black rounded-[10px] px-[13px]">
               <IoSearchSharp className="text-dark text-[28px]" />
               <input
+                onChange={handleChange}
                 type="text"
                 placeholder="Search Name, Location..."
                 className="2xl:text-2xl text-xl text-[#6E6E73] leading-5 w-full placeholder:text-[#6E6E73] font-medium outline-none border-0 bg-transparent py-4 2xl:py-5"

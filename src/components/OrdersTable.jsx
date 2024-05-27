@@ -67,7 +67,7 @@ const OrdersTable = ({ filterData }) => {
             (filterData.length > 0 ? filterData : orderData).map((val, i) => (
               <>
                 <div
-                  key={i}
+                  key={`key-${i}`}
                   className={`2xl:h-[60px] h-[54px] mt-2 flex items-center ${
                     i % 2 === 0 ? "bg-[#FEF9EB]" : "bg-white"
                   }`}
@@ -103,7 +103,7 @@ const OrdersTable = ({ filterData }) => {
                   </p>
                   <div className="w-[1572px] flex">
                     {val.orders.map((obj, ind) => (
-                      <div key={ind} className="flex">
+                      <div key={`${i}-${ind}`} className="flex">
                         <p className="font-medium text-nowrap pl-6 w-[249px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
                           {obj.user}
                         </p>

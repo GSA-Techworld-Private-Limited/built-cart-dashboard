@@ -11,6 +11,7 @@ import { ChooseIcon } from "./common/Icons";
 import CommonBtn from "./common/CommonBtn";
 import OrderLogTable from "./OrderLogTable";
 import MyContext from "./context/MyContext";
+import { toast } from "react-toastify";
 const OrderLogs = () => {
   const {
     showExport,
@@ -33,6 +34,28 @@ const OrderLogs = () => {
       setFilteredLogs(filteredData);
     }
   };
+  const handleChange = (event) => {
+    const term = event.target.value.toLowerCase();
+    if (term === "") {
+      // Clear filterData when the search term is empty
+      setFilteredLogs([]);
+    } else {
+      const filteredData = orderLogs.filter((order) => {
+        // Check if any string property of the order object includes the search term
+        return Object.values(order).some(
+          (value) =>
+            typeof value === "string" && value.toLowerCase().includes(term)
+        );
+      });
+      setFilteredLogs(filteredData);
+      console.log(filteredData);
+      // if (filteredData.length < 1) {
+      //   toast.warning("No matches", {
+      //     className: "rounded-[10px]",
+      //   });
+      // }
+    }
+  };
   return (
     <>
       <div className="w-full">
@@ -44,6 +67,7 @@ const OrderLogs = () => {
             <div className="flex items-center gap-[10px] me-4 max-h-[54px] 2xl:max-h-[62px] border w-[432px] border-black rounded-[10px] px-[13px]">
               <IoSearchSharp className="text-dark text-[28px]" />
               <input
+                onChange={handleChange}
                 type="text"
                 placeholder="Search Name, Location..."
                 className="2xl:text-2xl text-xl text-[#6E6E73] leading-5 w-full placeholder:text-[#6E6E73] font-medium outline-none border-0 bg-transparent py-4 2xl:py-5"

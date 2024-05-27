@@ -24,8 +24,9 @@ const ProductDetails = () => {
     setSelectExport,
   } = useContext(MyContext);
   const dataForCurrTitle = categoryData.filter(
-    (currElem) => currElem.id === categorySelect
+    (currElem) => currElem.name === selectedCate
   );
+  console.log(dataForCurrTitle);
   const filterUserWithName = async (e) => {
     const accessToken = sessionStorage.getItem("accessToken");
     try {
@@ -60,7 +61,7 @@ const ProductDetails = () => {
   return (
     <>
       <div className="w-full">
-        <p className="text-3xxl 2xl:text-4xl ps-7 font-bold text-black leading-[80%] mb-[62px]">
+        <p className="text-3xxl 2xl:text-4xl capitalize ps-7 font-bold text-black leading-[80%] mb-[62px]">
           {Array.isArray(dataForCurrTitle) &&
             dataForCurrTitle.length > 0 &&
             dataForCurrTitle[0].name}
@@ -97,7 +98,8 @@ const ProductDetails = () => {
                   setProductDetails,
                   productDetails,
                   setProductDetailsData,
-                  selectedCate
+                  selectedCate,
+                  setCategoryData
                 )
               }
               style="text-white bg-[#FF3D00] hover:bg-transparent hover:text-[#FF3D00]"

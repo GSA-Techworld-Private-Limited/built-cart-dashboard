@@ -97,7 +97,7 @@ const CategoriesTable = () => {
                 <div className=" pl-6 w-[204px]">
                   <img
                     width={67}
-                    src={`https://v3h2dw9k-8040.inc1.devtunnels.ms${val.image}`}
+                    src={`https://v3h2dw9k-8060.inc1.devtunnels.ms${val.image}`}
                     className="rounded object-cover max-h-[67px]"
                     alt="category pic"
                   />

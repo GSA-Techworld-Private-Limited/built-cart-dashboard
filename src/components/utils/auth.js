@@ -1,6 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-export const baseUrl = "https://v3h2dw9k-8040.inc1.devtunnels.ms";
+export const baseUrl = "https://v3h2dw9k-8030.inc1.devtunnels.ms";
 
 export const fetchUserData = async (
   setUserData,
@@ -216,7 +216,12 @@ export const updateCategory = async (
   }
 };
 
-export const addOffer = async (couponData, setIsOfferSent, setcouponData,selectedOption) => {
+export const addOffer = async (
+  couponData,
+  setIsOfferSent,
+  setcouponData,
+  selectedOption
+) => {
   const accessToken = sessionStorage.getItem("accessToken");
   console.log(couponData);
   try {
@@ -369,7 +374,8 @@ export const deleteProduct = async (
   setProductDetails,
   productDetails,
   setProductDetailsData,
-  selectedCate
+  selectedCate,
+  setCategoryData
 ) => {
   const accessToken = sessionStorage.getItem("accessToken");
   if (id) {
@@ -391,6 +397,13 @@ export const deleteProduct = async (
         val.category_names.includes(selectedCate)
       );
       setProductDetailsData(filteredProductDetails);
+      const categoryDataList = await axios.get(
+        `${baseUrl}/superadmin/add-category-dashboard/`,
+        {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        }
+      );
+      setCategoryData(categoryDataList.data.response);
       toast.success("Product Deleted Successfully!", {
         className: "rounded-[10px]",
       });

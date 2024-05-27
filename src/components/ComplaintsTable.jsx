@@ -12,6 +12,7 @@ const ComplaintsTable = () => {
     setCategorySelect,
     categorySelect,
     complaints,
+    filteredComplaints,
   } = useContext(MyContext);
   console.log(categorySelect);
   return (
@@ -50,7 +51,10 @@ const ComplaintsTable = () => {
             </p>
           </div>
           {complaints &&
-            complaints.map((val, i) => (
+            (filteredComplaints.length > 0
+              ? filteredComplaints
+              : complaints
+            ).map((val, i) => (
               <div
                 key={i}
                 className={`py-3 2xl:py-4 mt-2 flex ${

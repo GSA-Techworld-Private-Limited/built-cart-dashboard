@@ -132,7 +132,7 @@ const Orders = () => {
               <SelectTrigger className="w-[191px]">
                 <SelectValue placeholder="Status" />
               </SelectTrigger>
-              <SelectContent width="w-[191px]">
+              <SelectContent width="w-[188px]">
                 <SelectItem color="text-[#0E39D1]" value="payment_pending">
                   Pending
                 </SelectItem>

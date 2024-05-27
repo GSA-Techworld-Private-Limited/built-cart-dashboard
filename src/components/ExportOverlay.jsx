@@ -65,7 +65,9 @@ const ExportOverlay = () => {
           >
             <CloseIcon />
           </span>
-          <p className="text-2xl font-semibold text-black mb-9">Export Files</p>
+          <p className="text-xl 2xl:text-2xl font-semibold text-black mb-9">
+            Export Files
+          </p>
           <div className="flex justify-between gap-10 mb-4">
             <div className="flex flex-col w-full relative">
               <label
@@ -75,14 +77,14 @@ const ExportOverlay = () => {
                 From
               </label>
               <div className="flex relative w-full items-center">
-                <CalendarIcon style="absolute top-1/2 bg-white -translate-y-1/2 right-[25px] pointer-events-none" />
+                <CalendarIcon style="absolute top-1/2 bg-white -translate-y-1/2 right-[25px] pointer-events-none w-8 2xl:w-[38px]" />
                 <input
                   required
                   name="from"
                   onChange={handleDateInput}
                   value={timeFrame.from}
                   id="from-date"
-                  className="h-[63px] border outline-none border-dark w-full uppercase text-dark rounded-[10px] py-3.5 px-5 leading-5 text-2xl"
+                  className="h-[54px] 2xl:h-[63px] border outline-none border-dark w-full uppercase text-dark rounded-[10px] py-3.5 px-5 leading-5 text-xl 2xl:text-2xl"
                   type="date"
                 />
               </div>
@@ -95,14 +97,14 @@ const ExportOverlay = () => {
                 To
               </label>
               <div className="flex relative w-full items-center">
-                <CalendarIcon style="absolute top-1/2 bg-white -translate-y-1/2 right-[25px] pointer-events-none" />
+                <CalendarIcon style="absolute top-1/2 bg-white -translate-y-1/2 right-[25px] pointer-events-none w-8 2xl:w-[38px]" />
                 <input
                   required
                   name="to"
                   value={timeFrame.to}
                   onChange={handleDateInput}
                   id="to-date"
-                  className="h-[63px] border outline-none border-dark w-full uppercase text-dark rounded-[10px] py-3.5 px-5 leading-5 text-2xl"
+                  className="h-[54px] 2xl:h-[63px] border outline-none border-dark w-full uppercase text-dark rounded-[10px] py-3.5 px-5 leading-5 text-xl 2xl:text-2xl"
                   type="date"
                 />
               </div>
@@ -134,7 +136,7 @@ const ExportOverlay = () => {
             <button
               onClick={handleClick}
               type="submit"
-              className={`w-full text-center p-4 border border-transparent duration-200 rounded-[10px] mt-[50px] text-xl font-semibold ${
+              className={`w-full text-center p-3 2xl:p-4 border border-transparent duration-200 rounded-[10px] mt-9 2xl:mt-[50px] text-xl font-semibold ${
                 status === "export" ? "bg-[#FDC63A] text-white" : ""
               } ${
                 status === "exported"

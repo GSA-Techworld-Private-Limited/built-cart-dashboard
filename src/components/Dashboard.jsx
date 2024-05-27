@@ -23,30 +23,30 @@ const Dashboard = () => {
   }, [activeTab]);
   const [isTokenExpired, setIsTokenExpired] = useState(false);
 
-  useEffect(() => {
-    // Retrieve the token from localStorage
-    const token = sessionStorage.getItem("accessToken");
+  // useEffect(() => {
+  //   // Retrieve the token from localStorage
+  //   const token = sessionStorage.getItem("accessToken");
 
-    // Check if the token exists and is not expired
-    if (token) {
-      const decodedToken = JSON.parse(atob(token.split(".")[1])); // Decode the token payload
-      const tokenExpiryTime = decodedToken.exp * 1000; // Convert expiration time to milliseconds
-      const currentTime = Date.now();
-      const tokenExpiryDate = new Date(tokenExpiryTime);
-console.log(tokenExpiryDate);
-      // Check if the token has expired
-      if (currentTime > tokenExpiryTime) {
-        setIsTokenExpired(true);
-        console.log("yes expired");
-        // Optionally, you can clear the expired token from localStorage here
-        // localStorage.removeItem('accessToken');
-      } else {
-        // Handle case where token doesn't exist in localStorage
-        console.log("not");
-        setIsTokenExpired(true);
-      }
-    }
-  }, []);
+  //   // Check if the token exists and is not expired
+  //   if (token) {
+  //     const decodedToken = JSON.parse(atob(token.split(".")[1])); // Decode the token payload
+  //     const tokenExpiryTime = decodedToken.exp * 1000; // Convert expiration time to milliseconds
+  //     const currentTime = Date.now();
+  //     const tokenExpiryDate = new Date(tokenExpiryTime);
+  //     console.log(tokenExpiryDate);
+  //     // Check if the token has expired
+  //     if (currentTime > tokenExpiryTime) {
+  //       setIsTokenExpired(true);
+  //       console.log("yes expired");
+  //       // Optionally, you can clear the expired token from localStorage here
+  //       // localStorage.removeItem('accessToken');
+  //     } else {
+  //       // Handle case where token doesn't exist in localStorage
+  //       console.log("not");
+  //       setIsTokenExpired(true);
+  //     }
+  //   }
+  // }, []);
   return (
     <>
       <section className="flex min-h-screen flex-col overflow-hidden">
