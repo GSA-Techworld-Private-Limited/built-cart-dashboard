@@ -119,8 +119,7 @@ const OrderLogsDetails = (props) => {
               Total Amount
             </p>
             <p className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 rounded-[10px] bg-transparent outline-none h-10 2xl:h-[54px]">
-              {" "}
-              {logsDetails.total_price}
+               {logsDetails.total_price}
             </p>
           </div>
         </div>

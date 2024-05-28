@@ -52,7 +52,6 @@ const UserOrderTable = () => {
                 }`}
               >
                 <div className="px-[54px] w-[136px]">
-                  {/* <Checkbox border="border-[#686868]" /> */}
                   <CheckBox
                     inputStyle="!border-[#686868]"
                     checkStyle="!border-[#686868] !bg-transparent"

@@ -4,15 +4,16 @@ import pageLogo from "../../assets/images/webp/page-logo.webp";
 import { IoMdPower } from "react-icons/io";
 import MyContext from "../context/MyContext";
 import { useNavigate } from "react-router-dom";
+import logout from "../utils/logout";
 const AdminNav = () => {
   const { setAuthenticated } = useContext(MyContext);
   const navigate = useNavigate();
-  const logout = () => {
-    setAuthenticated(false);
-    sessionStorage.removeItem("accessToken");
-    sessionStorage.removeItem("refreshToken");
-    navigate("/");
-  };
+  // const logout = () => {
+  //   setAuthenticated(false);
+  //   sessionStorage.removeItem("accessToken");
+  //   sessionStorage.removeItem("refreshToken");
+  //   navigate("/");
+  // };
   return (
     <>
       <nav className="px-3 sticky top-0 z-50 shadow-base lg:px-8 bg-primary py-2 md:py-[13px] flex justify-between items-center">
@@ -29,7 +30,7 @@ const AdminNav = () => {
         />
 
         <button
-          onClick={logout}
+          onClick={() => logout(navigate, setAuthenticated)}
           className="py-[6px] 2xl:py-[9px] px-3 hover:text-primary group hover:bg-white duration-200 md:px-[18px] border border-white flex gap-2 2xl:gap-4 items-center text-white text-base sm:text-xl 2xl:text-2xl font-medium rounded-[10px] bg-transparent"
         >
           <IoMdPower className="text-white group-hover:text-primary duration-200 2xl:w-[31px] w-6 h-6 2xl:h-[31px]" />

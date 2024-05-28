@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext} from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import MyContext from "./context/MyContext";
 import { DateRangeIcon } from "./common/Icons";
@@ -16,7 +16,6 @@ const CategoriesTable = () => {
     checkedItems,
     categorySelect,
     productDetails,
-    setProductDetails,
     selectedCate,
     setSelectedCate,
   } = useContext(MyContext);
@@ -31,14 +30,6 @@ const CategoriesTable = () => {
     setProductDetailsData(res);
     setActiveSubTab("categories-products");
   };
-  // useEffect(() => {
-  //   console.log("hello");
-  //   if (selectedCate) {
-  //     showProductDetails(selectedCate);
-  //   }
-  //   console.log(selectedCate);
-  // }, [productDetails, selectedCate]);
-
   console.log(selectedCate);
   console.log(categorySelect);
   console.log(productDetailsData);
@@ -97,7 +88,7 @@ const CategoriesTable = () => {
                 <div className=" pl-6 w-[204px]">
                   <img
                     width={67}
-                    src={`https://v3h2dw9k-8060.inc1.devtunnels.ms${val.image}`}
+                    src={`https://v3h2dw9k-8030.inc1.devtunnels.ms${val.image}`}
                     className="rounded object-cover max-h-[67px]"
                     alt="category pic"
                   />

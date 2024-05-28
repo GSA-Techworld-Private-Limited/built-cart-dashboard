@@ -18,20 +18,19 @@ const AddProduct = () => {
   const [selectedOption, setSelectedOption] = useState("newly added");
   const currId = categoryData.find((val) => val.name === selectedOption);
   const [category, setCategory] = useState(currId.id);
-  const [tempColor, setTempColor] = useState("");
-  const [tempImage, setTempImage] = useState(null);
   const [addProducts, setAddProducts] = useState({
     name: "",
     description: "",
     selling_price: "",
     category_id: category, // Specify valid category ID
-    benifits: "",
-    quantity: null,
+    product_benifits: "",
+    total_quantity: null,
     rating: 0.5,
-    product_galleries: [],
     product_color_galleries: [],
   });
-
+  const product__Id = "12";
+  const [productImages, setProductImages] = useState([]);
+  const [colorVariants, setColorVariants] = useState([]);
   const decrementCount = () => {
     if (variantCount > 1) {
       setVariantCount(variantCount - 1);
@@ -56,6 +55,7 @@ const AddProduct = () => {
   );
 
   // handle the submit
+
   const handleProductSubmit = async (e) => {
     e.preventDefault();
 
@@ -66,42 +66,42 @@ const AddProduct = () => {
 
       // Append non-file data to formData
       formData.append("name", addProducts.name);
-      formData.append("quantity", addProducts.quantity);
+      formData.append("total_quantity", addProducts.total_quantity);
       formData.append("description", addProducts.description);
       formData.append("rating", addProducts.rating);
       formData.append("selling_price", addProducts.selling_price);
       formData.append("category_id", addProducts.category_id);
-      formData.append("benifits", addProducts.benifits);
+      formData.append("product_benifits", addProducts.product_benifits);
 
       // Append file data to formData
-      addProducts.product_galleries.forEach((gallery, index) => {
-        if (gallery.image) {
-          formData.append(`product_galleries[${index}][image]`, gallery.image);
-          formData.append(
-            `product_galleries[${index}][is_featured]`,
-            gallery.is_featured
-          );
-        }
-      });
+      // addProducts.product_galleries.forEach((gallery, index) => {
+      //   if (gallery.image) {
+      //     formData.append(`product_galleries[${index}][image]`, gallery.image);
+      //     formData.append(
+      //       `product_galleries[${index}][is_featured]`,
+      //       gallery.is_featured
+      //     );
+      //   }
+      // });
 
-      // Append color gallery file data to formData
-      addProducts.product_color_galleries.forEach((colorGallery, index) => {
-        if (colorGallery.image) {
-          formData.append(
-            `product_color_galleries[${index}][color_name]`,
-            colorGallery.color_name
-          );
-          formData.append(
-            `product_color_galleries[${index}][image]`,
-            colorGallery.image
-          );
-          formData.append(
-            `product_color_galleries[${index}][is_featured]`,
-            colorGallery.is_featured
-          );
-        }
-      });
-      console.log(formData.get("product_galleries[0][image]"));
+      // // Append color gallery file data to formData
+      // addProducts.product_color_galleries.forEach((colorGallery, index) => {
+      //   if (colorGallery.image) {
+      //     formData.append(
+      //       `product_color_galleries[${index}][color_name]`,
+      //       colorGallery.color_name
+      //     );
+      //     formData.append(
+      //       `product_color_galleries[${index}][image]`,
+      //       colorGallery.image
+      //     );
+      //     formData.append(
+      //       `product_color_galleries[${index}][is_featured]`,
+      //       colorGallery.is_featured
+      //     );
+      //   }
+      // });
+      // console.log(formData.get("product_galleries[0][image]"));
       // Send POST request with Axios
       const response = await axios.post(
         `${baseUrl}/superadmin/add-products-dashboard/`,
@@ -136,223 +136,257 @@ const AddProduct = () => {
     }));
   }, [category]);
 
-  // handle the file change
-  const handleFileChange = (uploadedFile, product) => {
-    const updatedAddProducts = { ...addProducts };
-    updatedAddProducts.product_galleries.push({
-      image: uploadedFile,
-      is_featured: false,
+  // handle the file change or adding images
+  const handleFileChange = (uploadedFile) => {
+    const productId = "a5703d01-e";
+
+    setProductImages((prevImages) => {
+      // Create a new object for the uploaded image
+      const newImage = {
+        product: productId,
+        image: uploadedFile, // Store the URL of the uploaded file
+        is_featured: false,
+      };
+
+      // Return the updated array with the new image object appended
+      return [...prevImages, newImage];
     });
-    setAddProducts(updatedAddProducts);
   };
 
-  const handleFile = (uploadedFile, product, index) => {
-    setTempImage(uploadedFile);
-
-    // Check if a gallery item with the same color name and index already exists
-    const existingIndex = addProducts.product_color_galleries.findIndex(
-      (galleryItem) =>
-        galleryItem.color_name === tempColor && galleryItem.index === index
-    );
-
-    // If there's already a color selected and an item with the same color and index exists, update the existing item
-    if (tempColor && existingIndex !== -1) {
-      const updatedGallery = [...addProducts.product_color_galleries];
-      updatedGallery[existingIndex].image = uploadedFile;
-      setAddProducts((prevState) => ({
-        ...prevState,
-        product_color_galleries: updatedGallery,
-      }));
-      setTempColor(""); // Reset the temporary color state
-      setTempImage(null); // Reset the temporary image state
-    } else if (tempColor) {
-      // If there's already a color selected but no item with the same color and index, create a new gallery item
-      const newColorGallery = {
-        color_name: tempColor,
-        image: uploadedFile,
-        index: index,
-        is_featured: false,
-      };
-      setAddProducts((prevState) => ({
-        ...prevState,
-        product_color_galleries: [
-          ...prevState.product_color_galleries,
-          newColorGallery,
-        ],
-      }));
-      setTempColor(""); // Reset the temporary color state
-      setTempImage(null); // Reset the temporary image state
-    }
+  //  for adding color variants
+  const handleFile = (uploadedFile, productId) => {
+    setColorVariants((prevState) => {
+      const updatedColorVariants = [...prevState];
+      const color_name = prevState[prevState.length - 1]?.color_name || "";
+  
+      // Find the index of the color variant with the same color_name
+      const index = updatedColorVariants.findIndex(
+        (variant) => variant.color_name === color_name
+      );
+  
+      // If the color variant doesn't exist, create a new one
+      if (index === -1) {
+        updatedColorVariants.push({
+          product: productId,
+          color_name: color_name,
+          image: uploadedFile,
+          is_featured: false, // Default is_featured to false
+        });
+      } else {
+        // If the color variant already exists, update its image
+        updatedColorVariants[index].image = uploadedFile;
+      }
+  
+      return updatedColorVariants;
+    });
   };
-
-  const handleColorChange = (color_name) => {
-    setTempColor(color_name);
-
-    // If there's already an image selected, create the new gallery item
-    if (tempImage) {
-      const newColorGallery = {
-        color_name,
-        image: tempImage,
-        is_featured: false,
-      };
-      setAddProducts((prevState) => ({
-        ...prevState,
-        product_color_galleries: [
-          ...prevState.product_color_galleries,
-          newColorGallery,
-        ],
-      }));
-      setTempColor(""); // Reset the temporary color state
-      setTempImage(null); // Reset the temporary image state
-    }
+  
+  const handleColorChange = (productId) => {
+    setColorVariants((prevState) => {
+      const updatedColorVariants = [...prevState];
+      const color_name = prevState[prevState.length - 1]?.color_name || "";
+  
+      // Find the index of the color variant with the same color_name
+      const index = updatedColorVariants.findIndex(
+        (variant) => variant.color_name === color_name
+      );
+  
+      // If the color variant doesn't exist, create a new one
+      if (index === -1) {
+        updatedColorVariants.push({
+          product: productId,
+          color_name: color_name,
+          image: null, // Initialize image as null
+          is_featured: false, // Set is_featured to default false
+        });
+      }
+  
+      return updatedColorVariants;
+    });
   };
 
   console.log(categoryData);
   console.log(addProducts);
+  console.log(productImages);
+  console.log(colorVariants);
+  const handleImagesSubmit = async () => {
+    const accessToken = sessionStorage.getItem("accessToken");
+    const formData = new FormData();
 
+    // Iterate over each image object in the array
+    productImages.forEach((imageObject) => {
+      // Append product_id and is_featured for each image
+      formData.append(`product_id`, imageObject.product);
+      formData.append(`is_featured`, imageObject.is_featured);
+
+      // Append the image URL to formData under the key "images"
+      formData.append(`images`, imageObject.image);
+    });
+
+    try {
+      const res = await axios.post(
+        `${baseUrl}/superadmin/add-products-images/`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      console.log(res);
+      setProductImages([]);
+      // Handle response
+    } catch (error) {
+      console.log(error);
+      // Handle error
+    }
+  };
   return (
     <>
-      <form onSubmit={handleProductSubmit} className="pl-[26px] pb-10">
-        <div className="flex items-center justify-between w-[95%] xl:w-[91%] mb-[31px]">
-          <div
-            onClick={() => setActiveSubTab(null)}
-            className="flex cursor-pointer items-center gap-4"
-          >
-            <IoArrowBack className="text-3xxl 2xl:text-[50px]" />
-            <p className="text-2xl 2xl:text-3xxl text-black font-semibold">
-              Add Product
-            </p>
-          </div>
-          <CommonBtn
-            style="text-white bg-[#0FB001] hover:bg-transparent hover:text-[#0FB001]"
-            btntext="Add"
-          />
-        </div>
-        <div className="w-[95%] xl:w-[87%]">
-          <div className="flex gap-[129px]">
-            <div className="flex flex-col w-full max-w-[396px]">
-              <label
-                htmlFor="product-name"
-                className="text-xl 2xl:text-2xl font-normal text-black mb-2"
-              >
-                Product Name
-              </label>
-              <input
-                required
-                name="name"
-                value={addProducts.name}
-                onChange={handleChange}
-                id="product-name"
-                type="text"
-                className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
-              />
-            </div>
-            <div className="flex flex-col w-full max-w-[396px]">
-              <label
-                htmlFor="price"
-                className="text-xl 2xl:text-2xl font-normal text-black mb-2"
-              >
-                Product Price per Piece
-              </label>
-              <input
-                required
-                id="price"
-                name="selling_price"
-                type="number"
-                value={addProducts.selling_price}
-                onChange={handleChange}
-                className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
-              />
-            </div>
-          </div>
-          <div className="flex gap-[129px] my-9">
-            <div className="flex flex-col w-full max-w-[396px]">
-              <label
-                htmlFor="description"
-                className="text-xl 2xl:text-2xl font-normal text-black mb-2"
-              >
-                Product Description
-              </label>
-
-              <textarea
-                required
-                className="border h-[200px] 2xl:h-[224px] border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full rounded-[10px] bg-transparent outline-none"
-                name="description"
-                value={addProducts.description}
-                onChange={handleChange}
-                id="description"
-                rows="6"
-              ></textarea>
-            </div>
-            <div className="flex flex-col w-full max-w-[396px]">
-              <label
-                htmlFor="benefits"
-                className="text-xl 2xl:text-2xl font-normal text-black mb-2"
-              >
-                Product Benefits
-              </label>
-
-              <textarea
-                required
-                className="border h-[200px] 2xl:h-[224px] border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full rounded-[10px] bg-transparent outline-none"
-                name="benifits"
-                value={addProducts.benifits}
-                onChange={handleChange}
-                id="benefits"
-                rows="6"
-              ></textarea>
-            </div>
-          </div>
-          <div className="flex gap-[129px]">
-            <div className="flex flex-col max-w-[396px] w-full">
-              <p className="text-xl 2xl:text-2xl font-normal text-black mb-2">
-                Select Category
+      <div className="pl-[26px] pb-10">
+        <form onSubmit={handleProductSubmit}>
+          <div className="flex items-center justify-between w-[95%] xl:w-[91%] mb-[31px]">
+            <div
+              onClick={() => setActiveSubTab(null)}
+              className="flex cursor-pointer items-center gap-4"
+            >
+              <IoArrowBack className="text-3xxl 2xl:text-[50px]" />
+              <p className="text-2xl 2xl:text-3xxl text-black font-semibold">
+                Add Product
               </p>
-              <div className="relative">
-                <div
-                  className="border border-spacing-[0.5px] flex 2xl:text-2xl text-xl max-w-[396px] font-medium h-12 2xl:h-[62px] text-[#6E6E73] justify-between items-center pl-[18px] pr-8 border-[#6E6E73] p-2 rounded-[10px] cursor-pointer"
-                  onClick={toggleDropdown}
+            </div>
+            <CommonBtn
+              style="text-white bg-[#0FB001] hover:bg-transparent hover:text-[#0FB001]"
+              btntext="Add"
+            />
+          </div>
+          <div className="w-[95%] xl:w-[87%]">
+            <div className="flex gap-[129px]">
+              <div className="flex flex-col w-full max-w-[396px]">
+                <label
+                  htmlFor="product-name"
+                  className="text-xl 2xl:text-2xl font-normal text-black mb-2"
                 >
-                  {selectedOption}
-
-                  <DownArrowIcon />
-                </div>
-                {isOpen && (
-                  <div className="absolute z-10 bg-white border-t-0 top-9 2xl:top-[52px] rounded-t-none border border-spacing-[0.5px] rounded-[10px] border-[#6E6E73] mt-1 py-1 w-full">
-                    {categoryData.map((option, index) => (
-                      <div
-                        key={index}
-                        className="px-4 py-2 cursor-pointer 2xl:text-2xl text-xl font-medium text-[#6E6E73]"
-                        onClick={() =>
-                          handleOptionClick(option.name, option.id)
-                        }
-                      >
-                        {option.name}
-                      </div>
-                    ))}
-                  </div>
-                )}
+                  Product Name
+                </label>
+                <input
+                  required
+                  name="name"
+                  value={addProducts.name}
+                  onChange={handleChange}
+                  id="product-name"
+                  type="text"
+                  className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
+                />
+              </div>
+              <div className="flex flex-col w-full max-w-[396px]">
+                <label
+                  htmlFor="price"
+                  className="text-xl 2xl:text-2xl font-normal text-black mb-2"
+                >
+                  Product Price per Piece
+                </label>
+                <input
+                  required
+                  id="price"
+                  name="selling_price"
+                  type="number"
+                  value={addProducts.selling_price}
+                  onChange={handleChange}
+                  className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
+                />
               </div>
             </div>
-            <div className="flex flex-col w-full max-w-[396px]">
-              <label
-                htmlFor="product_qyt"
-                className="text-xl 2xl:text-2xl font-normal text-black mb-2"
-              >
-                Product Quantity
-              </label>
-              <input
-                required
-                id="product_qyt"
-                name="quantity"
-                type="number"
-                value={addProducts.quantity}
-                onChange={handleChange}
-                className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
-              />
+            <div className="flex gap-[129px] my-9">
+              <div className="flex flex-col w-full max-w-[396px]">
+                <label
+                  htmlFor="description"
+                  className="text-xl 2xl:text-2xl font-normal text-black mb-2"
+                >
+                  Product Description
+                </label>
+
+                <textarea
+                  required
+                  className="border h-[200px] 2xl:h-[224px] border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full rounded-[10px] bg-transparent outline-none"
+                  name="description"
+                  value={addProducts.description}
+                  onChange={handleChange}
+                  id="description"
+                  rows="6"
+                ></textarea>
+              </div>
+              <div className="flex flex-col w-full max-w-[396px]">
+                <label
+                  htmlFor="benefits"
+                  className="text-xl 2xl:text-2xl font-normal text-black mb-2"
+                >
+                  Product Benefits
+                </label>
+
+                <textarea
+                  required
+                  className="border h-[200px] 2xl:h-[224px] border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full rounded-[10px] bg-transparent outline-none"
+                  name="product_benifits"
+                  value={addProducts.product_benifits}
+                  onChange={handleChange}
+                  id="benefits"
+                  rows="6"
+                ></textarea>
+              </div>
+            </div>
+            <div className="flex gap-[129px]">
+              <div className="flex flex-col max-w-[396px] w-full">
+                <p className="text-xl 2xl:text-2xl font-normal text-black mb-2">
+                  Select Category
+                </p>
+                <div className="relative">
+                  <div
+                    className="border border-spacing-[0.5px] flex 2xl:text-2xl text-xl max-w-[396px] font-medium h-12 2xl:h-[62px] text-[#6E6E73] justify-between items-center pl-[18px] pr-8 border-[#6E6E73] p-2 rounded-[10px] cursor-pointer"
+                    onClick={toggleDropdown}
+                  >
+                    {selectedOption}
+
+                    <DownArrowIcon />
+                  </div>
+                  {isOpen && (
+                    <div className="absolute z-10 bg-white border-t-0 top-9 2xl:top-[52px] rounded-t-none border border-spacing-[0.5px] rounded-[10px] border-[#6E6E73] mt-1 py-1 w-full">
+                      {categoryData.map((option, index) => (
+                        <div
+                          key={index}
+                          className="px-4 py-2 cursor-pointer 2xl:text-2xl text-xl font-medium text-[#6E6E73]"
+                          onClick={() =>
+                            handleOptionClick(option.name, option.id)
+                          }
+                        >
+                          {option.name}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="flex flex-col w-full max-w-[396px]">
+                <label
+                  htmlFor="product_qyt"
+                  className="text-xl 2xl:text-2xl font-normal text-black mb-2"
+                >
+                  Product Quantity
+                </label>
+                <input
+                  required
+                  id="product_qyt"
+                  name="total_quantity"
+                  type="number"
+                  value={addProducts.total_quantity}
+                  onChange={handleChange}
+                  className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
+                />
+              </div>
             </div>
           </div>
-        </div>
+        </form>
         <div className="flex items-center gap-7 mt-12">
           <label className="inline-flex items-center">
             <div className="relative inline-block">
@@ -399,28 +433,22 @@ const AddProduct = () => {
                         <input
                           required
                           id={`colour-name-${idx}`}
-                          // name={addProducts.product_color_galleries[idx].color}
                           onChange={(e) =>
-                            handleColorChange(e.target.value, idx)
+                            handleColorChange(e.target.value, idx, product__Id)
                           }
                           type="text"
                           className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
                         />
                       </div>
                       <AddPics
-                        handleFileChange={handleFile}
-                        image1={
-                          addProducts.product_color_galleries[0]?.image || null
+                        id={idx}
+                        handleFileChange={(file, index) =>
+                          handleFile(file, index, product__Id)
                         }
-                        image2={
-                          addProducts.product_color_galleries[1]?.image || null
-                        }
-                        image3={
-                          addProducts.product_color_galleries[2]?.image || null
-                        }
-                        image4={
-                          addProducts.product_color_galleries[3]?.image || null
-                        }
+                        image1={colorVariants.image?.[0] || null}
+                        image2={colorVariants.image?.[1] || null}
+                        image3={colorVariants.image?.[2] || null}
+                        image4={colorVariants.image?.[3] || null}
                       />
                     </div>
                   ))}
@@ -459,18 +487,22 @@ const AddProduct = () => {
               </>
             )
           ) : (
-            <div className="w-[41%] mt-11">
-              <AddPics
-                handleFileChange={handleFileChange}
-                image1={addProducts.product_galleries[0]?.image || null}
-                image2={addProducts.product_galleries[1]?.image || null}
-                image3={addProducts.product_galleries[2]?.image || null}
-                image4={addProducts.product_galleries[3]?.image || null}
-              />
+            <div>
+              <button onClick={handleImagesSubmit}>Next</button>
+              <div className="w-[41%] mt-11">
+                <AddPics
+                  id={productImages[0]?.product_id} // Use product_id from the first image object
+                  handleFileChange={handleFileChange}
+                  image1={productImages[0]?.image || null}
+                  image2={productImages[1]?.image || null}
+                  image3={productImages[2]?.image || null}
+                  image4={productImages[3]?.image || null}
+                />
+              </div>
             </div>
           )}
         </div>
-      </form>
+      </div>
     </>
   );
 };

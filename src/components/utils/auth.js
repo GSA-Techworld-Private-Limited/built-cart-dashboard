@@ -1,6 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-export const baseUrl = "https://v3h2dw9k-8030.inc1.devtunnels.ms";
+export const baseUrl = "https://0gdszwwr-8000.inc1.devtunnels.ms/";
 
 export const fetchUserData = async (
   setUserData,

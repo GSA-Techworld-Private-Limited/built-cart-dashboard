@@ -49,11 +49,6 @@ const OrderLogs = () => {
       });
       setFilteredLogs(filteredData);
       console.log(filteredData);
-      // if (filteredData.length < 1) {
-      //   toast.warning("No matches", {
-      //     className: "rounded-[10px]",
-      //   });
-      // }
     }
   };
   return (

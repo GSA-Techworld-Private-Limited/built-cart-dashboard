@@ -116,7 +116,7 @@ const ExportOverlay = () => {
             </p>
             <Select onValueChange={(value) => setFileType(value)}>
               <SelectTrigger
-                titleColor="placeholder:!text-dark !text-dark"
+                titlecolor="placeholder:!text-dark !text-dark"
                 className="w-[255px]"
               >
                 <SelectValue placeholder="pdf" />

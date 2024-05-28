@@ -11,8 +11,6 @@ const ProductDetails = () => {
     setActiveSubTab,
     categorySelect,
     setCategoryData,
-    setEditOverlay,
-    editOverlay,
     categoryData,
     setProductDetailsData,
     productDetailsData,

@@ -1,10 +1,15 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 const MyContext = createContext();
 
 export const MyContextProvider = ({ children }) => {
-  const [activeTab, setActiveTab] = useState("dashboard");
+  const [activeTab, setActiveTab] = useState(
+    localStorage.getItem("activeTab") || "dashboard"
+  );
   const [activeSubTab, setActiveSubTab] = useState(null);
+  useEffect(() => {
+    localStorage.setItem("activeTab", activeTab);
+  }, [activeTab, activeSubTab]);
   const [showExport, setShowExport] = useState(false);
   const [authenticated, setAuthenticated] = useState(false);
   const [editOverlay, setEditOverlay] = useState(false);

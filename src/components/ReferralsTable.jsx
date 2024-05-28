@@ -91,10 +91,3 @@ const ReferralsTable = () => {
 };
 
 export default ReferralsTable;
-// ${
-//   val.referral === "Secondary"
-//     ? "text-[#FDC63A]"
-//     : val.referral === "Primary"
-//     ? "text-[#0FB001]"
-//     : ""
-// }
