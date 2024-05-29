@@ -20,6 +20,7 @@ const ProductDetails = () => {
     setShowExport,
     showExport,
     setSelectExport,
+    setCurrProduct,
   } = useContext(MyContext);
   const dataForCurrTitle = categoryData.filter(
     (currElem) => currElem.name === selectedCate
@@ -56,6 +57,23 @@ const ProductDetails = () => {
       });
     }
   };
+  const editProduct = async () => {
+    const accessToken = sessionStorage.getItem("accessToken");
+    if (categorySelect) {
+      console.log("yes:", categorySelect);
+      const res = await axios.get(
+        `${baseUrl}/superadmin/get-products-dashboard/${categorySelect}/`,
+        {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        }
+      );
+      console.log(res.data);
+      setCurrProduct(res.data);
+      setActiveSubTab("edit-products");
+    } else {
+      console.log("not item selected");
+    }
+  };
   return (
     <>
       <div className="w-full">
@@ -85,7 +103,7 @@ const ProductDetails = () => {
               Add Product
             </button>
             <CommonBtn
-              // clickEvent={() => setEditOverlay(!editOverlay)}
+              clickEvent={editProduct}
               style="text-white bg-[#606060] hover:bg-transparent hover:text-[#606060]"
               btntext="Edit"
             />

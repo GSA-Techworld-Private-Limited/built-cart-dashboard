@@ -16,6 +16,7 @@ import ComplaintsPage from "./ComplaintsPage";
 import OffersPage from "./OffersPage";
 import OrderLogsDetails from "./OrderLogsDetails";
 import EditOverlay from "./common/EditOverlay";
+import EditProduct from "./EditProduct";
 const Dashboard = () => {
   const { activeSubTab, activeTab } = useContext(MyContext);
   useEffect(() => {
@@ -57,6 +58,8 @@ const Dashboard = () => {
                 <ProductDetails id="" />
               ) : activeSubTab === "add-products" ? (
                 <AddProduct />
+              ) : activeSubTab === "edit-products" ? (
+                <EditProduct />
               ) : (
                 <CategoriesPage />
               )

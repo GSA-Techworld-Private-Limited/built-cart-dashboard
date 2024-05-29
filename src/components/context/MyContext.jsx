@@ -4,11 +4,11 @@ const MyContext = createContext();
 
 export const MyContextProvider = ({ children }) => {
   const [activeTab, setActiveTab] = useState(
-    localStorage.getItem("activeTab") || "dashboard"
+    sessionStorage.getItem("activeTab") || "dashboard"
   );
   const [activeSubTab, setActiveSubTab] = useState(null);
   useEffect(() => {
-    localStorage.setItem("activeTab", activeTab);
+    sessionStorage.setItem("activeTab", activeTab);
   }, [activeTab, activeSubTab]);
   const [showExport, setShowExport] = useState(false);
   const [authenticated, setAuthenticated] = useState(false);
@@ -30,6 +30,7 @@ export const MyContextProvider = ({ children }) => {
   const [logsDetails, setLogsDetails] = useState(null);
   const [productDetails, setProductDetails] = useState(null);
   const [selectedCate, setSelectedCate] = useState(null);
+  const [currProduct, setCurrProduct] = useState(null);
   const [filteredLogs, setFilteredLogs] = useState([]);
   const [filteredComplaints, setFilteredComplaints] = useState([]);
   return (
@@ -83,6 +84,8 @@ export const MyContextProvider = ({ children }) => {
         setFilteredLogs,
         setFilteredComplaints,
         filteredComplaints,
+        currProduct,
+        setCurrProduct,
       }}
     >
       {children}

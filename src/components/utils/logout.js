@@ -23,8 +23,8 @@ const logout = async (navigate, setAuthenticated) => {
     //     // Example: clear refresh token from sessionStorage
     //     sessionStorage.removeItem("accessToken");
     //     sessionStorage.removeItem("refreshToken");
-    //     localStorage.removeItem("activeTab");
-    //     localStorage.removeItem("activeSubTab");
+    //     sessionStorage.removeItem("activeTab");
+    //     sessionStorage.removeItem("activeSubTab");
     //     setAuthenticated(false);
     //     navigate("/");
     //     return true;
@@ -40,8 +40,8 @@ const logout = async (navigate, setAuthenticated) => {
     // }
     sessionStorage.removeItem("accessToken");
     sessionStorage.removeItem("refreshToken");
-    localStorage.removeItem("activeTab");
-    localStorage.removeItem("activeSubTab");
+    sessionStorage.removeItem("activeTab");
+    sessionStorage.removeItem("activeSubTab");
     setAuthenticated(false);
     navigate("/");
   }

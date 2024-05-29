@@ -9,27 +9,25 @@ import { DownArrowIcon } from "./common/Icons";
 import { baseUrl, getProductDetails } from "./utils/auth";
 import axios from "axios";
 import { toast } from "react-toastify";
-const AddProduct = () => {
-  const { setActiveSubTab, categoryData, setCategoryData, setProductDetails } =
-    useContext(MyContext);
+const EditProduct = () => {
+  const {
+    setActiveSubTab,
+    categoryData,
+    setCategoryData,
+    setProductDetails,
+    currProduct,
+  } = useContext(MyContext);
+  const cateId = currProduct.category_names[0];
   const [productId, setProductId] = useState(null);
   const [addDetails, setAddDetails] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [variantCount, setVariantCount] = useState(1);
   const [variants, setVariants] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("newly added");
+  const [selectedOption, setSelectedOption] = useState(cateId);
   const currId = categoryData.find((val) => val.name === selectedOption);
   const [category, setCategory] = useState(currId.id);
-  const [addProducts, setAddProducts] = useState({
-    name: "",
-    description: "",
-    selling_price: "",
-    category_id: category, // Specify valid category ID
-    product_benifits: "",
-    total_quantity: null,
-    rating: 0.5,
-  });
+  const [updateProduct, setUpdateProduct] = useState(currProduct);
   const [productImages, setProductImages] = useState([]);
   const [colorVariants, setColorVariants] = useState([]);
   const decrementCount = () => {
@@ -45,30 +43,19 @@ const AddProduct = () => {
   };
   const handleOptionClick = useCallback(
     (option, id) => {
-      setCategory(id);
-      setSelectedOption(option);
+      currProduct.category_names[0] = option;
       setIsOpen(false);
-      console.log(id);
     },
-    [setCategory, setSelectedOption, setIsOpen]
+    [setSelectedOption, setIsOpen]
   );
   // handle the submit
   const handleProductSubmit = async (e) => {
     e.preventDefault();
     const accessToken = sessionStorage.getItem("accessToken");
     try {
-      const formData = new FormData();
-      // Append non-file data to formData
-      formData.append("name", addProducts.name);
-      formData.append("total_quantity", addProducts.total_quantity);
-      formData.append("description", addProducts.description);
-      formData.append("rating", addProducts.rating);
-      formData.append("selling_price", addProducts.selling_price);
-      formData.append("category_id", addProducts.category_id);
-      formData.append("product_benifits", addProducts.product_benifits);
-      const response = await axios.post(
-        `${baseUrl}/superadmin/add-products-dashboard/`,
-        formData,
+      const response = await axios.patch(
+        `${baseUrl}/superadmin/get-products-dashboard/${currProduct.product_id}/`,
+        updateProduct,
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -77,8 +64,6 @@ const AddProduct = () => {
         }
       );
       console.log(response.data);
-      setProductId(response.data.product_id);
-
       setAddDetails(true);
       toast.success(response.data.message, {
         className: "rounded-[10px]",
@@ -89,28 +74,28 @@ const AddProduct = () => {
   };
   // handle input change
   const handleChange = (e) => {
-    setAddProducts({ ...addProducts, [e.target.name]: e.target.value });
+    setUpdateProduct({ ...updateProduct, [e.target.name]: e.target.value });
   };
   // update the category in state
   useEffect(() => {
-    setAddProducts((prevProductData) => ({
+    setUpdateProduct((prevProductData) => ({
       ...prevProductData,
       category_id: category,
     }));
   }, [category]);
   // handle the file change or adding images
-  const handleFileChange = (uploadedFile) => {
-    setProductImages((prevImages) => {
-      // Create a new object for the uploaded image
-      const newImage = {
-        product: productId,
-        image: uploadedFile, // Store the URL of the uploaded file
-        is_featured: false,
-      };
-
-      // Return the updated array with the new image object appended
-      return [...prevImages, newImage];
+  const handleFileChange = (uploadedFile, index) => {
+    const product_galleries = updateProduct.product_galleries.map((val, i) => {
+      if (i === index) {
+        val.image = uploadedFile;
+      }
+      return val;
     });
+    console.log(product_galleries);
+    setUpdateProduct((prevData) => ({
+      ...prevData,
+      product_galleries: product_galleries,
+    }));
   };
   //  for adding color variants
   const handleColorChange = (colorName, productId, index) => {
@@ -120,7 +105,6 @@ const AddProduct = () => {
           ...variant,
           color_name: colorName,
           index: index,
-          product_id: productId,
         };
       });
       return updatedVariants;
@@ -166,18 +150,8 @@ const AddProduct = () => {
       }
     });
   };
-  if (colorVariants.length === 0) {
-    setColorVariants([
-      {
-        product_id: productId,
-        is_featured: false,
-        color_name: "", // You can set default values as needed
-        image: null,
-      },
-    ]);
-  }
   console.log(categoryData);
-  console.log(addProducts);
+  console.log(updateProduct);
   console.log(productImages);
   console.log(colorVariants);
   const handleImagesSubmit = async () => {
@@ -274,6 +248,22 @@ const AddProduct = () => {
     getProductDetails(setProductDetails);
   };
   console.log(productId);
+  console.log(updateProduct);
+  const editColorName = (e, index) => {
+    const product_color_galleries = updateProduct.product_color_galleries.map(
+      (val, i) => {
+        if (i === index) {
+          val.color_name = e.target.value;
+        }
+        return val;
+      }
+    );
+    setUpdateProduct((prevData) => ({
+      ...prevData,
+      product_color_galleries: product_color_galleries,
+    }));
+    console.log(product_color_galleries);
+  };
   return (
     <>
       <div className="pl-[26px] pb-10">
@@ -285,12 +275,12 @@ const AddProduct = () => {
             >
               <IoArrowBack className="text-3xxl 2xl:text-[50px]" />
               <p className="text-2xl 2xl:text-3xxl text-black font-semibold">
-                Add Product
+                Update Product
               </p>
             </div>
             <CommonBtn
               style="text-white bg-[#0FB001] hover:bg-transparent hover:text-[#0FB001]"
-              btntext="Next"
+              btntext="Update"
             />
           </div>
           <div className="w-[95%] xl:w-[87%]">
@@ -305,7 +295,7 @@ const AddProduct = () => {
                 <input
                   required
                   name="name"
-                  value={addProducts.name}
+                  value={updateProduct.name}
                   onChange={handleChange}
                   id="product-name"
                   type="text"
@@ -324,7 +314,7 @@ const AddProduct = () => {
                   id="price"
                   name="selling_price"
                   type="number"
-                  value={addProducts.selling_price}
+                  value={updateProduct.selling_price}
                   onChange={handleChange}
                   className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
                 />
@@ -343,7 +333,7 @@ const AddProduct = () => {
                   required
                   className="border h-[200px] 2xl:h-[224px] border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full rounded-[10px] bg-transparent outline-none"
                   name="description"
-                  value={addProducts.description}
+                  value={updateProduct.description}
                   onChange={handleChange}
                   id="description"
                   rows="6"
@@ -361,7 +351,7 @@ const AddProduct = () => {
                   required
                   className="border h-[200px] 2xl:h-[224px] border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full rounded-[10px] bg-transparent outline-none"
                   name="product_benifits"
-                  value={addProducts.product_benifits}
+                  value={updateProduct.product_benifits}
                   onChange={handleChange}
                   id="benefits"
                   rows="6"
@@ -411,7 +401,7 @@ const AddProduct = () => {
                   id="product_qyt"
                   name="total_quantity"
                   type="number"
-                  value={addProducts.total_quantity}
+                  value={updateProduct.total_quantity}
                   onChange={handleChange}
                   className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
                 />
@@ -419,173 +409,127 @@ const AddProduct = () => {
             </div>
           </div>
         </form>
-        {addDetails && (
-          <>
-            <div className="flex items-center gap-7 mt-12">
-              <label className="inline-flex items-center">
-                <div className="relative inline-block">
-                  <input
-                    type="checkbox"
-                    className="peer h-7 w-7 border border-[#282828] rounded transition-colors duration-150 ease-in-out"
-                    checked={isChecked}
-                    onChange={() => setIsChecked(!isChecked)}
-                  />
-                  <span className="absolute bg-white w-7 h-7 border inset-0 border-[#282828] flex items-center justify-center">
-                    {isChecked && <Check className=" text-sm text-[#0FB001]" />}
-                  </span>
-                </div>
-                <span className="ml-4 2xl:text-2xl text-xl leading-5 text-[#0028B7] font-normal">
-                  Skip and Add Product with different Colour Variants
-                </span>
-              </label>
-              {variants && isChecked && (
-                <button
-                  onClick={() => setVariants(false)}
-                  className="text-2xl text-white font-medium leading-5 bg-dark duration-200 py-[21px] px-[42px] hover:border-current border border-transparent rounded-[10px]"
-                >
-                  Add more variants
-                </button>
-              )}
+        <div className="flex items-center gap-7 mt-12">
+          <label className="inline-flex items-center">
+            <div className="relative inline-block">
+              <input
+                type="checkbox"
+                className="peer h-7 w-7 border border-[#282828] rounded transition-colors duration-150 ease-in-out"
+                checked={isChecked}
+                onChange={() => setIsChecked(!isChecked)}
+              />
+              <span className="absolute bg-white w-7 h-7 border inset-0 border-[#282828] flex items-center justify-center">
+                {isChecked && <Check className=" text-sm text-[#0FB001]" />}
+              </span>
             </div>
-            <div>
-              {isChecked ? (
-                variants ? (
-                  <>
-                    <div className="grid grid-cols-2 gap-6 2xl:gap-9 w-[95%] mt-8">
-                      {[...Array(variantCount)].map((_, idx) => (
-                        <div
-                          key={idx}
-                          className="border border-black rounded-[30px] py-6 w-full 2xl:py-[30px] px-8 2xl:px-10"
-                        >
-                          <div className="flex flex-col w-full max-w-[396px] mb-5">
-                            <label
-                              htmlFor={`colour-name-${idx}`}
-                              className="text-xl 2xl:text-2xl font-normal text-black mb-2"
-                            >
-                              Color Name
-                            </label>
-                            <input
-                              required
-                              id={`colour-name`}
-                              onBlur={
-                                (e) =>
-                                  handleColorChange(
-                                    e.target.value,
-                                    productId,
-                                    idx
-                                  ) // Include idx to identify the color variant
-                              }
-                              type="text"
-                              className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
-                            />
-                          </div>
-                          <AddPics
-                            id={`${idx}-${productId}`} // Use a combination of index and productId as the unique identifier
-                            handleFileChange={(file) =>
-                              handleFile(
-                                file,
-                                productId,
-                                idx,
-                                colorVariants[idx]?.color_name
-                              )
-                            }
-                            image1={
-                              colorVariants.filter(
-                                (curr) => curr.index === idx
-                              )[0]?.image || null // Use image from corresponding color variant
-                            }
-                            image2={
-                              colorVariants.filter(
-                                (curr) => curr.index === idx
-                              )[1]?.image || null // Use image from corresponding color variant
-                            }
-                            image3={
-                              colorVariants.filter(
-                                (curr) => curr.index === idx
-                              )[2]?.image || null // Use image from corresponding color variant
-                            }
-                            image4={
-                              colorVariants.filter(
-                                (curr) => curr.index === idx
-                              )[3]?.image || null // Use image from corresponding color variant
-                            }
-                          />
-                          <button
-                            onClick={submitVariants}
-                            className="mt-5 bg-[#0FB001] rounded-full py-3 px-8 2xl:text-xl  text-white"
-                          >
-                            Save
-                          </button>
-                        </div>
-                      ))}
+            <span className="ml-4 2xl:text-2xl text-xl leading-5 text-[#0028B7] font-normal">
+              Skip and Add Product with different Colour Variants
+            </span>
+          </label>
+          {variants && isChecked && (
+            <button
+              onClick={() => setVariants(false)}
+              className="text-2xl text-white font-medium leading-5 bg-dark duration-200 py-[21px] px-[42px] hover:border-current border border-transparent rounded-[10px]"
+            >
+              Add more variants
+            </button>
+          )}
+        </div>
+        <div>
+          {isChecked ? (
+            <>
+              <div className="grid grid-cols-2 gap-6 2xl:gap-9 w-[95%] mt-8">
+                {updateProduct.product_color_galleries.map((_, idx) => (
+                  <div
+                    key={idx}
+                    className="border border-black rounded-[30px] py-6 w-full 2xl:py-[30px] px-8 2xl:px-10"
+                  >
+                    <div className="flex flex-col w-full max-w-[396px] mb-5">
+                      <label
+                        htmlFor={`colour-name-${idx}`}
+                        className="text-xl 2xl:text-2xl font-normal text-black mb-2"
+                      >
+                        Color Name
+                      </label>
+                      <input
+                        required
+                        value={
+                          updateProduct.product_color_galleries.find(
+                            (curr, i) => i === idx
+                          )?.color_name || null
+                        }
+                        id={`colour-name`}
+                        name="color_name"
+                        onChange={(e) => editColorName(e, idx)}
+                        type="text"
+                        className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full h-12 2xl:h-[62px] rounded-[10px] bg-transparent outline-none"
+                      />
                     </div>
-                    <button
-                      onClick={finishAndUpdate}
-                      className="mt-5 bg-gray-500 rounded-[10px] py-3 px-8 2xl:text-xl  text-white"
-                    >
-                      Finish
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <div className="ml-11 mt-6">
-                      <p className="text-base text-black font-normal mb-3">
-                        Add number of variants you want to add
-                      </p>
-                      <div className="flex items-end gap-6">
-                        <div className="border border-black rounded-[10px] flex items-center gap-3 py-2 px-4">
-                          <FiMinusCircle
-                            onClick={decrementCount}
-                            className={`text-2xl cursor-pointer ${
-                              variantCount > 1
-                                ? "text-[#686868]"
-                                : "text-[#D9D9D9]"
-                            }`}
-                          />
-                          <span className="text-2xl font-normal leading-9 text-[#686868]">
-                            {variantCount}
-                          </span>
-                          <FiPlusCircle
-                            onClick={() => setVariantCount(variantCount + 1)}
-                            className="text-2xl cursor-pointer text-[#686868]"
-                          />
-                        </div>
-                        <button
-                          onClick={() => setVariants(true)}
-                          className="text-white border border-transparent text-base leading-5 font-medium py-2.5 px-[30px] bg-[#0FB001] duration-200 hover:border-current rounded-[10px] hover:text-[#0FB001] hover:bg-transparent"
-                        >
-                          Apply
-                        </button>
-                      </div>
-                    </div>
-                  </>
-                )
-              ) : (
-                <div>
-                  <div className="w-[41%] mt-11">
                     <AddPics
-                      id={productImages[0]?.product_id} // Use product_id from the first image object
-                      handleFileChange={handleFileChange}
-                      image1={productImages[0]?.image || null}
-                      image2={productImages[1]?.image || null}
-                      image3={productImages[2]?.image || null}
-                      image4={productImages[3]?.image || null}
+                      id={`${idx}-${productId}`} // Use a combination of index and productId as the unique identifier
+                      handleFileChange={(file) =>
+                        handleFile(
+                          file,
+                          productId,
+                          idx,
+                          updateProduct.product_color_galleries[idx]?.color_name
+                        )
+                      }
+                      image1={
+                        updateProduct.product_color_galleries.find(
+                          (curr, i) => i === idx
+                        )?.image || null // Use image from corresponding color variant
+                      }
+                      image2={
+                        updateProduct.product_color_galleries.filter(
+                          (curr) => curr.index === idx
+                        )[1]?.image || null // Use image from corresponding color variant
+                      }
+                      image3={
+                        updateProduct.product_color_galleries.filter(
+                          (curr) => curr.index === idx
+                        )[2]?.image || null // Use image from corresponding color variant
+                      }
+                      image4={
+                        updateProduct.product_color_galleries.filter(
+                          (curr) => curr.index === idx
+                        )[3]?.image || null // Use image from corresponding color variant
+                      }
                     />
                     <button
-                      onClick={handleImagesSubmit}
-                      className="mt-8 bg-[#0FB001] rounded-[10px] py-3 px-8 2xl:text-xl  text-white"
+                      onClick={submitVariants}
+                      className="mt-5 bg-[#0FB001] rounded-full py-3 px-8 2xl:text-xl  text-white"
                     >
-                      Add
+                      Save
                     </button>
                   </div>
-                </div>
-              )}
+                ))}
+              </div>
+              <button
+                onClick={finishAndUpdate}
+                className="mt-5 bg-gray-500 rounded-[10px] py-3 px-8 2xl:text-xl  text-white"
+              >
+                Finish
+              </button>
+            </>
+          ) : (
+            <div>
+              <div className="w-[41%] mt-11">
+                <AddPics
+                  id={updateProduct?.product_id} // Use product_id from the first image object
+                  handleFileChange={handleFileChange}
+                  image1={updateProduct.product_galleries[0]?.image || null}
+                  image2={updateProduct.product_galleries[1]?.image || null}
+                  image3={updateProduct.product_galleries[2]?.image || null}
+                  image4={updateProduct.product_galleries[3]?.image || null}
+                />
+              </div>
             </div>
-          </>
-        )}
+          )}
+        </div>
       </div>
     </>
   );
 };
 
-export default AddProduct;
+export default EditProduct;

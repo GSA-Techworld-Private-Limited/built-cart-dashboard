@@ -21,7 +21,11 @@ const AddPics = ({ id, handleFileChange, image1, image2, image3, image4 }) => {
             {images.length > 0 && images[index] && (
               <img
                 className="absolute inset-0 h-full w-full rounded-[10px] object-cover"
-                src={URL.createObjectURL(images[index])}
+                src={
+                  typeof images[index] === "string"
+                    ? images[index]
+                    : URL.createObjectURL(images[index])
+                }
                 alt="product image"
               />
             )}
