@@ -26,7 +26,6 @@ const UserDataPage = () => {
           },
         }
       );
-      console.log(e.target.value);
       setUserData(userDataList.data);
     } catch (error) {
       console.error("Fetch user data error:", error);

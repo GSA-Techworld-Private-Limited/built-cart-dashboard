@@ -1,49 +1,47 @@
+import { toast } from "react-toastify";
 import { baseUrl } from "./auth";
 import axios from "axios";
-import { useState } from "react"; // Assuming you're using React for state management
 
 const logout = async (navigate, setAuthenticated) => {
   const refreshToken = sessionStorage.getItem("refreshToken");
-  const accessToken = sessionStorage.getItem("accessTocken");
+  const accessToken = sessionStorage.getItem("accessToken");
   console.log(refreshToken);
   if (refreshToken) {
-    // try {
-    //   // Send the logout request
-    //   const response = await axios.post(
-    //     `${baseUrl}/superadmin/logout/`,
-    //     {
-    //       refresh_token: refreshToken,
-    //     },
-    //     {
-    //       headers: { Authorization: `Bearer ${accessToken}` },
-    //     }
-    //   );
-    //   if (response.status === 200) {
-    //     console.log("Logout Successfully");
-    //     // Example: clear refresh token from sessionStorage
-    //     sessionStorage.removeItem("accessToken");
-    //     sessionStorage.removeItem("refreshToken");
-    //     sessionStorage.removeItem("activeTab");
-    //     sessionStorage.removeItem("activeSubTab");
-    //     setAuthenticated(false);
-    //     navigate("/");
-    //     return true;
-    //   } else {
-    //     // Handle logout failure
-    //     console.error("Logout failed");
-    //     return false;
-    //   }
-    // } catch (error) {
-    //   // Handle network errors or other exceptions
-    //   console.error("Error logging out:", error);
-    //   return false;
-    // }
-    sessionStorage.removeItem("accessToken");
-    sessionStorage.removeItem("refreshToken");
-    sessionStorage.removeItem("activeTab");
-    sessionStorage.removeItem("activeSubTab");
-    setAuthenticated(false);
-    navigate("/");
+    try {
+      // Send the logout request
+      const response = await axios.post(
+        `${baseUrl}/superadmin/logout/`,
+        {
+          refresh_token: refreshToken,
+        },
+        {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        }
+      );
+      if (response.status === 200) {
+        console.log("Logout Successfully");
+        // Example: clear refresh token from sessionStorage
+        sessionStorage.removeItem("accessToken");
+        sessionStorage.removeItem("refreshToken");
+        sessionStorage.removeItem("activeTab");
+        sessionStorage.removeItem("activeSubTab");
+        setAuthenticated(false);
+        navigate("/");
+        toast.success(response.data.detail, {
+          className: "rounded-[10px]",
+        });
+
+        return true;
+      } else {
+        // Handle logout failure
+        console.error("Logout failed");
+        return false;
+      }
+    } catch (error) {
+      // Handle network errors or other exceptions
+      console.error("Error logging out:", error);
+      return false;
+    }
   }
 };
 
@@ -59,14 +57,11 @@ export const checkTokenExpiry = () => {
 
     // Check if the token has expired
     if (currentTime > tokenExpiryTime) {
-      console.log("Token expired");
-      return true;
+       return true;
     } else {
-      console.log("Token not expired", new Date(tokenExpiryTime));
       return false;
     }
   } else {
-    console.log("Token not found");
     return false;
   }
 };

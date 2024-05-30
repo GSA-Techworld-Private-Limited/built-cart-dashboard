@@ -29,7 +29,6 @@ const AddPics = ({ id, handleFileChange, image1, image2, image3, image4 }) => {
                 alt="product image"
               />
             )}
-            {/* {!images || !images[index] ? <></> : null} */}
             <div className="inline-flex relative flex-col items-center gap-4 px-[22px] w-full h-[100px] 2xl:h-[128px] justify-center bg-transparent rounded-[10px] shadow-sm pb-2 pt-[18px]">
               <FiPlusCircle className="text-[40px] cursor-pointer text-black" />
             </div>

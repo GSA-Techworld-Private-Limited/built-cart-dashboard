@@ -4,12 +4,11 @@ import { CalendarTwoIcon, DownArrowIcon } from "./common/Icons";
 import { addOffer } from "./utils/auth";
 import MyContext from "./context/MyContext";
 const OffersPage = () => {
-  const { isOfferSent, setIsOfferSent, setAllCoupons, allCoupons } =
-    useContext(MyContext);
+  const { isOfferSent, setIsOfferSent, allCoupons } = useContext(MyContext);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("Karnataka");
   const [isCouponUnique, setisCouponUnique] = useState(true);
-  const options = ["Karnataka", "Haryana"];
+  const options = ["Karnataka", "Haryana", "Gujrat"];
   const [couponData, setcouponData] = useState({
     coupon_code: "",
     order_value_amount: "",
@@ -26,7 +25,6 @@ const OffersPage = () => {
 
   const toggleDropdown = (e) => {
     setIsOpen(!isOpen);
-    console.log(e.value);
   };
 
   const handleOptionClick = (option) => {
@@ -35,7 +33,7 @@ const OffersPage = () => {
   };
   const handleSent = (e) => {
     e.preventDefault();
-    addOffer(couponData, setIsOfferSent, setcouponData,selectedOption);
+    addOffer(couponData, setIsOfferSent, setcouponData, selectedOption);
   };
   const today = new Date();
   const tomorrow = new Date(today);
@@ -46,7 +44,6 @@ const OffersPage = () => {
       const valid = allCoupons.find((val) => val.coupon_code === value);
       if (valid) {
         setisCouponUnique(false);
-        console.log(valid);
       } else setisCouponUnique(true);
     }
     if (name === "order_value_amount") {
@@ -79,9 +76,6 @@ const OffersPage = () => {
       state_name: selectedOption,
     }));
   }, [selectedOption]);
-
-  console.log(couponData);
-  console.log(selectedOption);
 
   return (
     <>
@@ -316,7 +310,8 @@ const OffersPage = () => {
                 >
                   Total Beneficiaries
                 </label>
-                <input required
+                <input
+                  required
                   onChange={handleInputChange}
                   name="total_beneficiaries"
                   value={couponData.total_beneficiaries}

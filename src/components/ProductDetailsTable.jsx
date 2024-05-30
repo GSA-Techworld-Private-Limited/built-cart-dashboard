@@ -11,8 +11,6 @@ const ProductDetailsTables = () => {
     checkedItems,
     setCategorySelect,
   } = useContext(MyContext);
-  console.log(productDetailsData);
-
   return (
     <>
       <div className="overflow-auto hide_scroll">
@@ -45,7 +43,6 @@ const ProductDetailsTables = () => {
                 key={index}
               >
                 <div className="px-[54px] w-[136px]">
-                  {/* <Checkbox border="border-[#686868]" /> */}
                   <CheckBox
                     inputStyle="!border-[#686868]"
                     checkStyle="!border-[#686868] !bg-transparent"
@@ -69,7 +66,7 @@ const ProductDetailsTables = () => {
                   {obj.selling_price}
                 </p>
                 <p className="font-medium text-nowrap pl-6 w-[280px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
-                  {obj.total_quantity}
+                  {obj.total_orders ? obj.total_orders : "N/A"}
                 </p>
               </div>
             ))

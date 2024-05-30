@@ -44,7 +44,6 @@ const ExportOverlay = () => {
     const { name, value } = e.target;
     setTimeFrame({ ...timeFrame, [name]: value });
   };
-  console.log(timeFrame);
   return (
     <>
       <div

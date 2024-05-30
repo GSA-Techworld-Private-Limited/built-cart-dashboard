@@ -21,11 +21,11 @@ const ProductDetails = () => {
     showExport,
     setSelectExport,
     setCurrProduct,
+    setMessage,
   } = useContext(MyContext);
   const dataForCurrTitle = categoryData.filter(
     (currElem) => currElem.name === selectedCate
   );
-  console.log(dataForCurrTitle);
   const filterUserWithName = async (e) => {
     const accessToken = sessionStorage.getItem("accessToken");
     try {
@@ -46,8 +46,6 @@ const ProductDetails = () => {
       console.error("Fetch user data error:", error);
     }
   };
-  console.log(productDetailsData);
-  console.log(productDetails);
   const exportProductDetails = () => {
     if (productDetailsData.length > 0) {
       setSelectExport(productDetailsData), setShowExport(!showExport);
@@ -71,6 +69,9 @@ const ProductDetails = () => {
       setCurrProduct(res.data);
       setActiveSubTab("edit-products");
     } else {
+      toast.warning("Select Any Item First!", {
+        className: "rounded-[10px]",
+      });
       console.log("not item selected");
     }
   };
@@ -115,7 +116,8 @@ const ProductDetails = () => {
                   productDetails,
                   setProductDetailsData,
                   selectedCate,
-                  setCategoryData
+                  setCategoryData,
+                  setMessage
                 )
               }
               style="text-white bg-[#FF3D00] hover:bg-transparent hover:text-[#FF3D00]"

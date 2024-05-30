@@ -47,7 +47,6 @@ export const fetchDataOfUser = async (setUserData) => {
     const res = await axios.get(`${baseUrl}/superadmin/add-user-dashboard/`, {
       headers: options,
     });
-    console.log(res.data);
     setUserData(res.data);
   } catch (error) {
     console.error("Fetch user data error:", error);
@@ -165,7 +164,6 @@ export const addCategory = async (
       }
     );
     setCategoryData(categoryDataList.data.response);
-    console.log(categoryDataList.data.response);
     setNewCategory({ name: "", image: null });
     toast.success("Category Added Successfully!!", {
       className: "rounded-[10px]",
@@ -184,7 +182,6 @@ export const updateCategory = async (
   setEditCategoryData
 ) => {
   const accessToken = sessionStorage.getItem("accessToken");
-  console.log(editCategoryData);
   try {
     // Send PATCH request with Axios
     const response = await axios.patch(
@@ -205,8 +202,7 @@ export const updateCategory = async (
     );
     setCategoryData(categoryDataList.data.response);
     setEditCategoryData({ name: "", image: null });
-    console.log(response);
-    toast.success("Category Updated Successfully!!", {
+     toast.success("Category Updated Successfully!!", {
       className: "rounded-[10px]",
     });
   } catch (error) {
@@ -223,7 +219,6 @@ export const addOffer = async (
   selectedOption
 ) => {
   const accessToken = sessionStorage.getItem("accessToken");
-  console.log(couponData);
   try {
     const response = await axios.post(
       `${baseUrl}/superadmin/add-coupons-dashboard/`,
@@ -308,11 +303,8 @@ export const getCoupon = async (setCouponData) => {
         headers: { Authorization: `Bearer ${accessToken}` },
       }
     );
-    console.log(res.data);
     setCouponData(res.data);
   } catch (error) {
-    console.error("Fetch coupon data error:", error);
-    // Show error message
     toast.error("Error fetching coupon data. Try again", {
       className: "rounded-[10px]",
     });
@@ -324,7 +316,6 @@ export const getComplaints = async (setComplaints) => {
     const res = await axios.get(`${baseUrl}/superadmin/user-complaints`, {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
-    console.log(res.data.response);
     setComplaints(res.data.response);
   } catch (error) {
     console.error("Fetch coupon data error:", error);
@@ -340,7 +331,6 @@ export const getOrderLogs = async (setOrderLogs) => {
     const res = await axios.get(`${baseUrl}/superadmin/user-logs`, {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
-    console.log(res.data.response);
     setOrderLogs(res.data.response);
   } catch (error) {
     console.error("Fetch coupon data error:", error);
@@ -375,7 +365,8 @@ export const deleteProduct = async (
   productDetails,
   setProductDetailsData,
   selectedCate,
-  setCategoryData
+  setCategoryData,
+  setMessage
 ) => {
   const accessToken = sessionStorage.getItem("accessToken");
   if (id) {
@@ -387,6 +378,7 @@ export const deleteProduct = async (
         }
       );
       console.log(res, "success");
+      // setMessage(true);
       // Immediately update productDetails to reflect changes
       const updatedProductDetails = productDetails.filter(
         (product) => product.product_id !== id

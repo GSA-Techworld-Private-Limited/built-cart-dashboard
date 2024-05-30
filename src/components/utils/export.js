@@ -93,7 +93,6 @@ export const exportData = (timeFrame, userData, fileType, afterComplete) => {
       const rows = flattenedData.map((item) =>
         keyChunk.map((key) => item[key].value)
       );
-
       doc.autoTable({
         head: [columns.map((col) => col.header)],
         body: rows,
@@ -130,6 +129,4 @@ export const exportData = (timeFrame, userData, fileType, afterComplete) => {
       className: "rounded-[10px]",
     });
   }
-
-  console.log(flattenedData);
 };

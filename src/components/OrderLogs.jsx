@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { IoSearchSharp } from "react-icons/io5";
 import {
   Select,
@@ -11,7 +11,6 @@ import { ChooseIcon } from "./common/Icons";
 import CommonBtn from "./common/CommonBtn";
 import OrderLogTable from "./OrderLogTable";
 import MyContext from "./context/MyContext";
-import { toast } from "react-toastify";
 const OrderLogs = () => {
   const {
     showExport,
@@ -30,8 +29,7 @@ const OrderLogs = () => {
           typeof order.status === "string" &&
           order.status.toLowerCase().includes(value)
       );
-      console.log(filteredData);
-      setFilteredLogs(filteredData);
+       setFilteredLogs(filteredData);
     }
   };
   const handleChange = (event) => {
@@ -48,7 +46,6 @@ const OrderLogs = () => {
         );
       });
       setFilteredLogs(filteredData);
-      console.log(filteredData);
     }
   };
   return (

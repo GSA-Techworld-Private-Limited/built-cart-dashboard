@@ -14,9 +14,7 @@ const UserDataTable = () => {
     setCheckedItems,
     setCurrUser,
     setCategorySelect,
-    categorySelect,
   } = useContext(MyContext);
-  console.log(categorySelect);
   return (
     <>
       <div className="overflow-auto hide_scroll">

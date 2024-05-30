@@ -1,4 +1,4 @@
-import React, { useContext} from "react";
+import React, { useContext } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import MyContext from "./context/MyContext";
 import { DateRangeIcon } from "./common/Icons";
@@ -10,29 +10,21 @@ const CategoriesTable = () => {
     setActiveSubTab,
     categoryData,
     setProductDetailsData,
-    productDetailsData,
     setCategorySelect,
     setCheckedItems,
     checkedItems,
-    categorySelect,
     productDetails,
-    selectedCate,
     setSelectedCate,
   } = useContext(MyContext);
 
   const showProductDetails = (name) => {
-    console.log(name);
     setSelectedCate(name);
     const res = productDetails.filter((val) =>
       val.category_names.includes(name)
     );
-    console.log(res);
     setProductDetailsData(res);
     setActiveSubTab("categories-products");
   };
-  console.log(selectedCate);
-  console.log(categorySelect);
-  console.log(productDetailsData);
   return (
     <>
       <div className="overflow-auto hide_scroll">

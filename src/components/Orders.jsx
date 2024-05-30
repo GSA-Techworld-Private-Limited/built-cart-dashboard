@@ -52,7 +52,6 @@ const Orders = () => {
           typeof order.status === "string" &&
           order.status.toLowerCase().includes(value)
       );
-      console.log(filteredData);
       setFilterData(filteredData);
     }
   };
@@ -71,7 +70,6 @@ const Orders = () => {
       );
       fetchOrderData(setOrderData);
       fetchStatusData(setStatusData, "this month");
-      console.log(res);
       toast.success("Status Updated Successfully", {
         className: "rounded-[10px]",
       });

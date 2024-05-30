@@ -8,7 +8,6 @@ import { formatDateTime } from "./OrdersTable";
 const OrderLogTable = () => {
   const {
     setActiveSubTab,
-    categorySelect,
     checkedItems,
     setCheckedItems,
     setCategorySelect,
@@ -16,7 +15,6 @@ const OrderLogTable = () => {
     setLogsDetails,
     filteredLogs,
   } = useContext(MyContext);
-  console.log(categorySelect);
   const getLogsDetails = (id) => {
     const logs = orderLogs.find((item) => item.order_id === id);
     console.log(logs);

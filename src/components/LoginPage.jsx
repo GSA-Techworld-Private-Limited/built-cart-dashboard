@@ -11,7 +11,6 @@ const LoginPage = () => {
   const {
     setUserData,
     setAuthenticated,
-    authenticated,
     setOrderData,
     setStatusData,
     setCategoryData,
@@ -21,12 +20,10 @@ const LoginPage = () => {
   } = useContext(MyContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ username: "", password: "" });
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -36,7 +33,6 @@ const LoginPage = () => {
       );
       const accessToken = loginResponse.data.access_token;
       const refreshToken = loginResponse.data.refresh_token;
-
       // Store the access token in sessionStorage
       if (accessToken) {
         sessionStorage.setItem("accessToken", accessToken);
@@ -44,7 +40,6 @@ const LoginPage = () => {
       if (refreshToken) {
         sessionStorage.setItem("refreshToken", refreshToken);
       }
-
       // show notification
       toast.success("Login successful!", {
         className: "rounded-[10px]",

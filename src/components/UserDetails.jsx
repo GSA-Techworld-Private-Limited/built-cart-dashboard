@@ -94,8 +94,7 @@ const UserDetails = () => {
                 Email ID
               </p>
               <p className="border border-black 2xl:text-2xl text-xl font-normal text-black placeholder:text-black px-5 w-full py-[5px] 2xl:py-3 h-10 2xl:h-[54px] rounded-[10px] bg-transparent outline-none">
-                {" "}
-                {currUser.email}
+                  {currUser.email}
               </p>
             </div>
           </div>

@@ -16,7 +16,7 @@ const UserDashboard = () => {
     fetchStatusData(setStatusData, value);
   };
   return (
-    <>
+    <React.Fragment>
       <div className="flex items-center ps-9 pb-16">
         <ChooseIcon />
         <p className="text-2xl text-black font-medium ms-[14px] mr-6">
@@ -95,7 +95,7 @@ const UserDashboard = () => {
           </>
         )}
       </div>
-    </>
+    </React.Fragment>
   );
 };
 export default UserDashboard;

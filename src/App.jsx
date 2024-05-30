@@ -8,7 +8,8 @@ import MyContext from "./components/context/MyContext";
 import { fetchUserData, getCoupon } from "./components/utils/auth";
 import ProtectedRoute from "./components/routes/ProtectedRoute";
 import { checkTokenExpiry } from "./components/utils/logout";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
+import SuccessMessage from "./components/common/SuccessMessage";
 function App() {
   const {
     authenticated,
@@ -21,6 +22,7 @@ function App() {
     setComplaints,
     setOrderLogs,
     setProductDetails,
+    message,
   } = useContext(MyContext);
   const navigate = useNavigate();
   useEffect(() => {
@@ -51,7 +53,6 @@ function App() {
     const interval = setInterval(() => {
       setIsTokenExpired(checkTokenExpiry());
     }, 60000); // 60000 milliseconds = 1 minute
-
     return () => clearInterval(interval);
   }, []);
 
@@ -63,23 +64,18 @@ function App() {
   }, [isTokenExpired]);
   useEffect(() => {
     const isRefreshToken = sessionStorage.getItem("refreshToken");
-    console.log(authenticated);
     if (isRefreshToken) {
       setAuthenticated(true);
     }
   }, [authenticated]);
-
   return (
-    <>
+    <React.Fragment>
       <ToastContainer />
       <Routes>
-        <Route path="/" element={<LoginPage />} />
-        {/* <Route path="/dashboard" element={<Dashboard />} /> */}
-        {/* {authenticated ? (
-          <Route path="/dashboard" element={<Dashboard />} />
-        ) : (
-          <Route path="/" element={<LoginPage />} />
-        )} */}
+        <Route
+          path="/"
+          element={authenticated ? <Navigate to="/dashboard" /> : <LoginPage />}
+        />
         <Route
           path="/dashboard"
           element={
@@ -89,7 +85,7 @@ function App() {
           }
         />
       </Routes>
-    </>
+    </React.Fragment>
   );
 }
 

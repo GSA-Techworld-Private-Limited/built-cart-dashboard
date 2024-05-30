@@ -16,11 +16,9 @@ const OrdersTable = ({ filterData }) => {
     setCategorySelect,
     checkedItems,
     setCheckedItems,
-    categorySelect,
     setUserOrderDetails,
   } = useContext(MyContext);
 
-  console.log(categorySelect);
   return (
     <>
       <div className="overflow-auto hide_scroll">
@@ -65,9 +63,8 @@ const OrdersTable = ({ filterData }) => {
           </div>
           {orderData &&
             (filterData.length > 0 ? filterData : orderData).map((val, i) => (
-              <>
+              <React.Fragment key={i}>
                 <div
-                  key={`key-${i}`}
                   className={`2xl:h-[60px] h-[54px] mt-2 flex items-center ${
                     i % 2 === 0 ? "bg-[#FEF9EB]" : "bg-white"
                   }`}
@@ -176,7 +173,7 @@ const OrdersTable = ({ filterData }) => {
                       : ""}
                   </p>
                 </div>
-              </>
+              </React.Fragment>
             ))}
         </div>
       </div>

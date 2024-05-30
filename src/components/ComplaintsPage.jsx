@@ -21,7 +21,6 @@ const ComplaintsPage = () => {
     setShowExport,
     setComplaints,
     categorySelect,
-    filteredComplaints,
     setFilteredComplaints,
   } = useContext(MyContext);
   const updateComplaintsStatus = async (value) => {
@@ -72,12 +71,9 @@ const ComplaintsPage = () => {
             return false;
           });
         };
-
         return checkNestedProperties(complaint);
       });
-
       setFilteredComplaints(filteredData);
-      console.log(filteredData);
     }
   };
   return (
