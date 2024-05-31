@@ -6,45 +6,38 @@ import CheckBox from "./common/CheckBox";
 import { handleCheckBoxChange } from "./utils/handleCheckBox";
 
 const UserOrderTable = () => {
-  const {
-    currUser,
-    setCheckedItems,
-    setCategorySelect,
-    categorySelect,
-    checkedItems,
-  } = useContext(MyContext);
-  console.log(categorySelect);
+  const { currUser, setCheckedItems, setCategorySelect, checkedItems } =
+    useContext(MyContext);
   return (
-    <>
-      <div className="overflow-auto hide_scroll">
-        <div className="w-[calc(1920px-265px)]">
-          <div className="bg-[#BDBDBD] h-[54px] 2xl:h-16 flex items-center">
-            <div className="px-[54px]">
-              <Checkbox border="border-dark" />
-            </div>
-            <div className="flex pl-6 items-center gap-2 w-[196px]">
-              <p className="font-semibold text-nowrap 2xl:text-2xl text-xl leading-5 text-[#282828]">
-                Delivery Date
-              </p>
-            </div>
-            <p className="font-semibold text-nowrap pl-6 w-[270px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
-              Order ID
-            </p>
-            <p className="font-semibold text-nowrap pl-6 w-[277px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
-              Items
-            </p>
-            <p className="font-semibold text-nowrap pl-6 w-[287px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
-              Amount Paid
-            </p>
-            <p className="font-semibold text-nowrap pl-6 w-[266px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
-              Payment Mode
-            </p>
-            <p className="font-semibold text-nowrap pl-6 w-[250px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
-              Status
+    <div className="overflow-auto hide_scroll">
+      <div className="w-[calc(1920px-265px)]">
+        <div className="bg-[#BDBDBD] h-[54px] 2xl:h-16 flex items-center">
+        <div className="px-[68px]"></div>
+          <div className="flex pl-6 items-center gap-2 w-[196px]">
+            <p className="font-semibold text-nowrap table-text">
+              Delivery Date
             </p>
           </div>
-          {currUser.user_orders.length > 0 ? (
-            currUser.user_orders.reduce((acc, item) => [item].concat(acc), []).map((val, i) => (
+          <p className="font-semibold text-nowrap pl-6 w-[270px] table-text">
+            Order ID
+          </p>
+          <p className="font-semibold text-nowrap pl-6 w-[277px] table-text">
+            Items
+          </p>
+          <p className="font-semibold text-nowrap pl-6 w-[287px] table-text">
+            Amount Paid
+          </p>
+          <p className="font-semibold text-nowrap pl-6 w-[266px] table-text">
+            Payment Mode
+          </p>
+          <p className="font-semibold text-nowrap pl-6 w-[250px] table-text">
+            Status
+          </p>
+        </div>
+        {currUser.user_orders.length > 0 ? (
+          currUser.user_orders
+            .reduce((acc, item) => [item].concat(acc), [])
+            .map((val, i) => (
               <div
                 key={i}
                 className={`2xl:h-[60px] h-[54px] mt-2 flex items-center ${
@@ -65,23 +58,22 @@ const UserOrderTable = () => {
                     }
                   />
                 </div>
-                <p className="font-medium pl-6 w-[196px] text-nowrap 2xl:text-2xl text-xl leading-5 text-[#282828]">
+                <p className="font-medium pl-6 w-[196px] text-nowrap table-text">
                   {formatDateTime(val.order_placed_date)}
                 </p>
-                <p className="font-medium underline text-nowrap pl-6 w-[270px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+                <p className="font-medium underline text-nowrap pl-6 w-[270px] table-text">
                   {val.order}
                 </p>
-                <p className="font-medium text-nowrap pl-6 w-[277px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+                <p className="font-medium text-nowrap pl-6 w-[277px] table-text">
                   {val.product}
                 </p>
-
-                <p className="font-medium text-nowrap pl-6 w-[287px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
-                  {val.is_paid || "Not Paid"}
+                <p className="font-medium text-nowrap pl-6 w-[287px] table-text">
+                  {val.is_paid ? "Paid" : "Not Paid"}
                 </p>
                 <p
                   className={`${
                     val.mode_of_payment === "cod" && "!uppercase"
-                  } font-medium capitalize text-nowrap pl-6 w-[266px] 2xl:text-2xl text-xl leading-5 text-[#282828]`}
+                  } font-medium capitalize text-nowrap pl-6 w-[266px] table-text`}
                 >
                   {val.mode_of_payment}
                 </p>
@@ -96,14 +88,13 @@ const UserOrderTable = () => {
                 </p>
               </div>
             ))
-          ) : (
-            <p className="text-red-500 text-3xl font-semibold text-center pt-3">
-              No Orders Yet
-            </p>
-          )}
-        </div>
+        ) : (
+          <p className="text-red-500 text-3xl font-semibold text-center pt-3">
+            No Orders Yet
+          </p>
+        )}
       </div>
-    </>
+    </div>
   );
 };
 

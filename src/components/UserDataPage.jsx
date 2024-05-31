@@ -46,7 +46,6 @@ const UserDataPage = () => {
           }
         );
         fetchDataOfUser(setUserData);
-        console.log(res);
         toast.success(res.data.message, {
           className: "rounded-[10px]",
         });

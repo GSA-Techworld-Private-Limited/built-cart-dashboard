@@ -24,7 +24,6 @@ export const getUserDetails = async (
     );
 
     setCurrUser(response.data);
-    console.log(response.data);
     setActiveSubTab("user-details");
   } catch (error) {
     console.error("Fetch user data error:", error);
@@ -51,7 +50,6 @@ const UserDetails = () => {
       });
     }
   };
-  console.log(currUser);
   return (
     <>
       <div className="w-full h-[calc(100vh-126.59px)] 2xl:h-[calc(100vh-150px)] flex flex-col overflow-auto">

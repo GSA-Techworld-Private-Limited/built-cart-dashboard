@@ -40,7 +40,6 @@ const ComplaintsPage = () => {
             },
           }
         );
-        console.log(res.data);
         getComplaints(setComplaints);
         toast.success(res.data.message, {
           className: "rounded-[10px]",

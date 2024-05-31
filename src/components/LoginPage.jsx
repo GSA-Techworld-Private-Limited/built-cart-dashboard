@@ -67,44 +67,41 @@ const LoginPage = () => {
       });
     }
   };
-
   return (
-    <>
-      <section className="min-h-screen bg-primary-gradient flex items-center flex-col justify-center py-14">
-        <div className="container px-4 flex justify-center flex-col items-center">
-          <img
-            className="w-1/3 2xl:w-full md:w-1/5 lg:w-[15%] 2xl:max-w-[292px] mb-9"
-            src={pageLogo}
-            alt="pagelogo"
-          />
-          <div className="rounded-[30px] border border-white p-5 sm:p-8 2xl:py-[28px] 2xl:px-12 max-w-[547px] 2xl:max-w-[647px] w-full">
-            <form onSubmit={handleLogin}>
-              <input
-                name="username"
-                value={formData.username}
-                onChange={handleInputChange}
-                type="text"
-                required
-                className="text-black text-[20px] md:text-xl 2xl:text-3xl bg-light-gray rounded-[20px] w-full outline-none placeholder:text-black font-normal py-3 px-6 md:py-4 sm:px-8"
-                placeholder="Username"
-              />
-              <input
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleInputChange}
-                required
-                className="text-black mt-5 2xl:mt-7 text-[20px] md:text-xl 2xl:text-3xl bg-light-gray rounded-[20px] w-full outline-none placeholder:text-black font-normal py-3 px-6 md:py-4 sm:px-8"
-                placeholder="Password"
-              />
-              <button className="w-full mt-6 2xl:mt-9 text-center text-2xl md:text-2xl 2xl:text-4xl font-semibold p-3 2xl:p-[18px] bg-primary text-white rounded-[20px] duration-300 hover:bg-transparent border border-transparent hover:border-primary">
-                Login
-              </button>
-            </form>
-          </div>
+    <section className="min-h-screen bg-primary-gradient flex items-center flex-col justify-center py-14">
+      <div className="container px-4 flex justify-center flex-col items-center">
+        <img
+          className="w-1/3 2xl:w-full md:w-1/5 lg:w-[15%] 2xl:max-w-[292px] mb-9"
+          src={pageLogo}
+          alt="pagelogo"
+        />
+        <div className="rounded-[30px] border border-white p-5 sm:p-8 2xl:py-[28px] 2xl:px-12 max-w-[547px] 2xl:max-w-[647px] w-full">
+          <form onSubmit={handleLogin}>
+            <input
+              name="username"
+              value={formData.username}
+              onChange={handleInputChange}
+              type="text"
+              required
+              className="text-black text-[20px] md:text-xl 2xl:text-3xl bg-light-gray rounded-[20px] w-full outline-none placeholder:text-black font-normal py-3 px-6 md:py-4 sm:px-8"
+              placeholder="Username"
+            />
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleInputChange}
+              required
+              className="text-black mt-5 2xl:mt-7 text-[20px] md:text-xl 2xl:text-3xl bg-light-gray rounded-[20px] w-full outline-none placeholder:text-black font-normal py-3 px-6 md:py-4 sm:px-8"
+              placeholder="Password"
+            />
+            <button className="w-full mt-6 2xl:mt-9 text-center text-2xl md:text-2xl 2xl:text-4xl font-semibold p-3 2xl:p-[18px] bg-primary text-white rounded-[20px] duration-300 hover:bg-transparent border border-transparent hover:border-primary">
+              Login
+            </button>
+          </form>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 };
 

@@ -22,7 +22,6 @@ export const fetchUserData = async (
         headers: options,
       }
     );
-    // console.log(categoryDataList.data.response);
     fetchDataOfUser(setUserData);
     fetchOrderData(setOrderData);
     fetchStatusData(setStatusData);
@@ -92,7 +91,6 @@ export const fetchStatusData = async (setStatusData, value) => {
       }
     );
     setStatusData(response.data.response);
-    // console.log("Response:", response.data);
   } catch (error) {
     console.error("Error fetching data:", error);
   }
@@ -102,7 +100,6 @@ export const removeCategory = async (id, setActiveSubTab, setCategoryData) => {
 
   if (id) {
     const requestData = { id: id.toString() };
-    console.log(requestData);
     try {
       // Send POST request with Axios
       const response = await axios.post(
@@ -116,7 +113,6 @@ export const removeCategory = async (id, setActiveSubTab, setCategoryData) => {
         }
       );
       setActiveSubTab(null);
-      console.log(response);
 
       const categoryDataList = await axios.get(
         `${baseUrl}/superadmin/add-category-dashboard/`,
@@ -139,7 +135,6 @@ export const removeCategory = async (id, setActiveSubTab, setCategoryData) => {
     });
   }
 };
-
 export const addCategory = async (
   newCategory,
   setCategoryData,
@@ -174,7 +169,6 @@ export const addCategory = async (
     });
   }
 };
-
 export const updateCategory = async (
   id,
   editCategoryData,
@@ -211,7 +205,6 @@ export const updateCategory = async (
     });
   }
 };
-
 export const addOffer = async (
   couponData,
   setIsOfferSent,
@@ -259,7 +252,6 @@ export const addOffer = async (
     console.log(error);
   }
 };
-
 export const showOrderDetails = async (
   id,
   setActiveSubTab,
@@ -284,7 +276,6 @@ export const showOrderDetails = async (
       setUserOrderDetails(res.data);
       setActiveSubTab("order-details");
     }
-    console.log(res.data);
   } catch (error) {
     console.error("Fetch user data error:", error);
     // Show error message
@@ -293,7 +284,6 @@ export const showOrderDetails = async (
     });
   }
 };
-
 export const getCoupon = async (setCouponData) => {
   const accessToken = sessionStorage.getItem("accessToken");
   try {
@@ -377,7 +367,6 @@ export const deleteProduct = async (
           headers: { Authorization: `Bearer ${accessToken}` },
         }
       );
-      console.log(res, "success");
       // setMessage(true);
       // Immediately update productDetails to reflect changes
       const updatedProductDetails = productDetails.filter(

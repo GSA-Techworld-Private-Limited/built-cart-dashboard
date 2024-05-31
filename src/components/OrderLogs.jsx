@@ -78,6 +78,9 @@ const OrderLogs = () => {
                     <SelectValue placeholder="Status" />
                   </SelectTrigger>
                   <SelectContent width="w-[191px]">
+                    <SelectItem color="text-dark" value=" ">
+                      All
+                    </SelectItem>
                     <SelectItem color="text-[#0FA958]" value="delivered">
                       Delivered
                     </SelectItem>

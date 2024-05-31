@@ -44,17 +44,14 @@ const logout = async (navigate, setAuthenticated) => {
     }
   }
 };
-
 // Check if the token exists and is not expired
 export const checkTokenExpiry = () => {
   const token = sessionStorage.getItem("accessToken");
-
   // Check if the token exists
   if (token) {
     const decodedToken = JSON.parse(atob(token.split(".")[1])); // Decode the token payload
     const tokenExpiryTime = decodedToken.exp * 1000; // Convert expiration time to milliseconds
     const currentTime = Date.now();
-
     // Check if the token has expired
     if (currentTime > tokenExpiryTime) {
        return true;

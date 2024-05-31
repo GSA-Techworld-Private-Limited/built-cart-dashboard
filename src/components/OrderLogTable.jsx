@@ -17,7 +17,6 @@ const OrderLogTable = () => {
   } = useContext(MyContext);
   const getLogsDetails = (id) => {
     const logs = orderLogs.find((item) => item.order_id === id);
-    console.log(logs);
     setLogsDetails(logs);
     setActiveSubTab("order-details");
   };
@@ -26,46 +25,42 @@ const OrderLogTable = () => {
       <div>
         <div className="w-[2966px]">
           <div className="bg-[#BDBDBD] h-[54px] 2xl:h-16 flex items-center">
-            <div className="px-[54px]">
-              <Checkbox border="border-dark" />
-            </div>
+            <div className="px-[68px]"></div>
             <div className="flex pl-6 items-center gap-9 w-[178px]">
-              <p className="font-semibold text-nowrap 2xl:text-2xl text-xl leading-5 text-[#282828]">
-                Date
-              </p>
+              <p className="font-semibold text-nowrap table-text">Date</p>
               <DateRangeIcon />
             </div>
-            <p className="font-semibold text-nowrap pl-6 w-[232px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+            <p className="font-semibold text-nowrap pl-6 w-[232px] table-text">
               Order ID
             </p>
-            <p className="font-semibold text-nowrap pl-6 w-[249px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+            <p className="font-semibold text-nowrap pl-6 w-[249px] table-text">
               User
             </p>
-            <p className="font-semibold text-nowrap pl-6 w-[237px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+            <p className="font-semibold text-nowrap pl-6 w-[237px] table-text">
               Location
             </p>
-            <p className="font-semibold text-nowrap pl-6 w-[315px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+            <p className="font-semibold text-nowrap pl-6 w-[315px] table-text">
               Referral
             </p>
-            <p className="font-semibold text-nowrap pl-6 w-[314px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+            <p className="font-semibold text-nowrap pl-6 w-[314px] table-text">
               Items
             </p>
-            <p className="font-semibold text-nowrap pl-6 w-[240px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+            <p className="font-semibold text-nowrap pl-6 w-[240px] table-text">
               Vendor
             </p>
-            <p className="font-semibold text-nowrap pl-6 w-[119px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+            <p className="font-semibold text-nowrap pl-6 w-[119px] table-text">
               Qty
             </p>
-            <p className="font-semibold text-nowrap pl-6 w-[199px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+            <p className="font-semibold text-nowrap pl-6 w-[199px] table-text">
               Price
             </p>
-            <p className="font-semibold text-nowrap pl-6 w-[244px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+            <p className="font-semibold text-nowrap pl-6 w-[244px] table-text">
               Payment mode
             </p>
-            <p className="font-semibold text-nowrap pl-6 w-[244px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+            <p className="font-semibold text-nowrap pl-6 w-[244px] table-text">
               Delivery Person
             </p>
-            <p className="font-semibold text-nowrap pl-6 w-[244px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+            <p className="font-semibold text-nowrap pl-6 w-[244px] table-text">
               Status
             </p>
           </div>
@@ -95,40 +90,40 @@ const OrderLogTable = () => {
                       }
                     />
                   </div>
-                  <p className="font-medium pl-6 w-[178px] text-nowrap 2xl:text-2xl text-xl leading-5 text-[#282828]">
+                  <p className="font-medium pl-6 w-[178px] text-nowrap table-text">
                     {formatDateTime(val.created_at)}
                   </p>
                   <p
                     onClick={() => getLogsDetails(val.order_id)}
-                    className="font-medium cursor-pointer underline text-nowrap pl-6 w-[232px] 2xl:text-2xl text-xl leading-5 text-dark"
+                    className="font-medium cursor-pointer underline hover:no-underline duration-300 text-nowrap pl-6 w-[232px] 2xl:text-2xl text-xl leading-5 text-dark"
                   >
                     {val.order_id}
                   </p>
-                  <p className="font-medium text-nowrap pl-6 w-[249px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+                  <p className="font-medium text-nowrap pl-6 w-[249px] table-text">
                     {val.user ? val.user : "N/A"}
                   </p>
-                  <p className="font-medium text-nowrap pl-6 w-[237px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+                  <p className="font-medium text-nowrap pl-6 w-[237px] table-text">
                     {val.location_name}
                   </p>
-                  <p className="font-medium text-nowrap pl-6 w-[315px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+                  <p className="font-medium text-nowrap pl-6 w-[315px] table-text">
                     {val.ref_coupon}
                   </p>
-                  <p className="font-medium text-nowrap pl-6 w-[314px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+                  <p className="font-medium text-nowrap pl-6 w-[314px] table-text">
                     {val.order_item}
                   </p>
-                  <p className="font-medium capitalize text-nowrap pl-6 w-[240px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+                  <p className="font-medium capitalize text-nowrap pl-6 w-[240px] table-text">
                     {val.vendor_name}
                   </p>
-                  <p className="font-medium text-nowrap pl-6 w-[119px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+                  <p className="font-medium text-nowrap pl-6 w-[119px] table-text">
                     {val.quantity}
                   </p>
-                  <p className="font-medium text-nowrap pl-6 w-[199px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+                  <p className="font-medium text-nowrap pl-6 w-[199px] table-text">
                     ₹{val.total_price}
                   </p>
-                  <p className="font-medium uppercase text-nowrap pl-6 w-[244px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+                  <p className="font-medium uppercase text-nowrap pl-6 w-[244px] table-text">
                     {val.payment_mode}
                   </p>
-                  <p className="font-medium capitalize text-nowrap pl-6 w-[244px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+                  <p className="font-medium capitalize text-nowrap pl-6 w-[244px] table-text">
                     {val.delivery_person}
                   </p>
                   <p

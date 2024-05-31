@@ -41,14 +41,12 @@ const AddProduct = () => {
   };
   const toggleDropdown = (e) => {
     setIsOpen(!isOpen);
-    console.log(e.value);
-  };
+   };
   const handleOptionClick = useCallback(
     (option, id) => {
       setCategory(id);
       setSelectedOption(option);
       setIsOpen(false);
-      console.log(id);
     },
     [setCategory, setSelectedOption, setIsOpen]
   );
@@ -76,7 +74,6 @@ const AddProduct = () => {
           },
         }
       );
-      console.log(response.data);
       setProductId(response.data.product_id);
 
       setAddDetails(true);
@@ -176,10 +173,6 @@ const AddProduct = () => {
       },
     ]);
   }
-  console.log(categoryData);
-  console.log(addProducts);
-  console.log(productImages);
-  console.log(colorVariants);
   const handleImagesSubmit = async () => {
     const accessToken = sessionStorage.getItem("accessToken");
     const formData = new FormData();
@@ -205,7 +198,7 @@ const AddProduct = () => {
           },
         }
       );
-      console.log(res);
+    
       toast.success("Images Added Successfully!", {
         className: "rounded-[10px]",
       });
@@ -249,8 +242,7 @@ const AddProduct = () => {
         className: "rounded-[10px]",
       });
       setColorVariants([]);
-      console.log(res);
-
+    
       setColorVariants([]);
       // Handle response
     } catch (error) {
@@ -273,7 +265,6 @@ const AddProduct = () => {
     setCategoryData(res.data.response);
     getProductDetails(setProductDetails);
   };
-  console.log(productId);
 
   return (
     <div className="pl-[26px] pb-10 h-[calc(100vh-126.59px)] 2xl:h-[calc(100vh-150px)] flex flex-col overflow-auto">

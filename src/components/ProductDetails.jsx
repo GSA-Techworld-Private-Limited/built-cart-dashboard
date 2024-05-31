@@ -37,7 +37,6 @@ const ProductDetails = () => {
           },
         }
       );
-      console.log(res.data);
       const searchRes = res.data.data.filter((val) =>
         val.category_names.includes(selectedCate)
       );
@@ -58,14 +57,12 @@ const ProductDetails = () => {
   const editProduct = async () => {
     const accessToken = sessionStorage.getItem("accessToken");
     if (categorySelect) {
-      console.log("yes:", categorySelect);
       const res = await axios.get(
         `${baseUrl}/superadmin/get-products-dashboard/${categorySelect}/`,
         {
           headers: { Authorization: `Bearer ${accessToken}` },
         }
       );
-      console.log(res.data);
       setCurrProduct(res.data);
       setActiveSubTab("edit-products");
     } else {

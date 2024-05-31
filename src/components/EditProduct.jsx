@@ -17,8 +17,7 @@ const EditProduct = () => {
   const [updateProduct, setUpdateProduct] = useState(currProduct);
   const toggleDropdown = (e) => {
     setIsOpen(!isOpen);
-    console.log(e.value);
-  };
+    };
   const handleOptionClick = useCallback(
     (option, id) => {
       // Create a new copy of the currProduct to avoid direct mutation
@@ -55,7 +54,6 @@ const EditProduct = () => {
           },
         }
       );
-      console.log(response.data);
       getProductDetails(setProductDetails);
       toast.success("Product Updated Successfully!", {
         className: "rounded-[10px]",
@@ -79,7 +77,6 @@ const EditProduct = () => {
       category_id: category,
     }));
   }, [category]);
-  console.log(updateProduct);
   return (
     <div className="pl-[26px] pb-10 h-[calc(100vh-126.59px)] 2xl:h-[calc(100vh-150px)] flex flex-col overflow-auto">
       <form onSubmit={handleProductSubmit}>

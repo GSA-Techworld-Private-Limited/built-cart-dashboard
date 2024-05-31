@@ -56,7 +56,6 @@ const Orders = () => {
     }
   };
   const updateOrderStatus = async (value) => {
-    console.log(value);
     const accessToken = sessionStorage.getItem("accessToken");
     try {
       const res = await axios.patch(
@@ -132,6 +131,9 @@ const Orders = () => {
                   <SelectValue placeholder="Status" />
                 </SelectTrigger>
                 <SelectContent width="w-[188px]">
+                  <SelectItem color="text-dark" value=" ">
+                    All
+                  </SelectItem>
                   <SelectItem color="text-[#0E39D1]" value="payment_pending">
                     Pending
                   </SelectItem>

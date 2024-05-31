@@ -18,33 +18,29 @@ const ComplaintsTable = () => {
       <div>
         <div className="w-[calc(1920px-265px+88px)]">
           <div className="bg-[#BDBDBD] h-[54px] 2xl:h-16 flex items-center">
-            <div className="px-[54px]">
-              <Checkbox border="border-dark" />
-            </div>
+            <div className="px-[68px]"></div>
             <div>
               <div className="flex pl-6 items-center gap-11 w-[178px]">
-                <p className="font-semibold text-nowrap 2xl:text-2xl text-xl leading-5 text-[#282828]">
-                  Date
-                </p>
+                <p className="font-semibold text-nowrap table-text">Date</p>
                 <DateRangeIcon />
               </div>
             </div>
-            <p className="font-semibold text-nowrap pl-6 w-[232px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+            <p className="font-semibold text-nowrap pl-6 w-[232px] table-text">
               Order ID
             </p>
-            <p className="font-semibold text-nowrap pl-6 w-[204px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+            <p className="font-semibold text-nowrap pl-6 w-[204px] table-text">
               Customer
             </p>
-            <p className="font-semibold text-nowrap pl-6 w-[237px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+            <p className="font-semibold text-nowrap pl-6 w-[237px] table-text">
               Mobile
             </p>
-            <p className="font-semibold text-nowrap pl-6 w-[204px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+            <p className="font-semibold text-nowrap pl-6 w-[204px] table-text">
               Items
             </p>
-            <p className="font-semibold text-nowrap pl-6 w-[276px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+            <p className="font-semibold text-nowrap pl-6 w-[276px] table-text">
               Complaints
             </p>
-            <p className="font-semibold text-nowrap pl-6 w-[276px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+            <p className="font-semibold text-nowrap pl-6 w-[276px] table-text">
               Status
             </p>
           </div>
@@ -71,19 +67,19 @@ const ComplaintsTable = () => {
                       }
                     />
                   </div>
-                  <p className="font-medium py-3 2xl:py-5 pl-6 w-[178px] text-nowrap 2xl:text-2xl text-xl leading-5 text-[#282828]">
+                  <p className="font-medium py-3 2xl:py-5 pl-6 w-[178px] text-nowrap table-text">
                     {formatDateTime(val.created_at)}
                   </p>
-                  <p className="font-medium underline py-3 2xl:py-5 pl-6 w-[232px] text-nowrap 2xl:text-2xl text-xl leading-5 text-[#282828]">
+                  <p className="font-medium underline py-3 2xl:py-5 pl-6 w-[232px] text-nowrap table-text">
                     {val.order_product.order_id}
                   </p>
-                  <p className="font-medium py-3 2xl:py-5 pl-6 w-[204px] text-nowrap 2xl:text-2xl text-xl leading-5 text-[#282828]">
+                  <p className="font-medium py-3 2xl:py-5 pl-6 w-[204px] text-nowrap table-text">
                     {val.user.customer_name}
                   </p>
-                  <p className="font-medium py-3 2xl:py-5 text-nowrap pl-6 w-[237px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+                  <p className="font-medium py-3 2xl:py-5 text-nowrap pl-6 w-[237px] table-text">
                     {val.user.mobile_number}
                   </p>
-                  <p className="font-medium py-3 2xl:py-5 text-nowrap pl-6 w-[204px] 2xl:text-2xl text-xl leading-5 text-[#282828]">
+                  <p className="font-medium py-3 2xl:py-5 text-nowrap pl-6 w-[204px] table-text">
                     {val.order_product.product}
                   </p>
                   <div className="w-[276px] flex items-center pl-6">

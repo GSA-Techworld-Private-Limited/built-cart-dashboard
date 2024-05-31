@@ -9,7 +9,6 @@ import { fetchUserData, getCoupon } from "./components/utils/auth";
 import ProtectedRoute from "./components/routes/ProtectedRoute";
 import { checkTokenExpiry } from "./components/utils/logout";
 import { useNavigate, Navigate } from "react-router-dom";
-import SuccessMessage from "./components/common/SuccessMessage";
 function App() {
   const {
     authenticated,
@@ -22,7 +21,6 @@ function App() {
     setComplaints,
     setOrderLogs,
     setProductDetails,
-    message,
   } = useContext(MyContext);
   const navigate = useNavigate();
   useEffect(() => {
@@ -40,14 +38,11 @@ function App() {
       getCoupon(setAllCoupons);
     }
   }, []);
-
   const [isTokenExpired, setIsTokenExpired] = useState(false);
-
   // Check token expiry on component mount
   useEffect(() => {
     setIsTokenExpired(checkTokenExpiry());
   }, []);
-
   // Check token expiry periodically (e.g., every minute)
   useEffect(() => {
     const interval = setInterval(() => {
@@ -55,7 +50,6 @@ function App() {
     }, 60000); // 60000 milliseconds = 1 minute
     return () => clearInterval(interval);
   }, []);
-
   // Logout user if token is expired
   useEffect(() => {
     if (isTokenExpired) {

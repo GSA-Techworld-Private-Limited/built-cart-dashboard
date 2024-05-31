@@ -5,7 +5,6 @@ import MyContext from "./context/MyContext";
 const OrderDetails = (props) => {
   const { setActiveSubTab, userOrderDetails } = useContext(MyContext);
   const userDetails = userOrderDetails.orders[0];
-  console.log(userOrderDetails);
   return (
     <>
       <div className="pl-[26px] pb-10 h-[calc(100vh-126.59px)] 2xl:h-[calc(100vh-150px)] flex flex-col overflow-auto">
