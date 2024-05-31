@@ -83,94 +83,96 @@ const Orders = () => {
   };
   return (
     <>
-      <div className="w-full">
+      <div className="w-full h-[calc(100vh-126.59px)] 2xl:h-[calc(100vh-150px)] flex flex-col">
         <p className="text-3xxl 2xl:text-4xl ps-7 font-bold text-black leading-[80%] mb-24">
           Orders
         </p>
         <div className="overflow-auto hide_scroll">
-          <div className="flex items-center ps-7 mb-[18px] gap-3 w-[calc(1920px-265px)]">
-            <div className="flex items-center gap-[10px] me-4 max-h-[54px] 2xl:max-h-[62px] border w-[432px] border-black rounded-[10px] px-[13px]">
-              <IoSearchSharp className="text-dark text-[28px]" />
-              <input
-                onChange={handleChange}
-                type="text"
-                placeholder="Search Name, Location..."
-                className="2xl:text-2xl text-xl text-[#6E6E73] leading-5 w-full placeholder:text-[#6E6E73] font-medium outline-none border-0 bg-transparent py-4 2xl:py-5"
+          <div>
+            <div className="flex items-center ps-7 mb-[18px] gap-3 w-[calc(1920px-265px)]">
+              <div className="flex items-center gap-[10px] me-4 max-h-[54px] 2xl:max-h-[62px] border w-[432px] border-black rounded-[10px] px-[13px]">
+                <IoSearchSharp className="text-dark text-[28px]" />
+                <input
+                  onChange={handleChange}
+                  type="text"
+                  placeholder="Search Name, Location..."
+                  className="2xl:text-2xl text-xl text-[#6E6E73] leading-5 w-full placeholder:text-[#6E6E73] font-medium outline-none border-0 bg-transparent py-4 2xl:py-5"
+                />
+              </div>
+              <Select onValueChange={updateOrderStatus}>
+                <SelectTrigger className="w-[277px]">
+                  <SelectValue placeholder="Update Status" />
+                </SelectTrigger>
+                <SelectContent width="w-[272px]">
+                  <SelectItem color="text-[#0E39D1]" value="payment_pending">
+                    Pending
+                  </SelectItem>
+                  <SelectItem color="text-[#FDC63A]" value="in_transit">
+                    In Transit
+                  </SelectItem>
+                  <SelectItem color="text-[#0FA958]" value="delivered">
+                    Delivered
+                  </SelectItem>
+                  <SelectItem color="text-dark" value="placed">
+                    Placed
+                  </SelectItem>
+                  <SelectItem color="text-dark" value="created">
+                    Created
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+              <div className="flex items-center gap-2">
+                <ChooseIcon dimensions="w-6" />
+                <p className="text-xl text-black font-medium text-nowrap">
+                  Sort By
+                </p>
+              </div>
+              <Select onValueChange={filterWithStatus}>
+                <SelectTrigger className="w-[191px]">
+                  <SelectValue placeholder="Status" />
+                </SelectTrigger>
+                <SelectContent width="w-[188px]">
+                  <SelectItem color="text-[#0E39D1]" value="payment_pending">
+                    Pending
+                  </SelectItem>
+                  <SelectItem color="text-[#FDC63A]" value="in_transit">
+                    In Transit
+                  </SelectItem>
+                  <SelectItem color="text-[#0FA958]" value="delivered">
+                    Delivered
+                  </SelectItem>
+                  <SelectItem color="text-dark" value="placed">
+                    Placed
+                  </SelectItem>
+                  <SelectItem color="text-dark" value="created">
+                    Created
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+              <CommonBtn
+                clickEvent={() => setAccept(true)}
+                style={
+                  accept
+                    ? "text-[#6E6E73] bg-transparent border-[#0FB001] hover:border-[#0FB001]"
+                    : "text-white bg-[#0FB001] hover:bg-transparent hover:text-[#0FB001]"
+                }
+                btntext={accept ? "Accepted" : "Accept"}
+              />
+              <CommonBtn
+                style="text-white bg-[#FF3D00] hover:bg-transparent hover:text-[#FF3D00]"
+                btntext="Refund"
+              />
+              <CommonBtn
+                clickEvent={() => {
+                  setSelectExport(orderData), setShowExport(!showExport);
+                }}
+                style="text-black bg-[#FDC63A] hover:bg-transparent hover:text-[#FDC63A]"
+                btntext="Export"
               />
             </div>
-            <Select onValueChange={updateOrderStatus}>
-              <SelectTrigger className="w-[277px]">
-                <SelectValue placeholder="Update Status" />
-              </SelectTrigger>
-              <SelectContent width="w-[272px]">
-                <SelectItem color="text-[#0E39D1]" value="payment_pending">
-                  Pending
-                </SelectItem>
-                <SelectItem color="text-[#FDC63A]" value="in_transit">
-                  In Transit
-                </SelectItem>
-                <SelectItem color="text-[#0FA958]" value="delivered">
-                  Delivered
-                </SelectItem>
-                <SelectItem color="text-dark" value="placed">
-                  Placed
-                </SelectItem>
-                <SelectItem color="text-dark" value="created">
-                  Created
-                </SelectItem>
-              </SelectContent>
-            </Select>
-            <div className="flex items-center gap-2">
-              <ChooseIcon dimensions="w-6" />
-              <p className="text-xl text-black font-medium text-nowrap">
-                Sort By
-              </p>
-            </div>
-            <Select onValueChange={filterWithStatus}>
-              <SelectTrigger className="w-[191px]">
-                <SelectValue placeholder="Status" />
-              </SelectTrigger>
-              <SelectContent width="w-[188px]">
-                <SelectItem color="text-[#0E39D1]" value="payment_pending">
-                  Pending
-                </SelectItem>
-                <SelectItem color="text-[#FDC63A]" value="in_transit">
-                  In Transit
-                </SelectItem>
-                <SelectItem color="text-[#0FA958]" value="delivered">
-                  Delivered
-                </SelectItem>
-                <SelectItem color="text-dark" value="placed">
-                  Placed
-                </SelectItem>
-                <SelectItem color="text-dark" value="created">
-                  Created
-                </SelectItem>
-              </SelectContent>
-            </Select>
-            <CommonBtn
-              clickEvent={() => setAccept(true)}
-              style={
-                accept
-                  ? "text-[#6E6E73] bg-transparent border-[#0FB001] hover:border-[#0FB001]"
-                  : "text-white bg-[#0FB001] hover:bg-transparent hover:text-[#0FB001]"
-              }
-              btntext={accept ? "Accepted" : "Accept"}
-            />
-            <CommonBtn
-              style="text-white bg-[#FF3D00] hover:bg-transparent hover:text-[#FF3D00]"
-              btntext="Refund"
-            />
-            <CommonBtn
-              clickEvent={() => {
-                setSelectExport(orderData), setShowExport(!showExport);
-              }}
-              style="text-black bg-[#FDC63A] hover:bg-transparent hover:text-[#FDC63A]"
-              btntext="Export"
-            />
+            <OrdersTable filterData={filterData} />
           </div>
         </div>
-        <OrdersTable filterData={filterData} />
       </div>
     </>
   );

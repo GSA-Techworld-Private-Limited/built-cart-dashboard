@@ -13,7 +13,7 @@ const ProductDetailsTables = () => {
   } = useContext(MyContext);
   return (
     <>
-      <div className="overflow-auto hide_scroll">
+      <div>
         <div className="w-[calc(1920px-265px)]">
           <div className="bg-[#BDBDBD] h-[54px] 2xl:h-16 flex gap-[65px] items-center">
             <div className="px-[54px]">
@@ -35,7 +35,7 @@ const ProductDetailsTables = () => {
             </p>
           </div>
           {productDetailsData.length > 0 ? (
-            productDetailsData.map((obj, index) => (
+            productDetailsData.reduce((acc, item) => [item].concat(acc), []).map((obj, index) => (
               <div
                 className={`2xl:h-[60px] h-[54px] mt-2 gap-[65px] flex items-center ${
                   index % 2 === 0 ? "bg-[#FEF9EB]" : "bg-white"

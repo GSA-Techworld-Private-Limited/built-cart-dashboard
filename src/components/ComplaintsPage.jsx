@@ -78,45 +78,47 @@ const ComplaintsPage = () => {
   };
   return (
     <>
-      <div className="w-full">
+      <div className="w-full h-[calc(100vh-126.59px)] 2xl:h-[calc(100vh-150px)] flex flex-col">
         <p className="text-3xxl 2xl:text-4xl ps-7 font-bold text-black leading-[80%] mb-[82px]">
           Complaints
         </p>
-        <div className="flex items-center ps-7 mb-10 gap-3 justify-between pr-8">
-          <div className="flex items-center gap-8">
-            <div className="flex items-center gap-[10px] me-4 max-h-[54px] 2xl:max-h-[62px] border w-[432px] border-black rounded-[10px] px-[13px]">
-              <IoSearchSharp className="text-dark text-[28px]" />
-              <input
-                onChange={handleChange}
-                type="text"
-                placeholder="Search Name, Location..."
-                className="2xl:text-2xl text-xl text-[#6E6E73] leading-5 w-full placeholder:text-[#6E6E73] font-medium outline-none border-0 bg-transparent py-4 2xl:py-5"
-              />
+        <div className="overflow-auto hide_scroll">
+          <div className="flex items-center ps-7 mb-[18px] 2xl:mb-10 gap-3 justify-between pr-8">
+            <div className="flex items-center gap-8">
+              <div className="flex items-center gap-[10px] me-4 max-h-[54px] 2xl:max-h-[62px] border w-[432px] border-black rounded-[10px] px-[13px]">
+                <IoSearchSharp className="text-dark text-[28px]" />
+                <input
+                  onChange={handleChange}
+                  type="text"
+                  placeholder="Search Name, Location..."
+                  className="2xl:text-2xl text-xl text-[#6E6E73] leading-5 w-full placeholder:text-[#6E6E73] font-medium outline-none border-0 bg-transparent py-4 2xl:py-5"
+                />
+              </div>
+              <Select onValueChange={updateComplaintsStatus}>
+                <SelectTrigger className="w-[277px]">
+                  <SelectValue placeholder="Update Status" />
+                </SelectTrigger>
+                <SelectContent width="w-[277px]">
+                  <SelectItem color="text-[#0FA958]" value="resolved">
+                    Resolved
+                  </SelectItem>
+                  <SelectItem color="text-[#FF3D00]" value="pending">
+                    Pending
+                  </SelectItem>
+                </SelectContent>
+              </Select>
             </div>
-            <Select onValueChange={updateComplaintsStatus}>
-              <SelectTrigger className="w-[277px]">
-                <SelectValue placeholder="Update Status" />
-              </SelectTrigger>
-              <SelectContent width="w-[277px]">
-                <SelectItem color="text-[#0FA958]" value="resolved">
-                  Resolved
-                </SelectItem>
-                <SelectItem color="text-[#FF3D00]" value="pending">
-                  Pending
-                </SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
 
-          <CommonBtn
-            clickEvent={() => {
-              setSelectExport(complaints), setShowExport(!showExport);
-            }}
-            style="text-black bg-[#FDC63A] hover:bg-transparent hover:text-[#FDC63A]"
-            btntext="Export"
-          />
+            <CommonBtn
+              clickEvent={() => {
+                setSelectExport(complaints), setShowExport(!showExport);
+              }}
+              style="text-black bg-[#FDC63A] hover:bg-transparent hover:text-[#FDC63A]"
+              btntext="Export"
+            />
+          </div>
+          <ComplaintsTable />
         </div>
-        <ComplaintsTable />
       </div>
     </>
   );

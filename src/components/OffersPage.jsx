@@ -79,7 +79,7 @@ const OffersPage = () => {
 
   return (
     <>
-      <form onSubmit={handleSent} className="w-full">
+      <form onSubmit={handleSent} className="w-full h-[calc(100vh-126.59px)] 2xl:h-[calc(100vh-150px)] flex flex-col overflow-auto">
         <div className="flex justify-between items-start pr-[26px] mb-[38px]">
           <p className="text-3xxl 2xl:text-4xl pl-9 font-bold text-black leading-[80%]">
             Offers

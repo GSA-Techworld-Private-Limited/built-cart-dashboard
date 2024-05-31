@@ -276,7 +276,7 @@ const AddProduct = () => {
   console.log(productId);
 
   return (
-    <div className="pl-[26px] pb-10">
+    <div className="pl-[26px] pb-10 h-[calc(100vh-126.59px)] 2xl:h-[calc(100vh-150px)] flex flex-col overflow-auto">
       <form onSubmit={handleProductSubmit}>
         <div className="flex items-center justify-between w-[95%] xl:w-[91%] mb-[31px]">
           <div

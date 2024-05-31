@@ -27,7 +27,7 @@ const CategoriesTable = () => {
   };
   return (
     <>
-      <div className="overflow-auto hide_scroll">
+      <div>
         <div className="w-[calc(1920px-265px)]">
           <div className="bg-[#BDBDBD] h-[54px] 2xl:h-16 flex gap-[62px] items-center">
             <div className="px-[54px]">
@@ -53,7 +53,7 @@ const CategoriesTable = () => {
             </p>
           </div>
           {categoryData &&
-            categoryData.map((val, i) => (
+            categoryData.reduce((acc, item) => [item].concat(acc), []).map((val, i) => (
               <div
                 key={val.id}
                 className={`2xl:h-[60px] h-[54px] mt-2 gap-[62px] flex items-center ${
@@ -81,7 +81,7 @@ const CategoriesTable = () => {
                   <img
                     width={67}
                     src={`https://v3h2dw9k-8030.inc1.devtunnels.ms${val.image}`}
-                    className="rounded object-cover max-h-[67px]"
+                    className="rounded object-cover max-h-[54px]"
                     alt="category pic"
                   />
                 </div>

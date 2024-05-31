@@ -67,7 +67,7 @@ const CategoriesPage = () => {
   };
   return (
     <>
-      <div className="w-full">
+      <div className="w-full h-[calc(100vh-126.59px)] 2xl:h-[calc(100vh-150px)] flex flex-col">
         <div className="flex gap-6 mb-[31px]">
           <p className="text-3xxl 2xl:text-4xl ps-7 font-bold text-black leading-[80%]">
             Categories
@@ -85,43 +85,45 @@ const CategoriesPage = () => {
             Add Product
           </button>
         </div>
-        <div className="flex items-center ps-7 mb-10 gap-3 justify-between pr-8">
-          <div className="flex items-center gap-[10px] me-4 max-h-[54px] 2xl:max-h-[62px] border w-[432px] border-black rounded-[10px] px-[13px]">
-            <IoSearchSharp className="text-dark text-[28px]" />
-            <input
-              onChange={filterCategoryWithName}
-              type="text"
-              placeholder="Search Name, Location..."
-              className="2xl:text-2xl text-xl text-[#6E6E73] leading-5 w-full placeholder:text-[#6E6E73] font-medium outline-none border-0 bg-transparent py-4 2xl:py-5"
-            />
+        <div className="overflow-auto hide_scroll">
+          <div className="flex items-center ps-7 mb-[18px] 2xl:mb-10 gap-3 justify-between pr-8">
+            <div className="flex items-center gap-[10px] me-4 max-h-[54px] 2xl:max-h-[62px] border w-[432px] border-black rounded-[10px] px-[13px]">
+              <IoSearchSharp className="text-dark text-[28px]" />
+              <input
+                onChange={filterCategoryWithName}
+                type="text"
+                placeholder="Search Name, Location..."
+                className="2xl:text-2xl text-xl text-[#6E6E73] leading-5 w-full placeholder:text-[#6E6E73] font-medium outline-none border-0 bg-transparent py-4 2xl:py-5"
+              />
+            </div>
+            <div className="flex items-center gap-6 2xl:gap-[30px]">
+              <CommonBtn
+                clickEvent={showEditOverlay}
+                style="text-white bg-[#606060] hover:bg-transparent hover:text-[#606060]"
+                btntext="Edit"
+              />
+              <CommonBtn
+                clickEvent={() => {
+                  removeCategory(
+                    categorySelect,
+                    setActiveSubTab,
+                    setCategoryData
+                  );
+                }}
+                style="text-white bg-[#FF3D00] hover:bg-transparent hover:text-[#FF3D00]"
+                btntext="Delete"
+              />
+              <CommonBtn
+                clickEvent={() => {
+                  setSelectExport(categoryData), setShowExport(!showExport);
+                }}
+                style="text-black bg-[#FDC63A] hover:bg-transparent hover:text-[#FDC63A]"
+                btntext="Export"
+              />
+            </div>
           </div>
-          <div className="flex items-center gap-6 2xl:gap-[30px]">
-            <CommonBtn
-              clickEvent={showEditOverlay}
-              style="text-white bg-[#606060] hover:bg-transparent hover:text-[#606060]"
-              btntext="Edit"
-            />
-            <CommonBtn
-              clickEvent={() => {
-                removeCategory(
-                  categorySelect,
-                  setActiveSubTab,
-                  setCategoryData
-                );
-              }}
-              style="text-white bg-[#FF3D00] hover:bg-transparent hover:text-[#FF3D00]"
-              btntext="Delete"
-            />
-            <CommonBtn
-              clickEvent={() => {
-                setSelectExport(categoryData), setShowExport(!showExport);
-              }}
-              style="text-black bg-[#FDC63A] hover:bg-transparent hover:text-[#FDC63A]"
-              btntext="Export"
-            />
-          </div>
+          <CategoriesTable />
         </div>
-        <CategoriesTable />
 
         {/* add category */}
         <div

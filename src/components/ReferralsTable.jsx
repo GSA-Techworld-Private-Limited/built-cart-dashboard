@@ -35,7 +35,7 @@ const ReferralsTable = () => {
             </p>
           </div>
           {currUser.referred_users ? (
-            currUser.referred_users.map((val, i) => (
+            currUser.referred_users.reduce((acc, item) => [item].concat(acc), []).map((val, i) => (
               <div
                 key={i}
                 className={`2xl:h-[60px] h-[54px] mt-2 flex items-center ${

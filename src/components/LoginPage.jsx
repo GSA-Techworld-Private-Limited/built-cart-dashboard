@@ -60,9 +60,9 @@ const LoginPage = () => {
       // Reset form data
       setFormData({ username: "", password: "" });
     } catch (error) {
-      console.error("Login error:", error);
+      console.error("Login error:", error.request.response);
       // show notification
-      toast.error("Error! Please try again.", {
+      toast.error("Invalid Credentials", {
         className: "rounded-[10px]",
       });
     }

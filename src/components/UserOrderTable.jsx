@@ -44,7 +44,7 @@ const UserOrderTable = () => {
             </p>
           </div>
           {currUser.user_orders.length > 0 ? (
-            currUser.user_orders.map((val, i) => (
+            currUser.user_orders.reduce((acc, item) => [item].concat(acc), []).map((val, i) => (
               <div
                 key={i}
                 className={`2xl:h-[60px] h-[54px] mt-2 flex items-center ${

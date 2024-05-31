@@ -17,7 +17,7 @@ const UserDataTable = () => {
   } = useContext(MyContext);
   return (
     <>
-      <div className="overflow-auto hide_scroll">
+      <div>
         <div className="w-[1740px]">
           <div className="bg-[#BDBDBD] h-[54px] 2xl:h-16 flex items-center">
             <div className="px-[54px]">
@@ -49,7 +49,7 @@ const UserDataTable = () => {
             </p>
           </div>
           {userData &&
-            userData.map((val, i) => (
+            userData.reduce((acc, item) => [item].concat(acc), []).map((val, i) => (
               <div
                 key={i}
                 className={`2xl:h-[60px] h-[54px] mt-2 flex items-center ${
