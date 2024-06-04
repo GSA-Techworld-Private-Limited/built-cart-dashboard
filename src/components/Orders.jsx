@@ -44,7 +44,7 @@ const Orders = () => {
   };
   const filterWithStatus = (value) => {
     if (value === "") {
-      // Clear filterData when the search term is empty
+      // Clear filterData when the status term is empty
       setFilterData([]);
     } else {
       const filteredData = orderData.filter(

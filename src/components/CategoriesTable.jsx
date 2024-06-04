@@ -5,6 +5,7 @@ import { DateRangeIcon } from "./common/Icons";
 import { formatDateTime } from "./OrdersTable";
 import CheckBox from "./common/CheckBox";
 import { handleCheckBoxChange } from "./utils/handleCheckBox";
+import { baseUrl } from "./utils/auth";
 const CategoriesTable = () => {
   const {
     setActiveSubTab,
@@ -78,7 +79,7 @@ const CategoriesTable = () => {
                   <div className="pl-6 w-[204px]">
                     <img
                       width={67}
-                      src={`https://v3h2dw9k-8030.inc1.devtunnels.ms${val.image}`}
+                      src={`${baseUrl}${val.image}`}
                       className="rounded object-cover max-h-[54px]"
                       alt="category pic"
                     />
