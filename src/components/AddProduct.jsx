@@ -41,7 +41,7 @@ const AddProduct = () => {
   };
   const toggleDropdown = (e) => {
     setIsOpen(!isOpen);
-   };
+  };
   const handleOptionClick = useCallback(
     (option, id) => {
       setCategory(id);
@@ -77,7 +77,7 @@ const AddProduct = () => {
       setProductId(response.data.product_id);
 
       setAddDetails(true);
-      toast.success(response.data.message, {
+      toast.success("First step completed", {
         className: "rounded-[10px]",
       });
     } catch (error) {
@@ -198,7 +198,7 @@ const AddProduct = () => {
           },
         }
       );
-    
+
       toast.success("Images Added Successfully!", {
         className: "rounded-[10px]",
       });
@@ -242,7 +242,7 @@ const AddProduct = () => {
         className: "rounded-[10px]",
       });
       setColorVariants([]);
-    
+
       setColorVariants([]);
       // Handle response
     } catch (error) {
@@ -264,6 +264,9 @@ const AddProduct = () => {
     );
     setCategoryData(res.data.response);
     getProductDetails(setProductDetails);
+    toast.success("Product Added Successfully", {
+      className: "rounded-[10px]",
+    });
   };
 
   return (

@@ -3,6 +3,7 @@ export const handleCheckBoxChange = (
   setCheckedItems,
   setCategorySelect
 ) => {
+  console.log(id);
   setCheckedItems((prevCheckedItems) => {
     const newCheckedItems = { ...prevCheckedItems };
     // Check if the checkbox was already selected

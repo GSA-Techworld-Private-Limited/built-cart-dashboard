@@ -167,17 +167,18 @@ const CategoriesPage = () => {
                   htmlFor="add-image"
                   className="cursor-pointer relative inline-block mt-9"
                 >
-                  {newCategory.image && (
+                  {newCategory.image ? (
                     <img
-                      className="absolute opacity-50 inset-0 h-full w-full rounded-[10px] object-cover"
+                      className="inset-0 h-[118px] w-[133px] rounded-[10px] object-cover"
                       src={URL.createObjectURL(newCategory.image)}
                       alt="category image"
                     />
+                  ) : (
+                    <div className="inline-flex relative flex-col items-center gap-4 px-[22px] bg-transparent rounded-[10px] shadow-sm pb-2 pt-[18px]">
+                      <FiPlusCircle className="text-[40px] cursor-pointer text-black" />
+                      <p className="text-2xl text-black font-normal">Add Pic</p>
+                    </div>
                   )}
-                  <div className="inline-flex relative flex-col items-center gap-4 px-[22px] bg-transparent rounded-[10px] shadow-sm pb-2 pt-[18px]">
-                    <FiPlusCircle className="text-[40px] cursor-pointer text-black" />
-                    <p className="text-2xl text-black font-normal">Add Pic</p>
-                  </div>
                   <input
                     required
                     id="add-image"

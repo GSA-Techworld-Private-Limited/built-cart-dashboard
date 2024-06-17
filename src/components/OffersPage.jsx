@@ -3,6 +3,8 @@ import { BsPatchCheckFill } from "react-icons/bs";
 import { CalendarTwoIcon, DownArrowIcon } from "./common/Icons";
 import { addOffer } from "./utils/auth";
 import MyContext from "./context/MyContext";
+import StatesSelect from "./common/StatesInput";
+import { toast } from "react-toastify";
 const OffersPage = () => {
   const { isOfferSent, setIsOfferSent, allCoupons } = useContext(MyContext);
   const [isOpen, setIsOpen] = useState(false);
@@ -19,10 +21,10 @@ const OffersPage = () => {
     account_created_to: "",
     number_of_referral_from: "",
     number_of_referral_to: "",
-    state_name: selectedOption,
+    state_name: "",
     total_beneficiaries: "",
   });
-
+  console.log(couponData);
   const toggleDropdown = (e) => {
     setIsOpen(!isOpen);
   };
@@ -33,7 +35,38 @@ const OffersPage = () => {
   };
   const handleSent = (e) => {
     e.preventDefault();
-    addOffer(couponData, setIsOfferSent, setcouponData, selectedOption);
+    const {
+      coupon_code,
+      order_value_amount,
+      validity_start,
+      validity_end,
+      term_conditions,
+      account_created_from,
+      account_created_to,
+      number_of_referral_from,
+      number_of_referral_to,
+      state_name,
+      total_beneficiaries,
+    } = couponData;
+    if (
+      coupon_code &&
+      order_value_amount &&
+      validity_start &&
+      validity_end &&
+      term_conditions &&
+      account_created_from &&
+      account_created_to &&
+      number_of_referral_from &&
+      number_of_referral_to &&
+      state_name &&
+      total_beneficiaries
+    ) {
+      addOffer(couponData, setIsOfferSent, setcouponData, selectedOption);
+    } else {
+      toast.warning("Please fill all the fields", {
+        className: "rounded-[10px]",
+      });
+    }
   };
   const today = new Date();
   const tomorrow = new Date(today);
@@ -70,16 +103,19 @@ const OffersPage = () => {
       setcouponData({ ...couponData, [name]: value });
     }
   };
-  useEffect(() => {
-    setcouponData((prevCouponData) => ({
-      ...prevCouponData,
-      state_name: selectedOption,
-    }));
-  }, [selectedOption]);
+  // useEffect(() => {
+  //   setcouponData((prevCouponData) => ({
+  //     ...prevCouponData,
+  //     state_name: selectedOption,
+  //   }));
+  // }, [selectedOption]);
 
   return (
     <>
-      <form onSubmit={handleSent} className="w-full h-[calc(100vh-126.59px)] 2xl:h-[calc(100vh-150px)] flex flex-col overflow-auto">
+      <form
+        onSubmit={handleSent}
+        className="w-full h-[calc(100vh-126.59px)] 2xl:h-[calc(100vh-150px)] flex flex-col overflow-auto"
+      >
         <div className="flex justify-between items-start pr-[26px] mb-[38px]">
           <p className="text-3xxl 2xl:text-4xl pl-9 font-bold text-black leading-[80%]">
             Offers
@@ -280,7 +316,7 @@ const OffersPage = () => {
               <p className="text-xl 2xl:text-2xl font-medium text-black mb-2 2xl:mb-4">
                 Select State
               </p>
-              <div className="relative">
+              {/* <div className="relative">
                 <div
                   className="border border-spacing-[0.5px] flex 2xl:text-2xl text-xl w-[401px] font-medium h-12 2xl:h-[62px] text-[#6E6E73] justify-between items-center pl-[18px] pr-8 border-[#6E6E73] p-2 rounded-[10px] cursor-pointer"
                   onClick={toggleDropdown}
@@ -302,7 +338,11 @@ const OffersPage = () => {
                     ))}
                   </div>
                 )}
-              </div>
+              </div> */}
+              <StatesSelect
+                setcouponData={setcouponData}
+                couponData={couponData}
+              />
               <div className="mt-10 2xl:mt-[50px] flex flex-col">
                 <label
                   htmlFor="total-beneficiaries"

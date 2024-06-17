@@ -30,3 +30,28 @@ input[type="number"] {
   font-weight: 500;
   text-transform: capitalize;
 }
+.css-154xyx0-MuiInputBase-root-MuiOutlinedInput-root {
+  border-radius: 10px !important;
+  color: #6e6e73 !important;
+  padding-top: unset !important;
+  padding-bottom: unset !important;
+}
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+  border: 1px solid #6e6e73 !important;
+}
+.css-1cs46gc-MuiAutocomplete-root
+  .MuiOutlinedInput-root
+  .MuiAutocomplete-input {
+  padding: 13px !important;
+}
+.css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root {
+  top: 50% !important;left: 12px !important;
+  transform: translateY(-50%) !important;
+}
+@media (min-width: 1536px) {
+  .css-1cs46gc-MuiAutocomplete-root
+    .MuiOutlinedInput-root
+    .MuiAutocomplete-input {
+    padding: 19px !important;
+  }
+}

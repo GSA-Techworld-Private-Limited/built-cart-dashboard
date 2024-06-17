@@ -13,6 +13,7 @@ const ComplaintsTable = () => {
     complaints,
     filteredComplaints,
   } = useContext(MyContext);
+  console.log(complaints);
   return (
     <>
       <div>
