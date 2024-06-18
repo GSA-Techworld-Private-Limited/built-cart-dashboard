@@ -64,7 +64,7 @@ function App() {
   }, [authenticated]);
   return (
     <React.Fragment>
-      <ToastContainer />
+      <ToastContainer autoClose={2500} />
       <Routes>
         <Route
           path="/"

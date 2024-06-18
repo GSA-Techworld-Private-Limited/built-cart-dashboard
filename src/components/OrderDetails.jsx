@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { IoArrowBack } from "react-icons/io5";
 import MyContext from "./context/MyContext";
 
-const OrderDetails = (props) => {
+const OrderDetails = () => {
   const { setActiveSubTab, userOrderDetails } = useContext(MyContext);
   const userDetails = userOrderDetails.orders[0];
   return (

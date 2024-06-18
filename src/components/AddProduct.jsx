@@ -517,12 +517,6 @@ const AddProduct = () => {
                       </div>
                     ))}
                   </div>
-                  <button
-                    onClick={finishAndUpdate}
-                    className="mt-5 bg-gray-500 rounded-[10px] py-3 px-8 2xl:text-xl  text-white"
-                  >
-                    Finish
-                  </button>
                 </React.Fragment>
               ) : (
                 <div className="ml-11 mt-6">
@@ -574,6 +568,12 @@ const AddProduct = () => {
                 </div>
               </div>
             )}
+            <button
+              onClick={finishAndUpdate}
+              className="mt-5 bg-gray-500 rounded-[10px] py-3 px-8 2xl:text-xl  text-white"
+            >
+              Finish
+            </button>
           </div>
         </React.Fragment>
       )}

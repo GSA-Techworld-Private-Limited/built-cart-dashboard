@@ -1,7 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-export const baseUrl = "https://v3h2dw9k-8002.inc1.devtunnels.ms/";
-
+export const baseUrl = "http://64.227.161.199:8007/";
 export const fetchUserData = async (
   setUserData,
   setOrderData,
@@ -196,7 +195,7 @@ export const updateCategory = async (
     );
     setCategoryData(categoryDataList.data.response);
     setEditCategoryData({ name: "", image: null });
-     toast.success("Category Updated Successfully!!", {
+    toast.success("Category Updated Successfully!!", {
       className: "rounded-[10px]",
     });
   } catch (error) {

@@ -1,18 +1,12 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { IoSearchSharp } from "react-icons/io5";
 import CommonBtn from "./common/CommonBtn";
 import MyContext from "./context/MyContext";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import ComplaintsTable from "./ComplaintsTable";
 import { baseUrl, getComplaints } from "./utils/auth";
 import axios from "axios";
 import { toast } from "react-toastify";
+import CustomSelect from "./common/CustomSelect";
 const ComplaintsPage = () => {
   const {
     complaints,
@@ -33,7 +27,7 @@ const ComplaintsPage = () => {
       try {
         const res = await axios.patch(
           `${baseUrl}/superadmin/user-complaints-update/${categorySelect}/`,
-          { status: value },
+          { status: value.value },
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -75,6 +69,11 @@ const ComplaintsPage = () => {
       setFilteredComplaints(filteredData);
     }
   };
+  const complaintStatusOptions = [
+    { value: "resolved", label: "Resolved", color: "text-[#0FA958]" },
+    { value: "pending", label: "Pending", color: "text-[#FF3D00]" },
+  ];
+
   return (
     <>
       <div className="w-full h-[calc(100vh-126.59px)] 2xl:h-[calc(100vh-150px)] flex flex-col">
@@ -93,21 +92,13 @@ const ComplaintsPage = () => {
                   className="2xl:text-2xl text-xl text-[#6E6E73] leading-5 w-full placeholder:text-[#6E6E73] font-medium outline-none border-0 bg-transparent py-4 2xl:py-5"
                 />
               </div>
-              <Select onValueChange={updateComplaintsStatus}>
-                <SelectTrigger className="w-[277px]">
-                  <SelectValue placeholder="Update Status" />
-                </SelectTrigger>
-                <SelectContent width="w-[277px]">
-                  <SelectItem color="text-[#0FA958]" value="resolved">
-                    Resolved
-                  </SelectItem>
-                  <SelectItem color="text-[#FF3D00]" value="pending">
-                    Pending
-                  </SelectItem>
-                </SelectContent>
-              </Select>
+              <CustomSelect
+                options={complaintStatusOptions}
+                onValueChange={updateComplaintsStatus}
+                placeholder="Update Status"
+                className="w-[277px]"
+              />
             </div>
-
             <CommonBtn
               clickEvent={() => {
                 setSelectExport(complaints), setShowExport(!showExport);

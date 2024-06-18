@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { BsPatchCheckFill } from "react-icons/bs";
-import { CalendarTwoIcon, DownArrowIcon } from "./common/Icons";
+import { CalendarTwoIcon } from "./common/Icons";
 import { addOffer } from "./utils/auth";
 import MyContext from "./context/MyContext";
 import StatesSelect from "./common/StatesInput";
@@ -10,7 +10,6 @@ const OffersPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("Karnataka");
   const [isCouponUnique, setisCouponUnique] = useState(true);
-  const options = ["Karnataka", "Haryana", "Gujrat"];
   const [couponData, setcouponData] = useState({
     coupon_code: "",
     order_value_amount: "",
@@ -103,13 +102,6 @@ const OffersPage = () => {
       setcouponData({ ...couponData, [name]: value });
     }
   };
-  // useEffect(() => {
-  //   setcouponData((prevCouponData) => ({
-  //     ...prevCouponData,
-  //     state_name: selectedOption,
-  //   }));
-  // }, [selectedOption]);
-
   return (
     <>
       <form

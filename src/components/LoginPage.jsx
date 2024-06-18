@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import pageLogo from "../assets/images/webp/page-logo.webp";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -20,6 +20,7 @@ const LoginPage = () => {
   } = useContext(MyContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ username: "", password: "" });
+  const [loading, setLoading] = useState(false);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -27,6 +28,7 @@ const LoginPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const loginResponse = await axios.post(
         `${baseUrl}/superadmin/dashboard-login/`,
         formData
@@ -40,6 +42,7 @@ const LoginPage = () => {
       if (refreshToken) {
         sessionStorage.setItem("refreshToken", refreshToken);
       }
+      setLoading(false);
       // show notification
       toast.success("Login successful!", {
         className: "rounded-[10px]",
@@ -96,7 +99,7 @@ const LoginPage = () => {
               placeholder="Password"
             />
             <button className="w-full mt-6 2xl:mt-9 text-center text-2xl md:text-2xl 2xl:text-4xl font-semibold p-3 2xl:p-[18px] bg-primary text-white rounded-[20px] duration-300 hover:bg-transparent border border-transparent hover:border-primary">
-              Login
+              {!loading ? "Login" : "Loading"}
             </button>
           </form>
         </div>

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { IoArrowBack } from "react-icons/io5";
 import MyContext from "./context/MyContext";
 import CommonBtn from "./common/CommonBtn";

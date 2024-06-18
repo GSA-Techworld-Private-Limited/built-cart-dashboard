@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { Checkbox } from "@/components/ui/checkbox";
+import { useContext } from "react";
 import MyContext from "./context/MyContext";
 import { DateRangeIcon } from "./common/Icons";
 import CheckBox from "./common/CheckBox";
@@ -7,11 +6,11 @@ import { handleCheckBoxChange } from "./utils/handleCheckBox";
 import { formatDateTime } from "./OrdersTable";
 const ComplaintsTable = () => {
   const {
-    checkedItems,
     setCheckedItems,
     setCategorySelect,
     complaints,
     filteredComplaints,
+    checkedItems,
   } = useContext(MyContext);
   console.log(complaints);
   return (
@@ -59,6 +58,9 @@ const ComplaintsTable = () => {
                     <CheckBox
                       inputStyle="!border-[#686868]"
                       checkStyle="!border-[#686868] !bg-transparent"
+                      isChecked={
+                        checkedItems[val.id] || false
+                      }
                       handleCheckBox={() =>
                         handleCheckBoxChange(
                           val.id,

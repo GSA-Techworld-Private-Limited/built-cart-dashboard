@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { IoSearchSharp } from "react-icons/io5";
 import CommonBtn from "./common/CommonBtn";
 import ProductDetailsTables from "./ProductDetailsTable";

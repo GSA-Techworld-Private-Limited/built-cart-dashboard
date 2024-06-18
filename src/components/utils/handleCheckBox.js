@@ -11,7 +11,7 @@ export const handleCheckBoxChange = (
     // Uncheck all other checkboxes
     Object.keys(newCheckedItems).forEach((key) => {
       if (key !== id) {
-        newCheckedItems[key] = false;
+        newCheckedItems[key] = false; 
       }
     });
     // Toggle the clicked checkbox if it was not checked before

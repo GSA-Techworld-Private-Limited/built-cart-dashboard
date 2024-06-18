@@ -14,6 +14,8 @@ import MyContext from "./context/MyContext";
 import { baseUrl, fetchOrderData, fetchStatusData } from "./utils/auth";
 import { toast } from "react-toastify";
 import axios from "axios";
+import CustomSelect from "./common/CustomSelect";
+
 const Orders = () => {
   const {
     showExport,
@@ -56,11 +58,12 @@ const Orders = () => {
     }
   };
   const updateOrderStatus = async (value) => {
+    console.log(value);
     const accessToken = sessionStorage.getItem("accessToken");
     try {
       const res = await axios.patch(
         `${baseUrl}/superadmin/get-orders-dashboard/${categorySelect}/`,
-        { status: value },
+        { status: value.value },
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -80,6 +83,14 @@ const Orders = () => {
       });
     }
   };
+  const options = [
+    { value: "payment_pending", label: "Pending", color: "text-[#0E39D1]" },
+    { value: "in_transit", label: "In Transit", color: "text-[#FDC63A]" },
+    { value: "delivered", label: "Delivered", color: "text-[#0FA958]" },
+    { value: "placed", label: "Placed", color: "text-dark" },
+    { value: "created", label: "Created", color: "text-dark" },
+  ];
+
   return (
     <>
       <div className="w-full h-[calc(100vh-126.59px)] 2xl:h-[calc(100vh-150px)] flex flex-col">
@@ -98,28 +109,12 @@ const Orders = () => {
                   className="2xl:text-2xl text-xl text-[#6E6E73] leading-5 w-full placeholder:text-[#6E6E73] font-medium outline-none border-0 bg-transparent py-4 2xl:py-5"
                 />
               </div>
-              <Select onValueChange={updateOrderStatus}>
-                <SelectTrigger className="w-[277px]">
-                  <SelectValue placeholder="Update Status" />
-                </SelectTrigger>
-                <SelectContent width="w-[272px]">
-                  <SelectItem color="text-[#0E39D1]" value="payment_pending">
-                    Pending
-                  </SelectItem>
-                  <SelectItem color="text-[#FDC63A]" value="in_transit">
-                    In Transit
-                  </SelectItem>
-                  <SelectItem color="text-[#0FA958]" value="delivered">
-                    Delivered
-                  </SelectItem>
-                  <SelectItem color="text-dark" value="placed">
-                    Placed
-                  </SelectItem>
-                  <SelectItem color="text-dark" value="created">
-                    Created
-                  </SelectItem>
-                </SelectContent>
-              </Select>
+              <CustomSelect
+                options={options}
+                onValueChange={updateOrderStatus}
+                placeholder="Update Status"
+                className="w-[277px]"
+              />
               <div className="flex items-center gap-2">
                 <ChooseIcon dimensions="w-6" />
                 <p className="text-xl text-black font-medium text-nowrap">

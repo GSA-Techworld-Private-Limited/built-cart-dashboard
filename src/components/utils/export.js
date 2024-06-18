@@ -3,31 +3,55 @@ import * as XLSX from "xlsx";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { toast } from "react-toastify";
+const extractDate = (str) => {
+  const datePattern = /^\d{4}-\d{2}-\d{2}/;
+  const match = str.match(datePattern);
+  return match ? match[0] : str;
+};
+const isURL = (str) => {
+  const urlPattern = /^(http|https):\/\/[^\s$.?#].[^\s]*$/gm;
+  return urlPattern.test(str);
+};
 
 const flattenObject = (obj, parent = "", res = {}) => {
   for (let key in obj) {
     const propName = parent ? `${parent}.${key}` : key;
     let displayName = key.replace(/_/g, " "); // Replace underscores with spaces
-    displayName = displayName = displayName
+    displayName = displayName
       .split(" ")
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" "); // Capitalize each word; // Capitalize the first letter
+      .join(" "); // Capitalize each word
     if (Array.isArray(obj[key])) {
       continue;
-    } else if (typeof obj[key] == "object" && obj[key] !== null) {
+    } else if (typeof obj[key] === "object" && obj[key] !== null) {
       flattenObject(obj[key], propName, res);
+    } else if (typeof obj[key] === "boolean" || !obj[key]) {
+      // Skip boolean values and falsy values
+      continue;
+    } else if (
+      typeof obj[key] === "string" &&
+      (obj[key].startsWith("data:image") || isURL(obj[key]))
+    ) {
+      // Skip image data and URLs
+      continue;
+    } else if (
+      typeof obj[key] === "string" &&
+      /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{6}/.test(obj[key])
+    ) {
+      // Format dates to YYYY-MM-DD
+      res[propName] = { value: extractDate(obj[key]), display: displayName };
     } else {
       res[propName] = { value: obj[key], display: displayName }; // Store both value and display name
     }
   }
   return res;
 };
-
+// Function to export data based on time frame and file type
 export const exportData = (timeFrame, userData, fileType, afterComplete) => {
   const startDate = new Date(`${timeFrame.from}T00:00:00Z`);
   const endDate = new Date(`${timeFrame.to}T23:59:59Z`);
   if (!startDate || !endDate) {
-    toast.error("Please select both start and end date.!! Try Again", {
+    toast.error("Please select both start and end date. Try Again", {
       className: "rounded-[10px]",
     });
     return;
@@ -45,6 +69,7 @@ export const exportData = (timeFrame, userData, fileType, afterComplete) => {
     return;
   }
 
+  // Flatten and format data
   const flattenedData = filteredData.map((item) => flattenObject(item));
 
   if (fileType === "xlsx" || fileType === "xls") {
@@ -125,8 +150,11 @@ export const exportData = (timeFrame, userData, fileType, afterComplete) => {
     doc.save("exported-data.pdf");
     afterComplete();
   } else {
-    toast.error("Request Failed!! Try Again", {
-      className: "rounded-[10px]",
-    });
+    toast.error(
+      "Invalid file type selected. Please select either XLSX/XLS or PDF.",
+      {
+        className: "rounded-[10px]",
+      }
+    );
   }
 };
