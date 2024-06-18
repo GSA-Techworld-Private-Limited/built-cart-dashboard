@@ -20,38 +20,38 @@ const OrdersTable = ({ filterData }) => {
 
   return (
     <div>
-      <div className="w-[2370px]">
-        <div className="bg-[#BDBDBD] h-[54px] 2xl:h-16 flex items-center">
-        <div className="px-[68px]"></div>
-          <div className="flex pl-6 items-center gap-9 w-[178px]">
+      <div className="w-[1700px] 2xl:w-[2370px]">
+        <div className="bg-[#BDBDBD] h-12 2xl:h-16 flex items-center">
+          <div className="max-2xl:w-[80px] 2xl:px-[68px]"></div>
+          <div className="flex pl-6 items-center gap-9 w-[140px] 2xl:w-[178px]">
             <p className="font-semibold text-nowrap table-text">Date</p>
             <DateRangeIcon />
           </div>
-          <p className="font-semibold text-nowrap pl-6 w-[232px] table-text">
+          <p className="font-semibold text-nowrap pl-6 w-[180px] 2xl:w-[232px] table-text">
             Order ID
           </p>
-          <p className="font-semibold text-nowrap pl-6 w-[249px] table-text">
+          <p className="font-semibold text-nowrap pl-6 w-[150px] 2xl:w-[249px] table-text">
             User
           </p>
-          <p className="font-semibold text-nowrap pl-6 w-[237px] table-text">
+          <p className="font-semibold text-nowrap pl-6 w-[180px] 2xl:w-[237px] table-text">
             Location
           </p>
-          <p className="font-semibold text-nowrap pl-6 w-[315px] table-text">
+          <p className="font-semibold text-nowrap pl-6 w-[180px] 2xl:w-[315px] table-text">
             Referral
           </p>
-          <p className="font-semibold text-nowrap pl-6 w-[209px] table-text">
+          <p className="font-semibold text-nowrap pl-6 w-[160px] 2xl:w-[209px] table-text">
             Items
           </p>
-          <p className="font-semibold text-nowrap pl-6 w-[119px] table-text">
+          <p className="font-semibold text-nowrap pl-6 w-[90px] 2xl:w-[119px] table-text">
             Qty
           </p>
-          <p className="font-semibold text-nowrap pl-6 w-[199px] table-text">
+          <p className="font-semibold text-nowrap pl-6 w-[150px] 2xl:w-[199px] table-text">
             Price
           </p>
-          <p className="font-semibold text-nowrap pl-6 w-[244px] table-text">
+          <p className="font-semibold text-nowrap pl-6 w-[180px] 2xl:w-[244px] table-text">
             Payment mode
           </p>
-          <p className="font-semibold text-nowrap pl-6 w-[244px] table-text">
+          <p className="font-semibold text-nowrap pl-6 w-[180px] 2xl:w-[244px] table-text">
             Status
           </p>
         </div>
@@ -61,11 +61,11 @@ const OrdersTable = ({ filterData }) => {
             .map((val, i) => (
               <React.Fragment key={i}>
                 <div
-                  className={`2xl:h-[60px] h-[54px] mt-2 flex items-center ${
+                  className={`2xl:h-[60px] h-12 mt-2 flex items-center ${
                     i % 2 === 0 ? "bg-[#FEF9EB]" : "bg-white"
                   }`}
                 >
-                  <div className="px-[54px] w-[136px]">
+                  <div className="2xl:px-[54px] text-center w-[80px] 2xl:w-[136px]">
                     <CheckBox
                       inputStyle="!border-[#686868]"
                       checkStyle="!border-[#686868] !bg-transparent"
@@ -79,7 +79,7 @@ const OrdersTable = ({ filterData }) => {
                       }
                     />
                   </div>
-                  <p className="font-medium pl-6 w-[178px] text-nowrap table-text">
+                  <p className="font-medium pl-6 w-[140px] 2xl:w-[178px] text-nowrap table-text">
                     {formatDateTime(val.created_at)}
                   </p>
                   <p
@@ -90,24 +90,24 @@ const OrdersTable = ({ filterData }) => {
                         setUserOrderDetails
                       )
                     }
-                    className="font-medium underline hover:no-underline duration-300 cursor-pointer text-nowrap pl-6 w-[232px] 2xl:text-2xl text-xl leading-5 text-dark"
+                    className="font-medium underline hover:no-underline duration-300 cursor-pointer text-nowrap pl-6 w-[180px] 2xl:w-[232px] 2xl:text-2xl text-base leading-5 text-dark"
                   >
                     {val.order_id}
                   </p>
-                  <div className="w-[1572px] flex">
+                  <div className="w-[1090px] 2xl:w-[1572px] flex">
                     {val.orders.map((obj, ind) => (
                       <div key={`${i}-${ind}`} className="flex">
-                        <p className="font-medium text-nowrap pl-6 w-[249px] table-text">
+                        <p className="font-medium text-nowrap pl-6 w-[150px] 2xl:w-[249px] table-text">
                           {obj.user}
                         </p>
-                        <p className="font-medium text-nowrap pl-6 w-[237px] table-text">
+                        <p className="font-medium text-nowrap pl-6 w-[180px] 2xl:w-[237px] table-text">
                           {obj.order_address}
                         </p>
-                        <p className="font-medium text-nowrap pl-6 w-[315px] table-text">
+                        <p className="font-medium text-nowrap pl-6 w-[180px] 2xl:w-[315px] table-text">
                           {obj.referral ? obj.referral : "N/A"}
                         </p>
                         <p
-                          className={`font-medium text-nowrap pl-6 w-[209px] 2xl:text-2xl text-xl leading-5 ${
+                          className={`font-medium text-nowrap pl-6 w-[160px] 2xl:w-[209px] 2xl:text-2xl text-base leading-5 ${
                             obj.date === ""
                               ? "text-[#FF8B66]"
                               : "text-[#282828]"
@@ -116,7 +116,7 @@ const OrdersTable = ({ filterData }) => {
                           {obj.product}
                         </p>
                         <p
-                          className={`font-medium text-nowrap pl-6 w-[119px] 2xl:text-2xl text-xl leading-5 ${
+                          className={`font-medium text-nowrap pl-6 w-[90px] 2xl:w-[119px] 2xl:text-2xl text-base leading-5 ${
                             obj.date === ""
                               ? "text-[#FF8B66]"
                               : "text-[#282828]"
@@ -125,7 +125,7 @@ const OrdersTable = ({ filterData }) => {
                           {obj.quantity}
                         </p>
                         <p
-                          className={`font-medium text-nowrap pl-6 w-[199px] 2xl:text-2xl text-xl leading-5 ${
+                          className={`font-medium text-nowrap pl-6 w-[150px] 2xl:w-[199px] 2xl:text-2xl text-base leading-5 ${
                             obj.date === ""
                               ? "text-[#FF8B66]"
                               : "text-[#282828]"
@@ -136,7 +136,7 @@ const OrdersTable = ({ filterData }) => {
                         <p
                           className={`${
                             obj.mode_of_payment === "cod" && "!uppercase"
-                          } font-medium text-nowrap capitalize pl-6 w-[244px] table-text`}
+                          } font-medium text-nowrap capitalize pl-6 w-[180px] 2xl:w-[244px] table-text`}
                         >
                           {obj.mode_of_payment}
                         </p>
@@ -144,7 +144,7 @@ const OrdersTable = ({ filterData }) => {
                     ))}
                   </div>
                   <p
-                    className={`font-medium text-nowrap pl-6 w-[244px] 2xl:text-2xl text-xl leading-5 ${
+                    className={`font-medium text-nowrap pl-6 w-[180px] 2xl:w-[244px] 2xl:text-2xl text-base leading-5 ${
                       val.status === "payment_pending"
                         ? "text-[#FF3D00]"
                         : val.status === "in_transit"

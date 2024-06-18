@@ -28,7 +28,7 @@ const CustomSelect = ({ options, onValueChange, placeholder, className }) => {
   return (
     <div className={`relative ${className}`} ref={dropdownRef}>
       <button
-        className="w-full flex items-center font-medium justify-between px-6 py-4 border border-black bg-white rounded-[10px] text-xl leading-5 text-[#6E6E73]"
+        className="w-full flex items-center font-medium justify-between px-6 py-3 2xl:py-5 border border-black bg-white rounded-[10px] 2xl:text-2xl text-lg leading-5 text-[#6E6E73]"
         onClick={() => setIsOpen(!isOpen)}
       >
         <span>{selectedValue ? selectedValue.label : placeholder}</span>
@@ -50,7 +50,7 @@ const CustomSelect = ({ options, onValueChange, placeholder, className }) => {
         </svg>
       </button>
       {isOpen && (
-        <div className="absolute w-full mt-1 bg-white border border-black rounded-[10px] z-50 border-t-0 rounded-t-none top-[42px]">
+        <div className="absolute w-full mt-1 bg-white border border-black rounded-[10px] z-50 border-t-0 rounded-t-none top-9 2xl:top-[42px]">
           {options.map((option) => (
             <div
               key={option.value}

@@ -109,11 +109,11 @@ const OffersPage = () => {
         className="w-full h-[calc(100vh-126.59px)] 2xl:h-[calc(100vh-150px)] flex flex-col overflow-auto"
       >
         <div className="flex justify-between items-start pr-[26px] mb-[38px]">
-          <p className="text-3xxl 2xl:text-4xl pl-9 font-bold text-black leading-[80%]">
+          <p className="text-3xl 2xl:text-4xl pl-9 font-bold text-black leading-[80%]">
             Offers
           </p>
           <button
-            className={`2xl:text-2xl text-xl font-semibold text-white duration-200 text-nowrap border w-[210px] 2xl:w-[256px] text-center rounded-[10px] px-10 py-3 2xl:py-3.5 ${
+            className={`2xl:text-2xl text-lg 2xl:font-semibold text-white duration-200 text-nowrap border w-[190px] 2xl:w-[256px] text-center rounded-[10px] px-10 py-3 2xl:py-3.5 ${
               isOfferSent
                 ? "flex items-center gap-3 justify-center border-[#0FB001]"
                 : "hover:text-[#0FB001] text-white bg-[#0FB001] hover:bg-transparent border-transparent hover:border-current"
@@ -135,7 +135,7 @@ const OffersPage = () => {
               <div className="flex flex-col">
                 <label
                   htmlFor="coupon"
-                  className="text-xl 2xl:text-2xl font-medium text-black mb-2 2xl:mb-4"
+                  className="text-lg 2xl:text-2xl font-medium text-black mb-1 2xl:mb-4"
                 >
                   Enter Coupon Code
                   <span className="text-sm ml-4 text-red-500">
@@ -155,10 +155,10 @@ const OffersPage = () => {
                   placeholder="Enter Code"
                 />
               </div>
-              <div className="flex flex-col mt-8 2xl:mt-[46px]">
+              <div className="flex flex-col mt-4 2xl:mt-[46px]">
                 <label
                   htmlFor="order-value"
-                  className="text-xl 2xl:text-2xl font-medium text-black mb-2 2xl:mb-4"
+                  className="text-lg 2xl:text-2xl font-medium text-black mb-1 2xl:mb-4"
                 >
                   Order value
                 </label>
@@ -175,39 +175,39 @@ const OffersPage = () => {
                   />
                 </div>
               </div>
-              <p className="text-xl 2xl:text-2xl font-medium text-black mb-4 2xl:mb-6 mt-11 2xl:mt-[53px]">
+              <p className="text-lg 2xl:text-2xl font-medium text-black mb-4 2xl:mb-6 mt-4 2xl:mt-[53px]">
                 Coupon Validity
               </p>
-              <div className="flex items-center flex-col min-[1800px]:flex-row gap-5 2xl:gap-8 mb-12 2xl:mb-[72px]">
+              <div className="flex items-center flex-col min-[1800px]:flex-row gap-4 2xl:gap-8 mb-4 2xl:mb-[72px]">
                 <div className="flex items-center gap-5 w-full">
-                  <p className="text-xl 2xl:text-2xl font-normal text-black">
+                  <p className="text-lg 2xl:text-2xl font-normal text-black">
                     From
                   </p>
-                  <div className="flex relative w-full items-center">
+                  <div className="flex relative 2xl:w-full items-center">
                     <input
                       required
                       onChange={handleInputChange}
                       name="validity_start"
                       value={couponData.validity_start}
                       // min={tomorrow.toISOString().split("T")[0]}
-                      className="h-12 2xl:h-[62px] border outline-none border-[#6E6E73] w-full uppercase text-[#6E6E73] rounded-[10px] py-3.5 px-5 leading-5 2xl:text-2xl text-xl border-spacing-[0.5px]"
+                      className="h-12 2xl:h-[62px] border outline-none border-[#6E6E73] w-full uppercase text-[#6E6E73] rounded-[10px] py-3 px-5 leading-5 2xl:text-2xl text-lg border-spacing-[0.5px]"
                       type="date"
                     />
                     <CalendarTwoIcon style="absolute top-1/2 bg-white -translate-y-1/2 right-[25px] pointer-events-none max-2xl:w-7" />
                   </div>
                 </div>
                 <div className="flex items-center gap-12 2xl:gap-[51px] min-[1800px]:gap-5 w-full">
-                  <p className="text-xl 2xl:text-2xl font-normal text-black">
+                  <p className="text-lg 2xl:text-2xl font-normal text-black">
                     To
                   </p>
-                  <div className="flex relative w-full items-center">
+                  <div className="flex relative 2xl:w-full items-center">
                     <input
                       required
                       onChange={handleInputChange}
                       name="validity_end"
                       value={couponData.validity_end}
                       // min={tomorrow.toISOString().split("T")[0]}
-                      className="h-12 2xl:h-[62px] border outline-none border-[#6E6E73] w-full uppercase text-[#6E6E73] rounded-[10px] py-3.5 px-5 leading-5 2xl:text-2xl text-xl border-spacing-[0.5px]"
+                      className="h-12 2xl:h-[62px] border outline-none border-[#6E6E73] w-full uppercase text-[#6E6E73] rounded-[10px] py-3 px-5 leading-5 2xl:text-2xl text-lg border-spacing-[0.5px]"
                       type="date"
                     />
                     <CalendarTwoIcon style="absolute top-1/2 bg-white -translate-y-1/2 right-[25px] pointer-events-none max-2xl:w-7" />
@@ -217,7 +217,7 @@ const OffersPage = () => {
               <div className="flex flex-col mb-3">
                 <label
                   htmlFor="t&c"
-                  className="text-xl 2xl:text-2xl font-medium text-black mb-2 2xl:mb-4"
+                  className="text-lg 2xl:text-2xl font-medium text-black mb-1 2xl:mb-4"
                 >
                   Enter T&C
                 </label>
@@ -234,52 +234,52 @@ const OffersPage = () => {
               </div>
             </div>
             <div className="w-full overflow-hidden">
-              <p className="text-2xl 2xl:text-[28px] font-medium text-black">
+              <p className="text-xl 2xl:text-[28px] font-medium text-black">
                 Select Criteria
               </p>
-              <p className="text-xl 2xl:text-2xl font-medium text-black mb-5 2xl:mb-7 mt-2 2xl:mt-6">
+              <p className="text-lg 2xl:text-2xl font-medium text-black mb-1 2xl:mb-7 mt-2 2xl:mt-6">
                 Account Creation Date :
               </p>
-              <div className="flex items-center flex-col min-[1800px]:flex-row gap-5 2xl:gap-8 mb-12 2xl:mb-[72px]">
+              <div className="flex items-center flex-col min-[1800px]:flex-row gap-4 2xl:gap-8 mb-6 2xl:mb-[72px]">
                 <div className="flex items-center gap-5 w-full">
-                  <p className="text-xl 2xl:text-2xl font-normal text-black">
+                  <p className="text-lg 2xl:text-2xl font-normal text-black">
                     From
                   </p>
-                  <div className="flex relative w-full items-center">
+                  <div className="flex relative 2xl:w-full items-center">
                     <input
                       required
                       onChange={handleInputChange}
                       name="account_created_from"
                       value={couponData.account_created_from}
-                      className="h-12 2xl:h-[62px] border outline-none border-[#6E6E73] w-full uppercase text-[#6E6E73] rounded-[10px] py-3.5 px-5 leading-5 2xl:text-2xl text-xl border-spacing-[0.5px]"
+                      className="h-12 2xl:h-[62px] border outline-none border-[#6E6E73] w-full uppercase text-[#6E6E73] rounded-[10px] py-3 px-5 leading-5 2xl:text-2xl text-lg border-spacing-[0.5px]"
                       type="date"
                     />
                     <CalendarTwoIcon style="absolute top-1/2 bg-white -translate-y-1/2 right-[25px] pointer-events-none max-2xl:w-7" />
                   </div>
                 </div>
                 <div className="flex items-center gap-12 2xl:gap-[51px] min-[1800px]:gap-5 w-full">
-                  <p className="text-xl 2xl:text-2xl font-normal text-black">
+                  <p className="text-lg 2xl:text-2xl font-normal text-black">
                     To
                   </p>
-                  <div className="flex relative w-full items-center">
+                  <div className="flex relative 2xl:w-full items-center">
                     <input
                       required
                       onChange={handleInputChange}
                       name="account_created_to"
                       value={couponData.account_created_to}
-                      className="h-12 2xl:h-[62px] border outline-none border-[#6E6E73] w-full uppercase text-[#6E6E73] rounded-[10px] py-3.5 px-5 leading-5 2xl:text-2xl text-xl border-spacing-[0.5px]"
+                      className="h-12 2xl:h-[62px] border outline-none border-[#6E6E73] w-full uppercase text-[#6E6E73] rounded-[10px] py-3 px-5 leading-5 2xl:text-2xl text-lg border-spacing-[0.5px]"
                       type="date"
                     />
                     <CalendarTwoIcon style="absolute top-1/2 bg-white -translate-y-1/2 right-[25px] pointer-events-none max-2xl:w-7" />
                   </div>
                 </div>
               </div>
-              <p className="text-xl 2xl:text-2xl font-medium text-black mb-4 2xl:mb-6">
+              <p className="text-lg 2xl:text-2xl font-medium text-black mb-1 2xl:mb-6">
                 Number of Referrals :
               </p>
-              <div className="flex items-center gap-8 mb-10">
+              <div className="flex items-center gap-8 mb-6 2xl:mb-10">
                 <div className="flex items-center gap-5">
-                  <p className="text-xl 2xl:text-2xl font-normal text-black">
+                  <p className="text-lg 2xl:text-2xl font-normal text-black">
                     From:
                   </p>
                   <input
@@ -287,12 +287,12 @@ const OffersPage = () => {
                     onChange={handleInputChange}
                     name="number_of_referral_from"
                     value={couponData.number_of_referral_from}
-                    className="border h-12 2xl:h-[62px] outline-none max-w-[113px] border-[#6E6E73] w-full uppercase text-[#6E6E73] rounded-[10px] py-3.5 px-5 leading-5 2xl:text-2xl text-xl border-spacing-[0.5px]"
+                    className="border h-12 2xl:h-[62px] outline-none max-w-[113px] border-[#6E6E73] w-full uppercase text-[#6E6E73] rounded-[10px] py-3 px-5 leading-5 2xl:text-2xl text-lg border-spacing-[0.5px]"
                     type="number"
                   />
                 </div>
                 <div className="flex items-center gap-5">
-                  <p className="text-xl 2xl:text-2xl font-normal text-black">
+                  <p className="text-lg 2xl:text-2xl font-normal text-black">
                     To:
                   </p>
                   <input
@@ -300,45 +300,22 @@ const OffersPage = () => {
                     onChange={handleInputChange}
                     name="number_of_referral_to"
                     value={couponData.number_of_referral_to}
-                    className="border h-12 2xl:h-[62px] outline-none max-w-[113px] border-[#6E6E73] w-full uppercase text-[#6E6E73] rounded-[10px] py-3.5 px-5 leading-5 2xl:text-2xl text-xl border-spacing-[0.5px]"
+                    className="border h-12 2xl:h-[62px] outline-none max-w-[113px] border-[#6E6E73] w-full uppercase text-[#6E6E73] rounded-[10px] py-3 px-5 leading-5 2xl:text-2xl text-lg border-spacing-[0.5px]"
                     type="number"
                   />
                 </div>
               </div>
-              <p className="text-xl 2xl:text-2xl font-medium text-black mb-2 2xl:mb-4">
+              <p className="text-lg 2xl:text-2xl font-medium text-black mb-1 2xl:mb-4">
                 Select State
               </p>
-              {/* <div className="relative">
-                <div
-                  className="border border-spacing-[0.5px] flex 2xl:text-2xl text-xl w-[401px] font-medium h-12 2xl:h-[62px] text-[#6E6E73] justify-between items-center pl-[18px] pr-8 border-[#6E6E73] p-2 rounded-[10px] cursor-pointer"
-                  onClick={toggleDropdown}
-                >
-                  {selectedOption}
-
-                  <DownArrowIcon />
-                </div>
-                {isOpen && (
-                  <div className="absolute z-10 bg-white border-t-0 top-9 2xl:top-[52px] rounded-t-none border border-spacing-[0.5px] rounded-[10px] border-[#6E6E73] mt-1 py-1 w-[401px]">
-                    {options.map((option, index) => (
-                      <div
-                        key={index}
-                        className="px-4 py-2 cursor-pointer 2xl:text-2xl text-xl font-medium text-[#6E6E73]"
-                        onClick={() => handleOptionClick(option)}
-                      >
-                        {option}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div> */}
               <StatesSelect
                 setcouponData={setcouponData}
                 couponData={couponData}
               />
-              <div className="mt-10 2xl:mt-[50px] flex flex-col">
+              <div className="mt-6 2xl:mt-[50px] flex flex-col">
                 <label
                   htmlFor="total-beneficiaries"
-                  className="text-xl 2xl:text-2xl font-medium text-black mb-2 2xl:mb-4"
+                  className="text-lg 2xl:text-2xl font-medium text-black mb-1 2xl:mb-4"
                 >
                   Total Beneficiaries
                 </label>
@@ -348,7 +325,7 @@ const OffersPage = () => {
                   name="total_beneficiaries"
                   value={couponData.total_beneficiaries}
                   id="total-beneficiaries"
-                  className="text-2xl 2xl:text-3xxl font-medium h-12 2xl:h-[62px] text-[#6E6E73] placeholder:text-[#6E6E73] border border-spacing-[0.5px] border-[#6E6E73] rounded-[10px] py-2 px-5 max-w-[365px] outline-none"
+                  className="text-xl 2xl:text-3xxl font-medium h-12 2xl:h-[62px] text-[#6E6E73] placeholder:text-[#6E6E73] border border-spacing-[0.5px] border-[#6E6E73] rounded-[10px] py-2 px-5 max-w-[365px] outline-none"
                   type="text"
                 />
               </div>

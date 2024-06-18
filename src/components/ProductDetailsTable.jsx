@@ -15,7 +15,7 @@ const ProductDetailsTables = () => {
       <div>
         <div className="w-[calc(1920px-265px)]">
           <div className="bg-[#BDBDBD] h-[54px] 2xl:h-16 flex gap-[65px] items-center">
-          <div className="px-[68px]"></div>
+            <div className="max-2xl:w-[80px] 2xl:px-[68px]"></div>
             <div className="flex pl-6 items-center gap-2 w-[244px] -ml-[65px]">
               <p className="font-semibold text-nowrap table-text">Date</p>
             </div>
@@ -39,7 +39,7 @@ const ProductDetailsTables = () => {
                   }`}
                   key={index}
                 >
-                  <div className="px-[54px] w-[136px]">
+                  <div className="2xl:px-[54px] text-center w-[80px] 2xl:w-[136px]">
                     <CheckBox
                       inputStyle="!border-[#686868]"
                       checkStyle="!border-[#686868] !bg-transparent"

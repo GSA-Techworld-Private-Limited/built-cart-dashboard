@@ -10,19 +10,19 @@ const ReferralsTable = () => {
   return (
     <>
       <div className="overflow-auto hide_scroll">
-        <div className="w-[calc(1920px-265px)]">
+        <div className="w-[calc(100vw-265px)] 2xl:w-[calc(1920px-265px)]">
           <div className="bg-[#BDBDBD] h-[54px] 2xl:h-16 flex items-center">
-            <div className="px-[68px]"></div>
-            <div className="flex pl-6 items-center gap-2 w-[196px]">
+            <div className="max-2xl:w-[80px] 2xl:px-[68px]"></div>
+            <div className="flex pl-6 items-center gap-2 w-[120px] 2xl:w-[196px]">
               <p className="font-semibold text-nowrap table-text">Join Date</p>
             </div>
-            <p className="font-semibold text-nowrap pl-6 w-[270px] table-text">
+            <p className="font-semibold text-nowrap pl-6 w-[160px] 2xl:w-[270px] table-text">
               Name
             </p>
-            <p className="font-semibold text-nowrap pl-6 w-[340px] table-text">
+            <p className="font-semibold text-nowrap pl-6 w-[170px] 2xl:w-[340px] table-text">
               Mobile
             </p>
-            <p className="font-semibold text-nowrap pl-6 w-[370px] table-text">
+            <p className="font-semibold text-nowrap pl-6 w-[210px] 2xl:w-[370px] table-text">
               Location
             </p>
             <p className="font-semibold text-nowrap pl-6 w-[250px] table-text">
@@ -39,7 +39,7 @@ const ReferralsTable = () => {
                     i % 2 === 0 ? "bg-[#FEF9EB]" : "bg-white"
                   }`}
                 >
-                  <div className="px-[54px] w-[136px]">
+                  <div className="2xl:px-[54px] text-center w-[80px] 2xl:w-[136px]">
                     {/* <Checkbox border="border-[#686868]" /> */}
                     <CheckBox
                       inputStyle="!border-[#686868]"
@@ -54,17 +54,17 @@ const ReferralsTable = () => {
                       }
                     />
                   </div>
-                  <p className="font-medium pl-6 w-[196px] text-nowrap table-text">
+                  <p className="font-medium pl-6 w-[120px] 2xl:w-[196px] text-nowrap table-text">
                     {formatDateTime(val.created_at)}
                   </p>
-                  <p className="font-medium text-nowrap pl-6 w-[270px] table-text">
+                  <p className="font-medium text-nowrap pl-6 w-[160px] 2xl:w-[270px] table-text">
                     {val.full_name}
                   </p>
-                  <p className="font-medium text-nowrap pl-6 w-[340px] table-text">
+                  <p className="font-medium text-nowrap pl-6 w-[170px] 2xl:w-[340px] table-text">
                     {val.mobile_number}
                   </p>
 
-                  <p className="font-medium text-nowrap pl-6 w-[370px] table-text">
+                  <p className="font-medium text-nowrap pl-6 w-[210px] 2xl:w-[370px] table-text">
                     {val.city}
                   </p>
                   <p

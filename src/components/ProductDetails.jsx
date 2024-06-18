@@ -75,29 +75,29 @@ const ProductDetails = () => {
   return (
     <>
       <div className="w-full h-[calc(100vh-126.59px)] 2xl:h-[calc(100vh-150px)] flex flex-col">
-        <p className="text-3xxl 2xl:text-4xl capitalize ps-7 font-bold text-black leading-[80%] mb-[62px]">
+        <p className="text-3xl 2xl:text-4xl capitalize ps-7 font-bold text-black leading-[80%] mb-[62px]">
           {Array.isArray(dataForCurrTitle) &&
             dataForCurrTitle.length > 0 &&
             dataForCurrTitle[0].name}
         </p>
 
         <div className="overflow-auto hide_scroll">
-          <div className="flex items-center ps-7 mb-[18px] 2xl:mb-10 gap-3 justify-between pr-8">
+          <div className="flex items-center ps-7 mb-3 2xl:mb-10 gap-3 justify-between pr-8">
             <div>
-              <div className="flex items-center gap-[10px] me-4 max-h-[54px] 2xl:max-h-[62px] border w-[432px] border-black rounded-[10px] px-[13px]">
-                <IoSearchSharp className="text-dark text-[28px]" />
+              <div className="flex items-center gap-[10px] me-4 max-h-[54px] 2xl:max-h-[62px] border w-[300px] 2xl:w-[432px] border-black rounded-[10px] px-[13px]">
+                <IoSearchSharp className="text-dark text-xl" />
                 <input
                   onChange={filterUserWithName}
                   type="text"
                   placeholder="Search Name, Location..."
-                  className="2xl:text-2xl text-xl text-[#6E6E73] leading-5 w-full placeholder:text-[#6E6E73] font-medium outline-none border-0 bg-transparent py-4 2xl:py-5"
+                  className="2xl:text-2xl text-lg text-[#6E6E73] leading-5 w-full placeholder:text-[#6E6E73] font-medium outline-none border-0 bg-transparent py-3 2xl:py-5"
                 />
               </div>
             </div>
             <div className="flex items-center gap-6 2xl:gap-[30px]">
               <button
                 onClick={() => setActiveSubTab("add-products")}
-                className="py-4 2xl:py-5 w-[224px] text-center duration-200 border border-transparent hover:border-current hover:bg-transparent hover:text-current leading-5 2xl:text-2xl text-xl font-medium px-6 rounded-[10px] bg-[#0028B7] text-white"
+                className="py-3 2xl:py-5 w-[224px] text-center duration-200 border border-transparent hover:border-current hover:bg-transparent hover:text-current leading-5 2xl:text-2xl text-xl font-medium px-6 rounded-[10px] bg-[#0028B7] text-white"
               >
                 Add Product
               </button>

@@ -94,38 +94,38 @@ const Orders = () => {
   return (
     <>
       <div className="w-full h-[calc(100vh-126.59px)] 2xl:h-[calc(100vh-150px)] flex flex-col">
-        <p className="text-3xxl 2xl:text-4xl ps-7 font-bold text-black leading-[80%] mb-24">
+        <p className="text-3xl 2xl:text-4xl ps-7 font-bold text-black leading-[80%] mb-24">
           Orders
         </p>
         <div className="overflow-auto hide_scroll">
           <div>
-            <div className="flex items-center ps-7 mb-[18px] gap-3 w-[calc(1920px-265px)]">
-              <div className="flex items-center gap-[10px] me-4 max-h-[54px] 2xl:max-h-[62px] border w-[432px] border-black rounded-[10px] px-[13px]">
-                <IoSearchSharp className="text-dark text-[28px]" />
+            <div className="flex items-center ps-7 mb-[12px] gap-3 w-[calc(1920px-265px)]">
+              <div className="flex items-center gap-[10px] me-4 max-h-[54px] 2xl:max-h-[62px] border w-[300px] 2xl:w-[432px] border-black rounded-[10px] px-[13px]">
+                <IoSearchSharp className="text-dark text-xl" />
                 <input
                   onChange={handleChange}
                   type="text"
                   placeholder="Search Name, Location..."
-                  className="2xl:text-2xl text-xl text-[#6E6E73] leading-5 w-full placeholder:text-[#6E6E73] font-medium outline-none border-0 bg-transparent py-4 2xl:py-5"
+                  className="2xl:text-2xl text-lg text-[#6E6E73] leading-5 w-full placeholder:text-[#6E6E73] font-medium outline-none border-0 bg-transparent py-3 2xl:py-5"
                 />
               </div>
               <CustomSelect
                 options={options}
                 onValueChange={updateOrderStatus}
                 placeholder="Update Status"
-                className="w-[277px]"
+                className="w-[230px] 2xl:w-[277px]"
               />
               <div className="flex items-center gap-2">
                 <ChooseIcon dimensions="w-6" />
-                <p className="text-xl text-black font-medium text-nowrap">
+                <p className="text-base 2xl:text-xl text-black font-medium text-nowrap">
                   Sort By
                 </p>
               </div>
               <Select onValueChange={filterWithStatus}>
-                <SelectTrigger className="w-[191px]">
+                <SelectTrigger className="w-[160px] 2xl:w-[191px]">
                   <SelectValue placeholder="Status" />
                 </SelectTrigger>
-                <SelectContent width="w-[188px]">
+                <SelectContent width="w-[160px] 2xl:w-[188px]">
                   <SelectItem color="text-dark" value=" ">
                     All
                   </SelectItem>

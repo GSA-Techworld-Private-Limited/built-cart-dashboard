@@ -159,7 +159,7 @@ export const DownArrowIcon = () => {
 };
 export const DateRangeIcon = () => {
   return (
-    <svg
+    <svg className="2xl:w-[14px] w-2"
       width="14"
       height="24"
       viewBox="0 0 14 24"

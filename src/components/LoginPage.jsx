@@ -65,6 +65,7 @@ const LoginPage = () => {
     } catch (error) {
       console.error("Login error:", error.request.response);
       // show notification
+      setLoading(false);
       toast.error("Invalid Credentials", {
         className: "rounded-[10px]",
       });

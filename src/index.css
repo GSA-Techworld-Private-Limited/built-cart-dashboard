@@ -3,6 +3,6 @@
 @tailwind utilities;
 @layer utilities {
   .table-text {
-    @apply 2xl:text-2xl text-xl leading-5 text-[#282828];
+    @apply 2xl:text-2xl text-base leading-5 text-[#282828];
   }
 }

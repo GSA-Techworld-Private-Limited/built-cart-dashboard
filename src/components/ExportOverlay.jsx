@@ -47,7 +47,7 @@ const ExportOverlay = () => {
   return (
     <>
       <div
-        className={`fixed z-50 duration-300 backdrop-blur-lg inset-0 flex justify-center items-center ${
+        className={`fixed z-50 duration-300 backdrop-blur-sm bg-opacity-10 inset-0 bg-[#FDC63A] flex justify-center items-center ${
           showExport
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
@@ -62,7 +62,7 @@ const ExportOverlay = () => {
             onClick={closeOverlay}
             className="absolute cursor-pointer top-5 right-8"
           >
-            <CloseIcon />
+            <CloseIcon style="w-8 2xl:w-11" />
           </span>
           <p className="text-xl 2xl:text-2xl font-semibold text-black mb-9">
             Export Files
