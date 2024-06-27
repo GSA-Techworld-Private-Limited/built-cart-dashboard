@@ -325,8 +325,9 @@ const OffersPage = () => {
                   name="total_beneficiaries"
                   value={couponData.total_beneficiaries}
                   id="total-beneficiaries"
+                  placeholder="Number"
                   className="text-xl 2xl:text-3xxl font-medium h-12 2xl:h-[62px] text-[#6E6E73] placeholder:text-[#6E6E73] border border-spacing-[0.5px] border-[#6E6E73] rounded-[10px] py-2 px-5 max-w-[365px] outline-none"
-                  type="text"
+                  type="number"
                 />
               </div>
             </div>
